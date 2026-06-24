@@ -8,7 +8,7 @@
         :root {
             --primary-color: #CC0000;  /* Vermelho Principal Premium */
             --primary-dark: #8B0000;   /* Vermelho Escuro Corporativo */
-            --accent-color: #aeb3bd;   /* Grafite para contraste */
+            --accent-color: #1E293B;   /* Grafite para contraste */
             --dark-text: #1E293B;      /* Texto escuro de alta legibilidade */
             --card-bg: #FFFFFF;
             --border-radius: 12px;
@@ -24,7 +24,7 @@
             line-height: 1.6; 
         }
         
-        /* Cabeçalho Transparente Claro - Melhora 100% a leitura dos menus */
+        /* Cabeçalho Transparente Claro */
         header {
             background-color: rgba(255, 255, 255, 0.85);
             backdrop-filter: blur(12px);
@@ -45,7 +45,6 @@
             align-items: center;
         }
 
-        /* Container das Logos integradas lado a lado */
         .logo-wrapper {
             display: flex;
             align-items: center;
@@ -97,9 +96,8 @@
             .logo-wrapper { gap: 12px; }
             .logo-netaki { height: 35px; }
             .logo-sp2tv { height: 30px; }
-            .download-box { flex-direction: column !important; text-align: center; }
-            .download-image-wrapper { margin-bottom: 15px; border-right: none !important; padding-right: 0 !important; }
-            .download-content { align-items: center !important; }
+            .download-row { flex-direction: column !important; align-items: flex-start !important; gap: 15px; }
+            .download-image-sidebar { width: 60px; height: auto; }
         }
 
         .content-section {
@@ -123,55 +121,45 @@
         h3 { color: var(--primary-dark); margin: 2.5rem 0 1rem 0; font-size: 1.4rem; border-bottom: 2px solid #F1F5F9; padding-bottom: 6px; }
         p { margin-bottom: 1.2rem; color: #475569; text-align: justify; font-size: 1.05rem; }
 
-        /* Novo Box de Download estilo Cartão Moderno Split */
-        .download-box {
+        /* Nova Estrutura: Linha externa para alinhar a imagem circulada ao lado */
+        .download-row {
             display: flex;
             flex-direction: row;
             align-items: center;
-            margin: 2rem 0;
+            gap: 25px; /* Espaço entre a imagem da esquerda e o box de texto */
+            margin-bottom: 2rem;
+        }
+
+        /* Imagem em destaque na esquerda (onde foi circulado no print) */
+        .download-image-sidebar {
+            width: 70px;
+            height: auto;
+            object-fit: contain;
+            flex-shrink: 0;
+        }
+
+        /* O Box cinza agora fica exclusivamente para o conteúdo da direita */
+        .download-box-right {
+            flex: 1;
             background: #F8FAFC;
+            padding: 1.5rem 2rem;
             border-radius: var(--border-radius);
             border: 1px solid #E2E8F0;
-            overflow: hidden;
-            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.02);
-        }
-
-        /* Lado esquerdo em destaque para o ícone da loja */
-        .download-image-wrapper {
-            padding: 2rem;
-            background: #FFFFFF;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            border-right: 1px solid #E2E8F0;
-            min-width: 140px;
-        }
-
-        .download-store-img {
-            height: 50px; /* Tamanho moderno de destaque */
-            width: auto;
-            object-fit: contain;
-        }
-
-        /* Lado direito para informações e botão */
-        .download-content {
-            padding: 2rem;
             display: flex;
             flex-direction: column;
-            gap: 12px;
-            flex: 1;
+            gap: 10px;
             align-items: flex-start;
         }
 
-        .download-content strong {
-            font-size: 1.1rem;
+        .download-box-right strong {
+            font-size: 1.05rem;
             color: var(--accent-color);
         }
 
         .btn-link {
             background-color: var(--primary-color);
             color: white;
-            padding: 12px 28px;
+            padding: 10px 24px;
             border-radius: 6px;
             text-decoration: none;
             font-weight: bold;
@@ -301,21 +289,17 @@
                 <h2>1. Como Baixar o App SP2 TV</h2>
                 <p>O aplicativo oficial SP2 TV está disponível para instalação imediata nas principais lojas de aplicativos do mercado. Basta aceder à loja do seu dispositivo e pesquisar por <strong>"SP2 TV"</strong>.</p>
                 
-                <div class="download-box">
-                    <div class="download-image-wrapper">
-                        <img src="imagens/store.png" alt="Google Play Logo" class="download-store-img">
-                    </div>
-                    <div class="download-content">
+                <div class="download-row">
+                    <img src="imagens/store.png" alt="Google Play Store" class="download-image-sidebar">
+                    <div class="download-box-right">
                         <strong>Dispositivos Android e TV Box (Google Play Store):</strong>
                         <a href="https://play.google.com/store/apps/details?id=com.eitv.sp2tv&hl=pt_BR" target="_blank" class="btn-link">Baixar Play Store</a>
                     </div>
                 </div>
 
-                <div class="download-box">
-                    <div class="download-image-wrapper">
-                        <img src="imagens/storeapp.png" alt="Apple App Store Logo" class="download-store-img">
-                    </div>
-                    <div class="download-content">
+                <div class="download-row">
+                    <img src="imagens/storeapp.png" alt="Apple App Store" class="download-image-sidebar">
+                    <div class="download-box-right">
                         <strong>Dispositivos iOS - iPhone / iPad (Apple App Store):</strong>
                         <a href="https://apps.apple.com/br/app/sp2-tv/id6502468697" target="_blank" class="btn-link">Baixar App Store</a>
                     </div>
