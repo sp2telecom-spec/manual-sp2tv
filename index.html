@@ -98,6 +98,7 @@
             .logo-sp2tv { height: 30px; }
             .download-row { flex-direction: column !important; align-items: center !important; gap: 15px; }
             .download-image-sidebar { width: 120px; }
+            .step-image { max-width: 100% !important; }
         }
 
         .content-section {
@@ -126,7 +127,7 @@
             display: flex;
             flex-direction: row;
             align-items: center;
-            gap: 30px; /* Aumentado ligeiramente para harmonizar com o novo tamanho */
+            gap: 30px; 
             margin-bottom: 2.5rem;
         }
 
@@ -218,6 +219,17 @@
             font-weight: bold;
             font-size: 1.2rem;
             box-shadow: 0 4px 6px rgba(204, 0, 0, 0.15);
+        }
+
+        /* Estilização para as imagens do tutorial passo a passo */
+        .step-image {
+            display: block;
+            max-width: 85%;
+            height: auto;
+            margin: 1.2rem 0 1.8rem 0;
+            border-radius: 8px;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.08);
+            border: 1px solid #E2E8F0;
         }
 
         .alert-box { 
@@ -357,13 +369,11 @@
 
                 <div class="alert-box">
                     <h4>⚠️ ALTERNATIVAS PARA USO DO APP SP2 TV, CASO A TV NÃO SEJA COMPATÍVEL</h4>
-                    <p>Uso de TV Box ou Dongle HDMI
-                       <p> Para ter o aplicativo instalado diretamente na TV de forma independente, sem depender do celular:</p>
-                       <p>  1.	Conecte um dispositivo Android TV na entrada HDMI da TV (exemplos: Fire TV Stick, Roku Express, Chromecast com Google TV ou um SMART TV Box).</p>
-                       <p>  2.	Mude a entrada da TV para o HDMI correspondente.</p>
-                       <p>  3.	Acesse a loja de aplicativos do dispositivo (Play Store ou Amazon Appstore), busque por SP2 TV e faça o download.</p>
-              
-    
+                    <p>Uso de TV Box ou Dongle HDMI</p>
+                    <p>Para ter o aplicativo instalado diretamente na TV de forma independente, sem depender do celular:</p>
+                    <p>  1. Conecte um dispositivo Android TV na entrada HDMI da TV (exemplos: Fire TV Stick, Roku Express, Chromecast com Google TV ou um SMART TV Box).</p>
+                    <p>  2. Mude a entrada da TV para o HDMI correspondente.</p>
+                    <p>  3. Acesse a loja de aplicativos do dispositivo (Play Store ou Amazon Appstore), busque por SP2 TV e faça o download.</p>
                 </div>
             </section>
 
@@ -372,15 +382,25 @@
                 <p>Após a conclusão da instalação, abra o aplicativo na sua TV e realize o procedimento de vinculação de conta:</p>
                 
                 <ol class="step-list">
-                    <li><strong>Abertura do App:</strong> A tela inicial da TV, siga as orientação, navegue utilizando ↓ ← ↑ → , Clique em OK do seu controle da TV para confirmar..</li>
-                    / colocar imagem nome arquivo: image 4.jpeg e a image 5.jpeg /
+                    <li>
+                        <strong>Abertura do App:</strong> Na tela inicial da TV, siga as orientações, navegue utilizando ↓ ← ↑ → , Clique em OK do seu controle da TV para confirmar.
+                        <img src="imagens/image4.jpeg" alt="Orientação Inicial do App" class="step-image">
+                        <img src="imagens/image5.jpeg" alt="Confirmação de Controle" class="step-image">
+                    </li>
                     <li><strong>Tela de Login:</strong> Na tela apresentará um <strong>QR Code</strong> e um <strong>Código de Ativação</strong> temporário gerado em tempo real.</li>
-                    <li><strong>Acesso ao Portal:</strong> Utilizando um telemóvel, tablet ou computador, faça a leitura do QR Code exibido ou acesse ao endereço https://tv.sp2.tv.br/activate.</li>
-                    / colocar imagem nome arquivo: image 6.jpeg /
-                    <li><strong>Autenticação do Assinante:</strong> Efetue o login inserindo rigorosamente o nome de utilizador e a senha fornecidos pela Netaki.</li>
-                    / colocar imagem nome arquivo: image 7.jpeg/
-                    <li><strong>Vinculação do Código:</strong> No campo intitulado "Em Destaque" (localizado ao lado do QR Code no portal web), digite os caracteres exibidos na sua TV e clique no botão <strong>Entrar</strong>.</li>
-                    / colocar imagem nome arquivo: image 8.jpeg e a image 9.jpeg /
+                    <li>
+                        <strong>Acesso ao Portal:</strong> Utilizando um telemóvel, tablet ou computador, faça a leitura do QR Code exibido ou acesse ao endereço <a href="https://tv.sp2.tv.br/activate" target="_blank">https://tv.sp2.tv.br/activate</a>.
+                        <img src="imagens/image6.jpeg" alt="Portal de Ativação QR Code" class="step-image">
+                    </li>
+                    <li>
+                        <strong>Autenticação do Assinante:</strong> Efetue o login inserindo rigorosamente o nome de utilizador e a senha fornecidos pela Netaki.
+                        <img src="imagens/image7.jpeg" alt="Tela de Autenticação Netaki" class="step-image">
+                    </li>
+                    <li>
+                        <strong>Vinculação do Código:</strong> No campo intitulado "Em Destaque" (localizado ao lado do QR Code no portal web), digite os caracteres exibidos na sua TV e clique no botão <strong>Entrar</strong>.
+                        <img src="imagens/image8.jpeg" alt="Inserção do código da TV" class="step-image">
+                        <img src="imagens/image9.jpeg" alt="Sucesso na vinculação" class="step-image">
+                    </li>
                 </ol>
 
                 <div class="alert-box" style="border-left-color: #10B981; background-color: #F0FDF4; border-color: #D1FAE5;">
@@ -390,21 +410,22 @@
 
                 <h3>Utilização Básica dos Canais</h3>
                 <p>O aplicativo está totalmente pronto para utilização. Os canais encontram-se devidamente separados por categorias. Utilize as <strong>setas direcionais ↓ ← ↑ → </strong> do seu controle remoto para navegar entre as opções e pressione o botão <strong>OK</strong> para confirmar a reprodução.</p>
-                    / colocar imagem nome arquivo: image 10.jpeg /
+                <img src="imagens/image10.jpeg" alt="Lista e Categorias de Canais" class="step-image">
+
                 <h3>Recursos Adicionais (Barra de Ferramentas)</h3>
                 <p>Durante a reprodução em tela inteira de qualquer canal, pressione o botão <strong>OK</strong> do controle remoto e utilize as <strong>setas direcionais ↓ ← ↑ → </strong> para habilitar a barra inferior de utilidades:</p>
-                / colocar imagem nome arquivo: image 11.jpeg /
+                <img src="imagens/image11.jpeg" alt="Ativação da Barra de Ferramentas" class="step-image">
+                
                 <p>• <strong>Canais:</strong> Exibe a listagem completa grade de canais com a programação em tempo real.<br></p>
-                / colocar imagem nome arquivo: image 12.jpeg /
+                <img src="imagens/image12.jpeg" alt="Visualização da Grade Completa" class="step-image">
+                
                 <p>• <strong>Programação:</strong> Permite navegar de forma detalhada pelo cronograma de conteúdos atuais, futuros e anteriores.<br></p>
-                / colocar imagem nome arquivo:image 13.jpeg /
+                <img src="imagens/image13.jpeg" alt="Cronograma de Programação EPG" class="step-image">
+
                 <div class="alert-box" style="border-left-color: var(--primary-dark); background-color: #F8FAFC; border-color: #E2E8F0;">
                     <h4>💡 Recurso Catch-up (Gravação de 24 horas)</h4>
                     <p>Alguns Canais possuem suporte para reprodução de transmissões anteriores gravadas nas últimas 24 horas. Para utilizar, selecione o conteúdo passado desejado no menu de programação e confirme pressionando <strong>OK</strong> no seu comando.</p>
                 </div>
-                 
-
-                
             </section>
 
             <section id="suporte" class="content-section">
