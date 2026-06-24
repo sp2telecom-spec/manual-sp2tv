@@ -9,31 +9,31 @@
             --primary-color: #CC0000;  /* Vermelho Principal Premium */
             --primary-dark: #8B0000;   /* Vermelho Escuro Corporativo */
             --accent-color: #1E293B;   /* Grafite para contraste */
-            --dark-text: #0F172A;      /* Texto quase preto ultralegível */
+            --dark-text: #1E293B;      /* Texto escuro de alta legibilidade */
             --card-bg: #FFFFFF;
             --border-radius: 12px;
         }
 
         * { margin: 0; padding: 0; box-sizing: border-box; font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; }
         
-        /* Fundo Moderno com Gradiente Suave e Textura Tecnológica */
+        /* Fundo Moderno Claro e Limpo */
         body { 
-            background: linear-gradient(135deg, #F1F5F9 0%, #E2E8F0 100%);
+            background: linear-gradient(135deg, #F8FAFC 0%, #E2E8F0 100%);
             background-attachment: fixed;
             color: var(--dark-text); 
             line-height: 1.6; 
         }
         
-        /* Cabeçalho Moderno com Efeito de Transparência e Desfoque Glassmorphism */
+        /* Cabeçalho Transparente Claro - Melhora 100% a leitura dos menus */
         header {
-            background-color: rgba(139, 0, 0, 0.85);
-            backdrop-filter: blur(10px);
-            -webkit-backdrop-filter: blur(10px);
-            box-shadow: 0 4px 12px rgba(0,0,0,0.12);
+            background-color: rgba(255, 255, 255, 0.80);
+            backdrop-filter: blur(12px);
+            -webkit-backdrop-filter: blur(12px);
+            box-shadow: 0 4px 20px rgba(0,0,0,0.05);
             position: sticky;
             top: 0;
             z-index: 100;
-            border-bottom: 4px solid var(--primary-color);
+            border-bottom: 3px solid var(--primary-color);
         }
 
         .header-container {
@@ -45,14 +45,13 @@
             align-items: center;
         }
 
-        /* Container das Logos integradas */
         .logo-wrapper {
             display: flex;
             align-items: center;
             gap: 15px;
         }
         .logo-netaki {
-            height: 42px;
+            height: 40px;
             width: auto;
             display: block;
         }
@@ -68,15 +67,14 @@
             align-items: center;
         }
         nav ul { display: flex; list-style: none; gap: 25px; align-items: center; }
-        nav a { text-decoration: none; color: #FFFFFF; font-weight: 600; font-size: 0.95rem; transition: color 0.3s; }
-        nav a:hover { color: #FFAAAA; }
+        nav a { text-decoration: none; color: var(--accent-color); font-weight: 600; font-size: 0.95rem; transition: color 0.2s; }
+        nav a:hover { color: var(--primary-color); }
 
         .hero {
             background: linear-gradient(135deg, var(--primary-dark) 0%, #4A0000 100%);
             color: white;
             text-align: center;
             padding: 5rem 2rem;
-            border-bottom: 1px solid rgba(255,255,255,0.1);
         }
 
         .hero h1 { font-size: 2.8rem; margin-bottom: 1rem; font-weight: 700; letter-spacing: -0.5px; }
@@ -101,13 +99,13 @@
             background: var(--card-bg);
             padding: 3rem;
             border-radius: var(--border-radius);
-            box-shadow: 0 10px 25px -5px rgba(0,0,0,0.05);
+            box-shadow: 0 4px 6px -1px rgba(0,0,0,0.02), 0 2px 4px -1px rgba(0,0,0,0.02);
             margin-bottom: 2.5rem;
-            border: 1px solid rgba(226, 232, 240, 0.8);
+            border: 1px solid #E2E8F0;
         }
 
         h2 {
-            color: var(--primary-dark);
+            color: var(--accent-color);
             border-left: 6px solid var(--primary-color);
             padding-left: 14px;
             margin-bottom: 2rem;
@@ -116,7 +114,7 @@
         }
 
         h3 { color: var(--primary-dark); margin: 2.5rem 0 1rem 0; font-size: 1.4rem; border-bottom: 2px solid #F1F5F9; padding-bottom: 6px; }
-        p { margin-bottom: 1.2rem; color: #334155; text-align: justify; font-size: 1.05rem; }
+        p { margin-bottom: 1.2rem; color: #475569; text-align: justify; font-size: 1.05rem; }
 
         .download-box {
             display: flex;
@@ -138,7 +136,7 @@
             font-weight: bold;
             display: inline-block;
             margin-top: 8px;
-            box-shadow: 0 4px 6px rgba(204, 0, 0, 0.2);
+            box-shadow: 0 4px 6px rgba(204, 0, 0, 0.15);
             transition: background 0.2s, transform 0.2s;
             text-align: center;
             max-width: 250px;
@@ -146,7 +144,6 @@
 
         .btn-link:hover { background-color: var(--primary-dark); transform: translateY(-2px); }
 
-        /* Estilo do novo botão de suporte WhatsApp no final */
         .btn-whatsapp {
             background-color: #25D366;
             color: white;
@@ -159,7 +156,7 @@
             justify-content: center;
             gap: 10px;
             margin-top: 15px;
-            box-shadow: 0 4px 12px rgba(37, 211, 102, 0.3);
+            box-shadow: 0 4px 12px rgba(37, 211, 102, 0.2);
             transition: background-color 0.2s, transform 0.2s;
             font-size: 1.1rem;
         }
@@ -175,7 +172,7 @@
         }
 
         .step-list { list-style: none; counter-reset: step-counter; margin: 1.5rem 0; }
-        .step-list li { position: relative; padding-left: 4.2rem; margin-bottom: 2.5rem; font-size: 1.05rem; color: #334155; }
+        .step-list li { position: relative; padding-left: 4.2rem; margin-bottom: 2.5rem; font-size: 1.05rem; color: #475569; }
         
         .step-list li::before {
             content: counter(step-counter);
@@ -202,9 +199,8 @@
             padding: 1.8rem; 
             border-radius: var(--border-radius); 
             margin: 2rem 0; 
-            border-top: 1px solid #FFE2E2;
-            border-right: 1px solid #FFE2E2;
-            border-bottom: 1px solid #FFE2E2;
+            border: 1px solid #FFE2E2;
+            border-left: 6px solid var(--primary-color);
         }
         .alert-box h4 { color: var(--primary-dark); margin-bottom: 0.6rem; font-size: 1.15rem; font-weight: 700; }
 
@@ -216,24 +212,24 @@
             margin-bottom: 1.8rem;
         }
         .solution-title { font-weight: 700; color: var(--primary-dark); margin-bottom: 0.6rem; text-transform: uppercase; font-size: 0.95rem; letter-spacing: 0.5px; }
-        .solution-text { color: #334155; font-size: 1.05rem; }
+        .solution-text { color: #475569; font-size: 1.05rem; }
 
         .sidebar { position: sticky; top: 120px; height: fit-content; }
         .quick-links { 
             background: var(--card-bg); 
             padding: 2rem; 
             border-radius: var(--border-radius); 
-            box-shadow: 0 10px 25px -5px rgba(0,0,0,0.05);
+            box-shadow: 0 4px 6px -1px rgba(0,0,0,0.02);
             border: 1px solid #E2E8F0;
         }
-        .quick-links h4 { color: var(--primary-dark); margin-bottom: 1.2rem; border-bottom: 2px solid var(--primary-color); padding-bottom: 0.6rem; font-size: 1.1rem; }
+        .quick-links h4 { color: var(--accent-color); margin-bottom: 1.2rem; border-bottom: 2px solid var(--primary-color); padding-bottom: 0.6rem; font-size: 1.1rem; }
         .quick-links ul { list-style: none; }
         .quick-links li { margin-bottom: 1rem; }
-        .quick-links a { text-decoration: none; color: #475569; font-weight: 500; transition: color 0.2s; font-size: 1rem; }
+        .quick-links a { text-decoration: none; color: #64748B; font-weight: 500; transition: color 0.2s; font-size: 1rem; }
         .quick-links a:hover { color: var(--primary-color); }
 
-        .footer { background-color: var(--primary-dark); color: white; text-align: center; padding: 3rem; margin-top: 6rem; border-top: 4px solid var(--primary-color); }
-        .footer p { color: #F1F5F9; text-align: center; margin: 0; font-size: 1rem; }
+        .footer { background-color: var(--accent-color); color: white; text-align: center; padding: 3rem; margin-top: 6rem; border-top: 4px solid var(--primary-color); }
+        .footer p { color: #94A3B8; text-align: center; margin: 0; font-size: 1rem; }
     </style>
 </head>
 <body>
@@ -300,7 +296,7 @@
                 <div class="alert-box">
                     <h4>⚠️ Nota de Compatibilidade Importante</h4>
                     <p>Se ao realizar as buscas o aplicativo "SP2 TV" não for localizado na loja, isto indica que este modelo específico de televisão não possui compatibilidade de sistema nativa com a plataforma de desenvolvimento da aplicação.</p>
-                    <p>Disponível para os models desde 2020 até os modelos de 2024 e que, os modelos 2025 e 2026, em breve</p>
+                    <p>Disponível para os modelos desde 2020 até os modelos de 2024 e que, os modelos 2025 e 2026, em breve</p>
                 </div>
             </section>
 
