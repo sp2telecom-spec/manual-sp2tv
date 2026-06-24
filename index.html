@@ -97,6 +97,9 @@
             .logo-wrapper { gap: 12px; }
             .logo-netaki { height: 35px; }
             .logo-sp2tv { height: 30px; }
+            .download-box { flex-direction: column !important; text-align: center; }
+            .download-image-wrapper { margin-bottom: 15px; border-right: none !important; padding-right: 0 !important; }
+            .download-content { align-items: center !important; }
         }
 
         .content-section {
@@ -120,45 +123,65 @@
         h3 { color: var(--primary-dark); margin: 2.5rem 0 1rem 0; font-size: 1.4rem; border-bottom: 2px solid #F1F5F9; padding-bottom: 6px; }
         p { margin-bottom: 1.2rem; color: #475569; text-align: justify; font-size: 1.05rem; }
 
+        /* Novo Box de Download estilo Cartão Moderno Split */
         .download-box {
             display: flex;
-            flex-direction: column;
-            gap: 10px;
-            margin: 1.5rem 0;
+            flex-direction: row;
+            align-items: center;
+            margin: 2rem 0;
             background: #F8FAFC;
-            padding: 1.5rem;
             border-radius: var(--border-radius);
             border: 1px solid #E2E8F0;
+            overflow: hidden;
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.02);
         }
 
-        /* Botão Ajustado para conter as Imagens das Lojas */
+        /* Lado esquerdo em destaque para o ícone da loja */
+        .download-image-wrapper {
+            padding: 2rem;
+            background: #FFFFFF;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            border-right: 1px solid #E2E8F0;
+            min-width: 140px;
+        }
+
+        .download-store-img {
+            height: 50px; /* Tamanho moderno de destaque */
+            width: auto;
+            object-fit: contain;
+        }
+
+        /* Lado direito para informações e botão */
+        .download-content {
+            padding: 2rem;
+            display: flex;
+            flex-direction: column;
+            gap: 12px;
+            flex: 1;
+            align-items: flex-start;
+        }
+
+        .download-content strong {
+            font-size: 1.1rem;
+            color: var(--accent-color);
+        }
+
         .btn-link {
             background-color: var(--primary-color);
             color: white;
-            padding: 12px 24px;
+            padding: 12px 28px;
             border-radius: 6px;
             text-decoration: none;
             font-weight: bold;
-            display: inline-flex;
-            align-items: center;
-            justify-content: center;
-            gap: 10px; /* Espaço entre a imagem e o texto */
-            margin-top: 8px;
+            display: inline-block;
             box-shadow: 0 4px 6px rgba(204, 0, 0, 0.15);
             transition: background 0.2s, transform 0.2s;
             text-align: center;
-            width: fit-content;
-            min-width: 260px;
         }
 
         .btn-link:hover { background-color: var(--primary-dark); transform: translateY(-2px); }
-
-        /* Estilo para as logos dentro dos botões */
-        .btn-store-icon {
-            height: 22px; /* Altura ideal integrada ao botão */
-            width: auto;
-            display: block;
-        }
 
         .btn-whatsapp {
             background-color: #25D366;
@@ -279,17 +302,23 @@
                 <p>O aplicativo oficial SP2 TV está disponível para instalação imediata nas principais lojas de aplicativos do mercado. Basta aceder à loja do seu dispositivo e pesquisar por <strong>"SP2 TV"</strong>.</p>
                 
                 <div class="download-box">
-                    <strong>Dispositivos Android e TV Box (Google Play Store):</strong>
-                    <a href="https://play.google.com/store/apps/details?id=com.eitv.sp2tv&hl=pt_BR" target="_blank" class="btn-link">
-                        <img src="imagens/store.png" alt="Play Store" class="btn-store-icon"> Baixar Play Store
-                    </a>
+                    <div class="download-image-wrapper">
+                        <img src="imagens/store.png" alt="Google Play Logo" class="download-store-img">
+                    </div>
+                    <div class="download-content">
+                        <strong>Dispositivos Android e TV Box (Google Play Store):</strong>
+                        <a href="https://play.google.com/store/apps/details?id=com.eitv.sp2tv&hl=pt_BR" target="_blank" class="btn-link">Baixar Play Store</a>
+                    </div>
                 </div>
 
                 <div class="download-box">
-                    <strong>Dispositivos iOS - iPhone / iPad (Apple App Store):</strong>
-                    <a href="https://apps.apple.com/br/app/sp2-tv/id6502468697" target="_blank" class="btn-link">
-                        <img src="imagens/storeapp.png" alt="App Store" class="btn-store-icon"> Baixar App Store
-                    </a>
+                    <div class="download-image-wrapper">
+                        <img src="imagens/storeapp.png" alt="Apple App Store Logo" class="download-store-img">
+                    </div>
+                    <div class="download-content">
+                        <strong>Dispositivos iOS - iPhone / iPad (Apple App Store):</strong>
+                        <a href="https://apps.apple.com/br/app/sp2-tv/id6502468697" target="_blank" class="btn-link">Baixar App Store</a>
+                    </div>
                 </div>
             </section>
 
@@ -393,7 +422,7 @@
 
                 <div class="support-card">
                     <h3>Ainda precisa de ajuda?</h3>
-                    <p>Se as soluções rápidas acima não resolverem o problem, entre em contacto direto com o nosso atendimento técnico especializado para receber ajuda imediata.</p>
+                    <p>Se as soluções rápidas acima não resolverem o problema, entre em contacto direto com o nosso atendimento técnico especializado para receber ajuda imediata.</p>
                     <a href="https://api.whatsapp.com/send?l=pt&phone=551938772700&text=Contato%20do%20site%20Netaki%20Telecom." target="_blank" class="btn-whatsapp">
                         💬 Falar com o Suporte Técnico
                     </a>
