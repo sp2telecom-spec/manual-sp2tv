@@ -35,7 +35,7 @@
             align-items: center;
         }
 
-        .logo-container img { height: 45px; display: block; filter: drop-shadow(0px 1px 2px rgba(0,0,0,0.2)); }
+        .logo-container img { height: 45px; display: block; }
         nav ul { display: flex; list-style: none; gap: 25px; }
         nav a { text-decoration: none; color: #FFFFFF; font-weight: 600; font-size: 0.95rem; transition: color 0.3s; }
         nav a:hover { color: var(--accent-color); }
@@ -70,7 +70,7 @@
             background: var(--card-bg);
             padding: 2.5rem;
             border-radius: var(--border-radius);
-            box-shadow: 0 4px 6px -1px rgba(0,0,0,0.05), 0 2px 4px -1px rgba(0,0,0,0.03);
+            box-shadow: 0 4px 6px -1px rgba(0,0,0,0.05);
             margin-bottom: 2.5rem;
             border: 1px solid #E2E8F0;
         }
@@ -84,7 +84,7 @@
             font-weight: 700;
         }
 
-        h3 { color: var(--primary-color); margin: 2rem 0 0.75rem 0; font-size: 1.3rem; }
+        h3 { color: var(--primary-color); margin: 2rem 0 0.75rem 0; font-size: 1.3rem; border-bottom: 1px solid #E2E8F0; padding-bottom: 5px; }
         p { margin-bottom: 1.2rem; color: #475569; text-align: justify; }
 
         .download-box {
@@ -115,14 +115,21 @@
 
         .btn-link:hover { background-color: #E04F00; transform: translateY(-1px); }
 
+        /* Estilo das Imagens Ampliáveis */
         .manual-img {
             max-width: 100%;
-            max-height: 400px;
+            max-height: 380px;
             display: block;
-            margin: 1.8rem auto;
+            margin: 1.5rem auto;
             border-radius: var(--border-radius);
             box-shadow: 0 10px 15px -3px rgba(0,0,0,0.07);
             border: 1px solid #E2E8F0;
+            cursor: zoom-in;
+            transition: transform 0.3s ease;
+        }
+        
+        .manual-img:hover {
+            transform: scale(1.02);
         }
 
         .step-list { list-style: none; counter-reset: step-counter; margin: 1.5rem 0; }
@@ -153,11 +160,20 @@
             padding: 1.5rem; 
             border-radius: var(--border-radius); 
             margin: 1.8rem 0; 
-            border-top: 1px solid #FFEDD5;
-            border-right: 1px solid #FFEDD5;
-            border-bottom: 1px solid #FFEDD5;
+            border: 1px solid #FFEDD5;
+            border-left: 5px solid var(--accent-color);
         }
         .alert-box h4 { color: var(--accent-color); margin-bottom: 0.5rem; font-size: 1.1rem; }
+
+        .solution-box {
+            background-color: #F8FAFC;
+            border: 1px solid #E2E8F0;
+            padding: 1.5rem;
+            border-radius: var(--border-radius);
+            margin-bottom: 1.5rem;
+        }
+        .solution-title { font-weight: bold; color: #DC2626; margin-bottom: 0.5rem; }
+        .solution-text { color: #1E293B; font-weight: 500; }
 
         .sidebar { position: sticky; top: 110px; height: fit-content; }
         .quick-links { 
@@ -178,6 +194,38 @@
 
         .footer { background-color: var(--primary-color); color: white; text-align: center; padding: 2.5rem; margin-top: 5rem; border-top: 4px solid var(--accent-color); }
         .footer p { color: #E2E8F0; text-align: center; margin: 0; font-size: 0.95rem; }
+
+        /* Estrutura do Zoom (Lightbox) via JavaScript */
+        .lightbox {
+            display: none;
+            position: fixed;
+            z-index: 999;
+            top: 0; left: 0;
+            width: 100%; height: 100%;
+            background-color: rgba(0,0,0,0.85);
+            justify-content: center;
+            align-items: center;
+            cursor: zoom-out;
+        }
+        .lightbox img {
+            max-width: 90%;
+            max-height: 90%;
+            border-radius: 6px;
+            box-shadow: 0 4px 20px rgba(0,0,0,0.5);
+            animation: zoomIn 0.2s ease;
+        }
+        .lightbox-close {
+            position: absolute;
+            top: 20px; right: 30px;
+            color: white;
+            font-size: 40px;
+            font-weight: bold;
+            cursor: pointer;
+        }
+        @keyframes zoomIn {
+            from { transform: scale(0.9); opacity: 0; }
+            to { transform: scale(1); opacity: 1; }
+        }
     </style>
 </head>
 <body>
@@ -193,6 +241,7 @@
                     <li><a href="#samsung">Samsung</a></li>
                     <li><a href="#lg">LG</a></li>
                     <li><a href="#ativacao">Ativação</a></li>
+                    <li><a href="#suporte">Suporte</a></li>
                 </ul>
             </nav>
         </div>
@@ -200,118 +249,134 @@
 
     <section class="hero">
         <h1>Guia de Instalação e Configuração</h1>
-        <p>Aprenda a configurar e ativar o seu aplicativo oficial SP2 TV com o suporte da Netaki.</p>
+        <p>Siga o passo a passo ilustrado para configurar o seu aplicativo oficial SP2 TV. Clique em qualquer imagem para ampliá-la.</p>
     </section>
 
     <div class="main-container">
         <main>
             <section id="download" class="content-section">
                 <h2>1. Como Baixar o App SP2 TV</h2>
-                <p>O aplicativo oficial está disponível para download imediato nas lojas virtuais dos seus aparelhos.</p>
+                <p>O aplicativo oficial SP2 TV pode ser encontrado diretamente nas lojas virtuais do seu dispositivo móvel ou Smart TV.</p>
                 
                 <div class="download-box">
-                    <img src="imagens/image 1.png" alt="Google Play Store Logo">
+                    <img src="imagens/image 1.png" alt="Google Play Store">
                     <div>
-                        <strong>Google Play Store (Android / TV Box):</strong><br>
+                        <strong>Dispositivos Android e TV Box (Google Play Store):</strong><br>
                         <a href="https://play.google.com/store/apps/details?id=com.eitv.sp2tv&hl=pt_BR" target="_blank" class="btn-link">Aceder à Play Store</a>
                     </div>
                 </div>
-                <img class="manual-img" src="imagens/image 1.png" alt="Play Store Tela">
+                <img class="manual-img" src="imagens/image 1.png" alt="Disponibilidade Google Play">
 
                 <div class="download-box">
-                    <img src="imagens/image 2.png" alt="Apple App Store Logo">
+                    <img src="imagens/image 2.png" alt="Apple App Store">
                     <div>
-                        <strong>Apple App Store (iOS - iPhone / iPad):</strong><br>
+                        <strong>Dispositivos iOS - iPhone / iPad (Apple App Store):</strong><br>
                         <a href="https://apps.apple.com/br/app/sp2-tv/id6502468697" target="_blank" class="btn-link">Aceder à App Store</a>
                     </div>
                 </div>
-                <img class="manual-img" src="imagens/image 2.png" alt="App Store Tela">
+                <img class="manual-img" src="imagens/image 2.png" alt="Disponibilidade App Store">
             </section>
 
             <section id="samsung" class="content-section">
                 <h2>2. Instalação em Smart TVs Samsung</h2>
-                <img class="manual-img" src="imagens/image 3.png" alt="Guia Samsung">
+                <img class="manual-img" src="imagens/image 3.png" alt="Interface de instalação Samsung">
                 
                 <h3>Modelos Recentes (Sistema Tizen Atual - Menu Lateral)</h3>
                 <ol class="step-list">
-                    <li>Pressione o botão <strong>Home</strong> (Ícone de Casinha) no comando remoto.</li>
-                    <li>Navegue até o menu lateral esquerdo e clique em <strong>APPS</strong>.</li>
-                    <li>Clique no ícone da <strong>Lupa (Pesquisar)</strong> no canto superior.</li>
-                    <li>Digite <strong>SP2 TV</strong>, selecione o app e clique em <strong>Instalar</strong>.</li>
+                    <li>Pressione o botão <strong>Home</strong> (ícone de casa) no seu comando remoto.</li>
+                    <li>Navegue usando as setas até o menu lateral esquerdo e clique na opção <strong>APPS</strong>.</li>
+                    <li>Selecione o ícone da <strong>Lupa (Pesquisar)</strong> localizado no canto superior direito da tela.</li>
+                    <li>Digite <strong>SP2 TV</strong>, selecione o aplicativo correspondente e clique em <strong>Instalar</strong>.</li>
                 </ol>
-                <img class="manual-img" src="imagens/image 4.png" alt="Passo APPS Samsung">
+                <img class="manual-img" src="imagens/image 4.png" alt="Passo a passo Loja Samsung">
 
                 <h3>Modelos Antigos (Sistema Tizen Antigo - Faixa Inferior)</h3>
                 <ol class="step-list">
-                    <li>Pressione o botão <strong>Home</strong> ou <strong>Smart Hub</strong> no comando.</li>
-                    <li>Na barra colorida inferior, navegue até ao ícone <strong>APPS</strong>.</li>
-                    <li>Aceda à <strong>Lupa</strong> no topo superior direito, escreva o nome e clique em concluído.</li>
-                    <li>Selecione <strong>Transferir</strong> (ou Instalar).</li>
+                    <li>Pressione o botão <strong>Home</strong> ou <strong>Smart Hub</strong> no comando remoto.</li>
+                    <li>Na barra colorida que surge na parte inferior do ecrã, navegue até encontrar o ícone <strong>APPS</strong>.</li>
+                    <li>Aceda à <strong>Lupa</strong> no canto superior direito.</li>
+                    <li>Escreva o nome do aplicativo, selecione concluído e clique em <strong>Transferir</strong> (ou Instalar).</li>
                 </ol>
-                <img class="manual-img" src="imagens/image 5.png" alt="Pesquisa Tizen Antigo">
+                <img class="manual-img" src="imagens/image 5.png" alt="Pesquisa no Tizen Antigo">
 
                 <div class="alert-box">
-                    <h4>⚠️ Observação Importante</h4>
-                    <p>Se seguir os passos acima e pesquisar por "SP2 TV" e não encontrar o app, significa que esse modelo de TV não possui compatibilidade nativa de desenvolvimento com o aplicativo.</p>
+                    <h4>⚠️ Nota Importante de Compatibilidade</h4>
+                    <p>Se ao realizar a pesquisa por "SP2 TV" o aplicativo não for localizado na loja, significa que este modelo específico de televisão não possui compatibilidade de sistema nativa com a plataforma de desenvolvimento da aplicação.</p>
                 </div>
-                <img class="manual-img" src="imagens/image 6.jpeg" alt="Aviso de Compatibilidade">
+                <img class="manual-img" src="imagens/image 6.jpeg" alt="Aviso de indisponibilidade por modelo antigo">
             </section>
 
             <section id="lg" class="content-section">
                 <h2>3. Instalação em Smart TVs LG</h2>
-                <img class="manual-img" src="imagens/image 7.jpeg" alt="Guia LG">
+                <img class="manual-img" src="imagens/image 7.jpeg" alt="Interface de instalação LG">
                 
                 <h3>Modelos Recentes (webOS 6.0 ou superior)</h3>
                 <ol class="step-list">
                     <li>Pressione o botão <strong>Home</strong> no comando Smart Magic.</li>
-                    <li>No ecrã principal, abra a aplicação <strong>Apps (ou LG Content Store)</strong>.</li>
-                    <li>Clique na <strong>Lupa (Pesquisar)</strong> no topo direito, digite <strong>SP2 TV</strong> e instale.</li>
+                    <li>No ecrã inicial da TV, localize e abra a aplicação <strong>Apps</strong> (ou <strong>LG Content Store</strong>).</li>
+                    <li>Clique no ícone da <strong>Lupa (Pesquisar)</strong> no topo direito, digite <strong>SP2 TV</strong> e confirme a instalação.</li>
                 </ol>
-                <img class="manual-img" src="imagens/image 8.jpeg" alt="Passo Lupa LG">
+                <img class="manual-img" src="imagens/image 8.jpeg" alt="Pesquisa Loja LG">
 
                 <h3>Modelos Antigos (webOS 5.0 ou inferior)</h3>
                 <ol class="step-list">
                     <li>Pressione o botão <strong>Home</strong> no comando remoto.</li>
-                    <li>Na barra inferior de cartões coloridos, clique em <strong>LG Content Store</strong>.</li>
-                    <li>Aceda ao menu superior, clique na <strong>Lupa</strong>, introduza o nome do app e instale.</li>
+                    <li>Na barra de cartões coloridos inferior, procure e clique em <strong>LG Content Store</strong>.</li>
+                    <li>Aceda ao menu superior, selecione a <strong>Lupa</strong>, introduza o nome do app e efetue a instalação.</li>
                 </ol>
-                <img class="manual-img" src="imagens/image 9.jpeg" alt="LG Content Store Antiga">
+                <img class="manual-img" src="imagens/image 9.jpeg" alt="LG Content Store antiga">
             </section>
 
             <section id="ativacao" class="content-section">
                 <h2>4. Processo de Ativação Passo a Passo</h2>
-                <p>Após instalar e abrir o app na sua televisão, siga as instruções abaixo para ativar a sua conta:</p>
+                <p>Após a conclusão da instalação, abra o aplicativo na sua TV e siga este procedimento seguro para vinculação da sua conta:</p>
                 
                 <ol class="step-list">
-                    <li><strong>Abra o app na TV:</strong> Um ecrã inicial apresentando um <strong>QR Code</strong> e um <strong>Código de Ativação</strong> temporário será exibido.</li>
-                    <img class="manual-img" src="imagens/image 10.png" alt="Ecrã QR Code TV">
+                    <li><strong>Visualize as credenciais na TV:</strong> A tela inicial apresentará um <strong>QR Code</strong> e um <strong>Código de Ativação</strong> gerado em tempo real.</li>
+                    <img class="manual-img" src="imagens/image 10.png" alt="Tela com QR Code na TV">
                     
-                    <li><strong>Acesse o Portal:</strong> Com o seu telemóvel, tablet ou computador, leia o QR Code.</li>
-                    <img class="manual-img" src="imagens/image 11.png" alt="Portal de Ativação Mobile">
+                    <li><strong>Acesse o Portal:</strong> Utilizando um telemóvel, tablet ou computador, faça a leitura do QR Code exibido.</li>
+                    <img class="manual-img" src="imagens/image 11.png" alt="Portal de Ativação Netaki">
                     
-                    <li><strong>Efetue o Login:</strong> Introduza o utilizador e a senha fornecidos formalmente pela Netaki.</li>
-                    <img class="manual-img" src="imagens/image 12.png" alt="Tela de Login do Portal">
+                    <li><strong>Efetue a autenticação:</strong> Insira o nome de utilizador e a senha fornecidos oficialmente pela nossa equipa de atendimento Netaki.</li>
+                    <img class="manual-img" src="imagens/image 12.png" alt="Campos de autenticação e ativação">
                     
-                    <li><strong>Insira o Código:</strong> No campo "Em Destaque", digite os caracteres exibidos na TV e clique em <strong>Entrar</strong>.</li>
-                    <img class="manual-img" src="imagens/image 13.jpeg" alt="Inserindo o Código">
+                    <li><strong>Insira o Código de Ativação:</strong> No campo "Em Destaque" (ao lado do QR Code no portal web), digite os caracteres exibidos na sua TV e clique em <strong>Entrar</strong>.</li>
+                    <img class="manual-img" src="imagens/image 13.jpeg" alt="Inserção de código no painel">
                 </ol>
 
                 <div class="alert-box" style="border-left-color: #10B981; background-color: #F0FDF4; border-color: #D1FAE5;">
-                    <h4 style="color: #059669;">✓ Sucesso na Ativação</h4>
-                    <p style="color: #065F46;">Surgirá no ecrã a mensagem <em>"Dispositivo ativado com sucesso"</em>. Os canais serão carregados automaticamente por categorias para sua comodidade.</p>
+                    <h4 style="color: #059669;">✓ Dispositivo Vinculado com Sucesso</h4>
+                    <p style="color: #065F46;">A mensagem <em>"Dispositivo ativado com sucesso"</em> será exibida. Se houver falha de código expirado, verifique novamente os caracteres na TV, pois eles atualizam constantemente por segurança.</p>
                 </div>
-                <img class="manual-img" src="imagens/image 14.jpeg" alt="Mensagem de Sucesso">
+                <img class="manual-img" src="imagens/image 14.jpeg" alt="Confirmação de ativação bem-sucedida">
 
-                <h3>5. Utilização do App e Grelha de Canais</h3>
-                <p>Basta escolher o seu canal preferido e desfrutar. Os canais são separados por categoria, use as setas do controle para localizá-los e confirme com "OK".</p>
-                <img class="manual-img" src="imagens/image 15.jpeg" alt="Navegação por Categorias">
+                <h3>Navegação Básica e Categorias</h3>
+                <p>Com o sistema ativo, os canais serão devidamente carregados e organizados por categorias. Utilize as setas direcionais do seu comando para navegar entre as listas e confirme sua escolha clicando em <strong>OK</strong>.</p>
+                <img class="manual-img" src="imagens/image 15.jpeg" alt="Menu principal por categorias">
 
-                <h3>6. Outras Opções Dentro do App SP2 TV</h3>
-                <p>Com um canal em reprodução, clique em <strong>OK</strong> no seu comando para abrir a barra de ferramentas inferior. Lá encontrará a lista de canais e programação.</p>
+                <h3>Recursos Adicionais (Barra de Ferramentas)</h3>
+                <p>Durante a exibição em tela inteira de qualquer transmissão, pressione o botão <strong>OK</strong> do comando remoto para abrir o menu inferior de utilidades:</p>
+                <p>• <strong>Canais:</strong> Exibe a listagem completa com a grade de programação atual.<br>• <strong>Programação (EPG):</strong> Permite verificar cronogramas de conteúdos atuais, futuros ou até mesmo reproduzir transmissões das últimas 24h (recurso de *Catch-up*, disponível em canais selecionados).</p>
                 
                 <div class="img-grid">
-                    <img class="manual-img" src="imagens/image 16.jpeg" alt="Barra Inferior Aberta">
-                    <img class="manual-img" src="imagens/image 17.jpeg" alt="Lista de Canais Lateral">
+                    <img class="manual-img" src="imagens/image 16.jpeg" alt="Barra de ferramentas inferior">
+                    <img class="manual-img" src="imagens/image 17.jpeg" alt="Menu de Canais integrado">
+                </div>
+            </section>
+
+            <section id="suporte" class="content-section">
+                <h2>5. Resolução de Problemas Comuns</h2>
+                <p>Caso encontre alguma intercorrência durante o uso do SP2 TV, verifique os diagnósticos rápidos abaixo antes de acionar o suporte técnico:</p>
+
+                <div class="solution-box">
+                    <div class="solution-title">Falha: Erro de comunicação com o servidor</div>
+                    <p class="solution-text">Solução: Certifique-se de que a ligação de internet do seu dispositivo está ativa e estável. Recomendamos desligar o roteador/TV da tomada por 30 segundos e ligar novamente. Se persistir, valide se outros apps abrem conteúdo.</p>
+                </div>
+
+                <div class="solution-box">
+                    <div class="solution-title">Falha: Aplicativo deslogado da conta / Solicitação de novo código</div>
+                    <p class="solution-text">Solução: Isso ocorre devido a atualizações de segurança no servidor ou reinicialização do cache do aparelho. Basta refazer o processo contido no tópico "4. Processo de Ativação Passo a Passo".</p>
                 </div>
             </section>
         </main>
@@ -323,15 +388,40 @@
                     <li><a href="#download">» Downloads</a></li>
                     <li><a href="#samsung">» Smart TV Samsung</a></li>
                     <li><a href="#lg">» Smart TV LG</a></li>
-                    <li><a href="#ativacao">» Portal Ativação</a></li>
+                    <li><a href="#ativacao">» Ativação de Conta</a></li>
+                    <li><a href="#suporte">» Diagnósticos</a></li>
                 </ul>
             </div>
         </aside>
     </div>
 
     <footer class="footer">
-        <p>&copy; 2026 Netaki. Todos os direitos reservados. Conectando o que importa.</p>
+        <p>&copy; 2026 Netaki Telecomunicações. Todos os direitos reservados. Conectando o que importa.</p>
     </footer>
+
+    <div id="lightbox" class="lightbox" onclick="closeLightbox()">
+        <span class="lightbox-close">&times;</span>
+        <img id="lightbox-img" src="" alt="Imagem Ampliada">
+    </div>
+
+    <script>
+        // Seleciona todas as imagens do manual
+        const images = document.querySelectorAll('.manual-img');
+        const lightbox = document.getElementById('lightbox');
+        const lightboxImg = document.getElementById('lightbox-img');
+
+        images.forEach(img => {
+            img.addEventListener('click', () => {
+                lightboxImg.src = img.src; // Copia o caminho da imagem clicada
+                lightboxImg.alt = img.alt;
+                lightbox.style.display = 'flex'; // Torna visível o fundo preto
+            });
+        });
+
+        function closeLightbox() {
+            lightbox.style.display = 'none'; // Esconde ao clicar fora ou no X
+        }
+    </script>
 
 </body>
 </html>
