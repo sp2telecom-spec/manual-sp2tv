@@ -6,54 +6,63 @@
     <title>Guia de Instalação e Configuração - SP2 TV | Netaki</title>
     <style>
         :root {
-            --primary-color: #002D62; /* Azul Escuro Oficial Netaki */
-            --accent-color: #FF5A00;  /* Laranja Oficial Netaki */
-            --light-bg: #F4F7FA;      /* Fundo suave baseado no site */
-            --dark-text: #1E293B;     /* Texto escuro legível */
+            --primary-color: #CC0000;  /* Vermelho Principal Premium */
+            --primary-dark: #8B0000;   /* Vermelho Escuro Corporativo */
+            --accent-color: #1E293B;   /* Grafite para contraste */
+            --dark-text: #0F172A;      /* Texto quase preto ultralegível */
             --card-bg: #FFFFFF;
-            --border-radius: 10px;
+            --border-radius: 12px;
         }
 
         * { margin: 0; padding: 0; box-sizing: border-box; font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; }
-        body { background-color: var(--light-bg); color: var(--dark-text); line-height: 1.6; }
+        
+        /* Fundo Moderno com Gradiente Suave e Textura Tecnológica */
+        body { 
+            background: linear-gradient(135deg, #F1F5F9 0%, #E2E8F0 100%);
+            background-attachment: fixed;
+            color: var(--dark-text); 
+            line-height: 1.6; 
+        }
         
         header {
-            background-color: var(--primary-color);
-            box-shadow: 0 4px 10px rgba(0,0,0,0.15);
+            background-color: var(--primary-dark);
+            box-shadow: 0 4px 12px rgba(0,0,0,0.1);
             position: sticky;
             top: 0;
             z-index: 100;
-            border-bottom: 4px solid var(--accent-color);
+            border-bottom: 4px solid var(--primary-color);
         }
 
         .header-container {
             max-width: 1200px;
             margin: 0 auto;
-            padding: 0.8rem 2rem;
+            padding: 1rem 2rem;
             display: flex;
             justify-content: space-between;
             align-items: center;
         }
 
-        .logo-container img { height: 45px; display: block; }
+        .logo-container { color: white; font-weight: bold; font-size: 1.4rem; letter-spacing: -0.5px; }
+        .logo-container span { color: var(--primary-color); }
+        
         nav ul { display: flex; list-style: none; gap: 25px; }
         nav a { text-decoration: none; color: #FFFFFF; font-weight: 600; font-size: 0.95rem; transition: color 0.3s; }
-        nav a:hover { color: var(--accent-color); }
+        nav a:hover { color: #FFAAAA; }
 
         .hero {
-            background: linear-gradient(135deg, var(--primary-color) 0%, #001530 100%);
+            background: linear-gradient(135deg, var(--primary-dark) 0%, #4A0000 100%);
             color: white;
             text-align: center;
-            padding: 4.5rem 2rem;
+            padding: 5rem 2rem;
             border-bottom: 1px solid rgba(255,255,255,0.1);
         }
 
-        .hero h1 { font-size: 2.6rem; margin-bottom: 1rem; font-weight: 700; letter-spacing: -0.5px; }
-        .hero p { font-size: 1.2rem; opacity: 0.9; max-width: 650px; margin: 0 auto; }
+        .hero h1 { font-size: 2.8rem; margin-bottom: 1rem; font-weight: 700; letter-spacing: -0.5px; }
+        .hero p { font-size: 1.25rem; opacity: 0.95; max-width: 650px; margin: 0 auto; font-weight: 300; }
 
         .main-container {
             max-width: 1200px;
-            margin: 2.5rem auto;
+            margin: 3rem auto;
             padding: 0 2rem;
             display: grid;
             grid-template-columns: 3fr 1fr;
@@ -63,34 +72,34 @@
         @media (max-width: 768px) {
             .main-container { grid-template-columns: 1fr; gap: 1.5rem; padding: 0 1rem; }
             nav { display: none; }
-            .hero h1 { font-size: 2rem; }
+            .hero h1 { font-size: 2.2rem; }
         }
 
         .content-section {
             background: var(--card-bg);
-            padding: 2.5rem;
+            padding: 3rem;
             border-radius: var(--border-radius);
-            box-shadow: 0 4px 6px -1px rgba(0,0,0,0.05);
+            box-shadow: 0 10px 25px -5px rgba(0,0,0,0.05);
             margin-bottom: 2.5rem;
-            border: 1px solid #E2E8F0;
+            border: 1px solid rgba(226, 232, 240, 0.8);
         }
 
         h2 {
-            color: var(--primary-color);
-            border-left: 6px solid var(--accent-color);
-            padding-left: 12px;
-            margin-bottom: 1.75rem;
-            font-size: 1.8rem;
+            color: var(--primary-dark);
+            border-left: 6px solid var(--primary-color);
+            padding-left: 14px;
+            margin-bottom: 2rem;
+            font-size: 1.9rem;
             font-weight: 700;
         }
 
-        h3 { color: var(--primary-color); margin: 2rem 0 0.75rem 0; font-size: 1.3rem; border-bottom: 1px solid #E2E8F0; padding-bottom: 5px; }
-        p { margin-bottom: 1.2rem; color: #475569; text-align: justify; }
+        h3 { color: var(--primary-dark); margin: 2.5rem 0 1rem 0; font-size: 1.4rem; border-bottom: 2px solid #F1F5F9; padding-bottom: 6px; }
+        p { margin-bottom: 1.2rem; color: #334155; text-align: justify; font-size: 1.05rem; }
 
         .download-box {
             display: flex;
-            align-items: center;
-            gap: 20px;
+            flex-direction: column;
+            gap: 10px;
             margin: 1.5rem 0;
             background: #F8FAFC;
             padding: 1.5rem;
@@ -98,126 +107,83 @@
             border: 1px solid #E2E8F0;
         }
 
-        .download-box img { height: 45px; width: auto; }
-
         .btn-link {
-            background-color: var(--accent-color);
+            background-color: var(--primary-color);
             color: white;
-            padding: 10px 20px;
+            padding: 12px 24px;
             border-radius: 6px;
             text-decoration: none;
             font-weight: bold;
             display: inline-block;
             margin-top: 8px;
-            box-shadow: 0 2px 4px rgba(255, 90, 0, 0.2);
+            box-shadow: 0 4px 6px rgba(204, 0, 0, 0.2);
             transition: background 0.2s, transform 0.2s;
+            text-align: center;
+            max-width: 250px;
         }
 
-        .btn-link:hover { background-color: #E04F00; transform: translateY(-1px); }
-
-        .manual-img {
-            max-width: 100%;
-            max-height: 380px;
-            display: block;
-            margin: 1.5rem auto;
-            border-radius: var(--border-radius);
-            box-shadow: 0 10px 15px -3px rgba(0,0,0,0.07);
-            border: 1px solid #E2E8F0;
-            cursor: zoom-in;
-            transition: transform 0.3s ease;
-        }
-        
-        .manual-img:hover { transform: scale(1.02); }
+        .btn-link:hover { background-color: var(--primary-dark); transform: translateY(-2px); }
 
         .step-list { list-style: none; counter-reset: step-counter; margin: 1.5rem 0; }
-        .step-list li { position: relative; padding-left: 3.8rem; margin-bottom: 2rem; }
+        .step-list li { position: relative; padding-left: 4.2rem; margin-bottom: 2.5rem; font-size: 1.05rem; color: #334155; }
         
         .step-list li::before {
             content: counter(step-counter);
             counter-increment: step-counter;
             position: absolute;
-            left: 0; top: 2px;
+            left: 0;
+            top: -2px;
             background-color: var(--primary-color);
             color: white;
-            width: 2.6rem; height: 2.6rem;
+            width: 2.8rem;
+            height: 2.8rem;
             border-radius: 50%;
-            display: flex; align-items: center; justify-content: center;
-            font-weight: bold; font-size: 1.1rem;
-            border: 2px solid var(--accent-color);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: bold;
+            font-size: 1.2rem;
+            box-shadow: 0 4px 6px rgba(204, 0, 0, 0.15);
         }
 
         .alert-box { 
-            background-color: #FFF7ED; 
-            border-left: 5px solid var(--accent-color); 
-            padding: 1.5rem; 
+            background-color: #FFF5F5; 
+            border-left: 6px solid var(--primary-color); 
+            padding: 1.8rem; 
             border-radius: var(--border-radius); 
-            margin: 1.8rem 0; 
-            border: 1px solid #FFEDD5;
-            border-left: 5px solid var(--accent-color);
+            margin: 2rem 0; 
+            border-top: 1px solid #FFE2E2;
+            border-right: 1px solid #FFE2E2;
+            border-bottom: 1px solid #FFE2E2;
         }
-        .alert-box h4 { color: var(--accent-color); margin-bottom: 0.5rem; font-size: 1.1rem; }
+        .alert-box h4 { color: var(--primary-dark); margin-bottom: 0.6rem; font-size: 1.15rem; font-weight: 700; }
 
         .solution-box {
             background-color: #F8FAFC;
             border: 1px solid #E2E8F0;
-            padding: 1.5rem;
+            padding: 1.8rem;
             border-radius: var(--border-radius);
-            margin-bottom: 1.5rem;
+            margin-bottom: 1.8rem;
         }
-        .solution-title { font-weight: bold; color: #DC2626; margin-bottom: 0.5rem; text-transform: uppercase; font-size: 0.95rem; letter-spacing: 0.5px; }
-        .solution-text { color: #1E293B; }
+        .solution-title { font-weight: 700; color: var(--primary-dark); margin-bottom: 0.6rem; text-transform: uppercase; font-size: 0.95rem; letter-spacing: 0.5px; }
+        .solution-text { color: #334155; font-size: 1.05rem; }
 
-        .sidebar { position: sticky; top: 110px; height: fit-content; }
+        .sidebar { position: sticky; top: 120px; height: fit-content; }
         .quick-links { 
             background: var(--card-bg); 
-            padding: 1.5rem; 
+            padding: 2rem; 
             border-radius: var(--border-radius); 
-            box-shadow: 0 4px 6px -1px rgba(0,0,0,0.05);
+            box-shadow: 0 10px 25px -5px rgba(0,0,0,0.05);
             border: 1px solid #E2E8F0;
         }
-        .quick-links h4 { color: var(--primary-color); margin-bottom: 1rem; border-bottom: 2px solid var(--accent-color); padding-bottom: 0.5rem; }
+        .quick-links h4 { color: var(--primary-dark); margin-bottom: 1.2rem; border-bottom: 2px solid var(--primary-color); padding-bottom: 0.6rem; font-size: 1.1rem; }
         .quick-links ul { list-style: none; }
-        .quick-links li { margin-bottom: 0.85rem; }
-        .quick-links a { text-decoration: none; color: #475569; font-weight: 500; transition: color 0.2s; }
-        .quick-links a:hover { color: var(--accent-color); }
+        .quick-links li { margin-bottom: 1rem; }
+        .quick-links a { text-decoration: none; color: #475569; font-weight: 500; transition: color 0.2s; font-size: 1rem; }
+        .quick-links a:hover { color: var(--primary-color); }
 
-        .img-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 20px; margin: 1.8rem 0; }
-        @media (max-width: 600px) { .img-grid { grid-template-columns: 1fr; gap: 10px; } }
-
-        .footer { background-color: var(--primary-color); color: white; text-align: center; padding: 2.5rem; margin-top: 5rem; border-top: 4px solid var(--accent-color); }
-        .footer p { color: #E2E8F0; text-align: center; margin: 0; font-size: 0.95rem; }
-
-        /* Estrutura do Lightbox */
-        .lightbox {
-            display: none;
-            position: fixed;
-            z-index: 999;
-            top: 0; left: 0;
-            width: 100%; height: 100%;
-            background-color: rgba(0,0,0,0.85);
-            justify-content: center;
-            align-items: center;
-            cursor: zoom-out;
-        }
-        .lightbox img {
-            max-width: 90%;
-            max-height: 90%;
-            border-radius: 6px;
-            box-shadow: 0 4px 20px rgba(0,0,0,0.5);
-            animation: zoomIn 0.2s ease;
-        }
-        .lightbox-close {
-            position: absolute;
-            top: 20px; right: 30px;
-            color: white;
-            font-size: 40px;
-            font-weight: bold;
-            cursor: pointer;
-        }
-        @keyframes zoomIn {
-            from { transform: scale(0.9); opacity: 0; }
-            to { transform: scale(1); opacity: 1; }
-        }
+        .footer { background-color: var(--primary-dark); color: white; text-align: center; padding: 3rem; margin-top: 6rem; border-top: 4px solid var(--primary-color); }
+        .footer p { color: #F1F5F9; text-align: center; margin: 0; font-size: 1rem; }
     </style>
 </head>
 <body>
@@ -225,7 +191,7 @@
     <header>
         <div class="header-container">
             <div class="logo-container">
-                <img src="imagens/logonetaki-colorido-2048x1086.webp?v=1" alt="Netaki Telecomunicações">
+                NETAKI<span>.</span>
             </div>
             <nav>
                 <ul>
@@ -241,144 +207,115 @@
 
     <section class="hero">
         <h1>Guia de Instalação e Configuração</h1>
-        <p>Siga o passo a passo ilustrado para configurar o seu aplicativo oficial SP2 TV. Clique em qualquer imagem para ampliá-la.</p>
+        <p>Acompanhe o procedimento oficial para instalação, ativação e suporte do aplicativo SP2 TV.</p>
     </section>
 
     <div class="main-container">
         <main>
             <section id="download" class="content-section">
                 <h2>1. Como Baixar o App SP2 TV</h2>
-                <p>O aplicativo oficial SP2 TV pode ser baixado diretamente nas lojas de aplicativos do seu telemóvel, tablet ou Smart TV, pesquisando por <strong>"SP2 TV"</strong>.</p>
+                <p>O aplicativo oficial SP2 TV está disponível para instalação imediata nas principais lojas de aplicativos do mercado. Basta aceder à loja do seu dispositivo e pesquisar por <strong>"SP2 TV"</strong>.</p>
                 
                 <div class="download-box">
-                    <img src="imagens/image 1.png?v=1" alt="Google Play Store">
-                    <div>
-                        <strong>Dispositivos Android e TV Box (Google Play Store):</strong><br>
-                        <a href="https://play.google.com/store/apps/details?id=com.eitv.sp2tv&hl=pt_BR" target="_blank" class="btn-link">Aceder à Play Store</a>
-                    </div>
+                    <strong>Dispositivos Android e TV Box (Google Play Store):</strong>
+                    <a href="https://play.google.com/store/apps/details?id=com.eitv.sp2tv&hl=pt_BR" target="_blank" class="btn-link">Aceder à Play Store</a>
                 </div>
-                <img class="manual-img" src="imagens/image 1.png?v=1" alt="Disponibilidade Google Play">
 
                 <div class="download-box">
-                    <img src="imagens/image 2.png?v=1" alt="Apple App Store">
-                    <div>
-                        <strong>Dispositivos iOS - iPhone / iPad (Apple App Store):</strong><br>
-                        <a href="https://apps.apple.com/br/app/sp2-tv/id6502468697" target="_blank" class="btn-link">Aceder à App Store</a>
-                    </div>
+                    <strong>Dispositivos iOS - iPhone / iPad (Apple App Store):</strong>
+                    <a href="https://apps.apple.com/br/app/sp2-tv/id6502468697" target="_blank" class="btn-link">Aceder à App Store</a>
                 </div>
-                <img class="manual-img" src="imagens/image 2.png?v=1" alt="Disponibilidade App Store">
             </section>
 
             <section id="samsung" class="content-section">
                 <h2>2. Instalação em Smart TVs Samsung</h2>
-                <img class="manual-img" src="imagens/image 3.png?v=1" alt="Instalação Smart TVs Samsung">
                 
                 <h3>Modelos Recentes (Sistema Tizen Atual - Menu Lateral)</h3>
                 <ol class="step-list">
                     <li>Pressione o botão <strong>Home</strong> (ícone de casinha) no seu comando remoto.</li>
-                    <li>Utilize as setas direcionais para navegar até o menu lateral esquerdo e selecione <strong>APPS</strong>.</li>
+                    <li>Utilize as setas direcionais para navegar até ao menu lateral esquerdo e selecione a opção <strong>APPS</strong>.</li>
                     <li>Clique no ícone da <strong>Lupa (Pesquisar)</strong> localizado no canto superior direito da tela.</li>
-                    <li>Digite o nome do aplicativo <strong>SP2 TV</strong>, selecione o app correspondente e clique em <strong>Instalar</strong>.</li>
+                    <li>Introduza o nome <strong>SP2 TV</strong>, selecione o aplicativo correspondente e clique em <strong>Instalar</strong>.</li>
                 </ol>
-                <img class="manual-img" src="imagens/image 4.png?v=1" alt="Loja de Apps Samsung">
 
                 <h3>Modelos Antigos (Sistema Tizen Antigo - Faixa Inferior)</h3>
                 <ol class="step-list">
                     <li>Pressione o botão <strong>Home</strong> ou <strong>Smart Hub</strong> no comando remoto.</li>
-                    <li>Na barra colorida que aparece na parte inferior do ecrã, navegue até o ícone <strong>APPS</strong>.</li>
-                    <li>Vá até a <strong>Lupa</strong> situada no canto superior direito.</li>
-                    <li>Escreva o nome do aplicativo, clique em <strong>Concluído</strong> e, em seguida, selecione <strong>Transferir</strong> (o mesmo que Instalar).</li>
+                    <li>Na barra colorida que surge na parte inferior do ecrã, navegue até encontrar o ícone <strong>APPS</strong>.</li>
+                    <li>Aceda à <strong>Lupa</strong> situada no canto superior direito.</li>
+                    <li>Escreva o nome do aplicativo, selecione concluído e clique em <strong>Transferir</strong> (ou Instalar).</li>
                 </ol>
-                <img class="manual-img" src="imagens/image 5.png?v=1" alt="Modelos Antigos Samsung">
 
                 <div class="alert-box">
-                    <h4>⚠️ Nota de Compatibilidade</h4>
-                    <p>Se ao realizar os passos acima e pesquisar por "SP2 TV" o aplicativo não for localizado, significa que este modelo específico de televisão não possui compatibilidade de sistema nativa com a plataforma de desenvolvimento da aplicação.</p>
+                    <h4>⚠️ Nota de Compatibilidade Importante</h4>
+                    <p>Se ao realizar as buscas o aplicativo "SP2 TV" não for localizado na loja, isto indica que este modelo específico de televisão não possui compatibilidade de sistema nativa com a plataforma de desenvolvimento da aplicação.</p>
                 </div>
-                <img class="manual-img" src="imagens/image 6.jpeg?v=1" alt="Aviso de indisponibilidade em aparelhos antigos">
             </section>
 
             <section id="lg" class="content-section">
                 <h2>3. Instalação em Smart TVs LG</h2>
-                <img class="manual-img" src="imagens/image 7.jpeg?v=1" alt="Instalação Smart TVs LG">
                 
                 <h3>Modelos Recentes (webOS 6.0 ou superior)</h3>
                 <ol class="step-list">
                     <li>Pressione o botão <strong>Home</strong> no comando Smart Magic.</li>
-                    <li>No ecrã inicial da TV, localize e abra a aplicação <strong>Apps</strong> (ou <strong>LG Content Store</strong>).</li>
-                    <li>Selecione a <strong>Lupa (Pesquisar)</strong> no topo direito, digite <strong>SP2 TV</strong> e confirme a instalação.</li>
+                    <li>No ecrã inicial da sua TV, localize e abra a aplicação <strong>Apps</strong> (ou <strong>LG Content Store</strong>).</li>
+                    <li>Clique no ícone da <strong>Lupa (Pesquisar)</strong> no topo direito, digite <strong>SP2 TV</strong> e confirme a instalação.</li>
                 </ol>
-                <img class="manual-img" src="imagens/image 8.jpeg?v=1" alt="Pesquisa de Apps na LG">
 
                 <h3>Modelos Antigos (webOS 5.0 ou inferior)</h3>
                 <ol class="step-list">
                     <li>Pressione o botão <strong>Home</strong> no comando remoto.</li>
-                    <li>Na barra inferior de cartões coloridos, procure e selecione a opção <strong>LG Content Store</strong>.</li>
-                    <li>Aceda ao menu superior, clique na <strong>Lupa</strong>, introduza o nome do aplicativo e efetue a instalação.</li>
+                    <li>Na barra de cartões coloridos inferior, procure e selecione a opção <strong>LG Content Store</strong>.</li>
+                    <li>Aceda ao menu superior, selecione a <strong>Lupa</strong>, introduza o nome do aplicativo e efetue a instalação.</li>
                 </ol>
-                <img class="manual-img" src="imagens/image 9.jpeg?v=1" alt="Modelos Antigos LG">
             </section>
 
             <section id="ativacao" class="content-section">
                 <h2>4. Processo de Ativação Passo a Passo</h2>
-                <p>Após concluir a instalação, abra o aplicativo na sua televisão e realize o seguinte procedimento seguro para vincular sua conta de assinante:</p>
+                <p>Após a conclusão da instalação, abra o aplicativo na sua TV e realize o procedimento de vinculação de conta:</p>
                 
                 <ol class="step-list">
                     <li><strong>Abertura do App:</strong> A tela inicial da TV apresentará um <strong>QR Code</strong> e um <strong>Código de Ativação</strong> temporário gerado em tempo real.</li>
-                    <img class="manual-img" src="imagens/image 10.png?v=1" alt="Tela de Ativação na TV com QR Code">
-                    
-                    <li><strong>Acesso ao Portal:</strong> Utilizando um telemóvel, tablet ou computador, faça a leitura do QR Code exibido no ecrã.</li>
-                    <img class="manual-img" src="imagens/image 11.png?v=1" alt="Portal de Ativação Mobile">
-                    
-                    <li><strong>Autenticação do Assinante:</strong> Efetue o login introduzindo o nome de utilizador e a senha fornecidos oficialmente pela nossa equipa de suporte Netaki.</li>
-                    <img class="manual-img" src="imagens/image 12.png?v=1" alt="Campos de Login e Senha">
-                    
-                    <li><strong>Vinculação do Código:</strong> No campo "Em Destaque" (localizado ao lado do QR Code no portal web), digite os caracteres exibidos na sua TV e clique em <strong>Entrar</strong>.</li>
-                    <img class="manual-img" src="imagens/image 13.jpeg?v=1" alt="Inserindo o Código de Ativação">
+                    <li><strong>Acesso ao Portal:</strong> Utilizando um telemóvel, tablet ou computador, faça a leitura do QR Code exibido ou aceda ao endereço web correspondente.</li>
+                    <li><strong>Autenticação do Assinante:</strong> Efetue o login inserindo rigorosamente o nome de utilizador e a senha fornecidos formalmente pela nossa equipa de suporte Netaki.</li>
+                    <li><strong>Vinculação do Código:</strong> No campo intitulado "Em Destaque" (localizado ao lado do QR Code no portal web), digite os caracteres exibidos na sua TV e clique no botão <strong>Entrar</strong>.</li>
                 </ol>
 
                 <div class="alert-box" style="border-left-color: #10B981; background-color: #F0FDF4; border-color: #D1FAE5;">
-                    <h4 style="color: #059669;">✓ Ativação Concluída</h4>
-                    <p style="color: #065F46;">A notificação <em>"Dispositivo ativado com sucesso"</em> será exibida. Caso apareça "Código de ativação não encontrado", digite novamente e certifique-se de que os caracteres não alteraram na TV, pois o código atualiza constantemente por segurança.</p>
+                    <h4 style="color: #059669;">✓ Ativação Concluída com Sucesso</h4>
+                    <p style="color: #065F46;">A notificação <em>"Dispositivo ativado com sucesso"</em> será exibida. Caso ocorra erro de código expirado, verifique novamente a tela da TV, pois os caracteres renovam-se constantemente por motivos de segurança.</p>
                 </div>
-                <img class="manual-img" src="imagens/image 14.jpeg?v=1" alt="Confirmação de Sucesso">
 
                 <h3>Utilização Básica e Grelha de Canais</h3>
-                <p>O aplicativo está pronto para uso! Basta escolher o seu canal preferido e desfrutar. Os canais encontram-se totalmente separados por categoria. Utilize as <strong>setas direcionais</strong> do seu comando remoto para navegar e pressione o botão <strong>OK</strong> para confirmar.</p>
-                <img class="manual-img" src="imagens/image 15.jpeg?v=1" alt="Interface de Canais por Categoria">
+                <p>O aplicativo está totalmente pronto para utilização. Os canais encontram-se devidamente separados por categorias. Utilize as <strong>setas direcionais</strong> do seu comando remoto para navegar entre as opções e pressione o botão <strong>OK</strong> para confirmar a reprodução.</p>
 
                 <h3>Recursos Adicionais (Barra de Ferramentas)</h3>
-                <p>Com um canal em reprodução de ecrã inteiro, clique no botão <strong>OK</strong> do seu comando e use as <strong>setas direcionais</strong> para navegar. Uma barra de ferramentas surgirá na parte inferior da tela contendo as seguintes opções:</p>
-                <p>• <strong>Canais:</strong> Exibe a listagem completa de canais integrada com o cronograma da programação atual.<br>• <strong>Programação (EPG):</strong> Permite navegar, verificar a programação atual, futura e os conteúdos que já foram transmitidos.</p>
+                <p>Durante a reprodução em tela inteira de qualquer canal, pressione o botão <strong>OK</strong> do comando remoto e utilize as <strong>setas direcionais</strong> para habilitar a barra inferior de utilidades:</p>
+                <p>• <strong>Canais:</strong> Exibe a listagem completa integrada à grelha com a programação em tempo real.<br>• <strong>Programação (EPG):</strong> Permite navegar de forma detalhada pelo cronograma de conteúdos atuais, futuros e anteriores.</p>
                 
-                <div class="alert-box" style="border-left-color: #002D62; background-color: #F8FAFC; border-color: #E2E8F0;">
-                    <h4>💡 Dica: Recurso Catch-up (Gravação de 24h)</h4>
-                    <p>Alguns canais selecionados possuem a opção de reproduzir conteúdos já exibidos anteriormente no período das últimas 24h. Basta selecionar a programação desejada no menu e pressionar <strong>OK</strong> no controle remoto para iniciar a reprodução retroativa.</p>
-                </div>
-
-                <div class="img-grid">
-                    <img class="manual-img" src="imagens/image 16.jpeg?v=1" alt="Barra de Ferramentas Inferior">
-                    <img class="manual-img" src="imagens/image 17.jpeg?v=1" alt="Menu de Grade de Canais">
+                <div class="alert-box" style="border-left-color: var(--primary-dark); background-color: #F8FAFC; border-color: #E2E8F0;">
+                    <h4>💡 Recurso Catch-up (Gravação de 24 horas)</h4>
+                    <p>Canais selecionados possuem suporte para reprodução de transmissões anteriores gravadas nas últimas 24 horas. Para utilizar, selecione o conteúdo passado desejado no menu de programação e confirme pressionando <strong>OK</strong> no seu comando.</p>
                 </div>
             </section>
 
             <section id="suporte" class="content-section">
                 <h2>5. Resolução de Problemas Comuns</h2>
-                <p>Caso experimente qualquer comportamento incomum durante a reprodução do SP2 TV, consulte estes diagnósticos práticos antes de abrir um chamado técnico:</p>
+                <p>Caso experimente qualquer comportamento incomum, consulte as soluções rápidas listadas abaixo antes de contactar a central técnica:</p>
 
                 <div class="solution-box">
                     <div class="solution-title">Falha: Erro de comunicação com o servidor</div>
-                    <p class="solution-text"><strong>Solução:</strong> Verifique se a ligação de internet no seu dispositivo está ativa e funcional. Caso não esteja, desligue a TV e o seu roteador da tomada de energia por 30 segundos, religue-os e tente novamente. Se o problema persistir, entre em contacto com o nosso suporte.</p>
+                    <p class="solution-text"><strong>Solução:</strong> Certifique-se de que a ligação de rede do seu equipamento está ativa e estável. Se necessário, desligue a TV e o roteador da tomada de energia por 30 segundos, religue-os e teste novamente.</p>
                 </div>
 
                 <div class="solution-box">
                     <div class="solution-title">Falha: Aplicativo deslogado da conta / Solicitação de novo código</div>
-                    <p class="solution-text"><strong>Solução:</strong> Isso ocorre devido a limpezas automáticas de cache do aparelho ou atualizações de segurança no servidor. Para reestabelecer o sinal, basta refazer o processo de pareamento contido no tópico "4. Processo de Ativação Passo a Passo". Se encontrar dificuldades, acione nosso suporte técnico.</p>
+                    <p class="solution-text"><strong>Solução:</strong> Isto ocorre em decorrência de limpezas automáticas de cache do sistema ou atualizações preventivas nos servidores. Para restabelecer o sinal, basta refazer a vinculação contida no tópico "4. Processo de Ativação Passo a Passo".</p>
                 </div>
                 
                 <div class="solution-box">
                     <div class="solution-title">Falha: Instabilidade em um canal específico</div>
-                    <p class="solution-text"><strong>Solução:</strong> Caso ocorra falha técnica localizada em apenas um canal específico, trata-se de uma manutenção temporária na fonte de transmissão. Aguarde alguns instantes ou reporte o canal à nossa central de atendimento para correção.</p>
+                    <p class="solution-text"><strong>Solução:</strong> Se a falha técnica for isolada em apenas um canal, trata-se de uma manutenção temporária na transmissão da fonte. Aguarde alguns instantes ou reporte a ocorrência diretamente à nossa equipa.</p>
                 </div>
             </section>
         </main>
@@ -387,11 +324,11 @@
             <div class="quick-links">
                 <h4>Navegação Rápida</h4>
                 <ul>
-                    <li><a href="#download">» Downloads</a></li>
-                    <li><a href="#samsung">» Smart TV Samsung</a></li>
-                    <li><a href="#lg">» Smart TV LG</a></li>
+                    <li><a href="#download">» Downloads dos Apps</a></li>
+                    <li><a href="#samsung">» Instalação Samsung</a></li>
+                    <li><a href="#lg">» Instalação LG</a></li>
                     <li><a href="#ativacao">» Ativação de Conta</a></li>
-                    <li><a href="#suporte">» Diagnósticos Rápidos</a></li>
+                    <li><a href="#suporte">» Diagnósticos Técnicos</a></li>
                 </ul>
             </div>
         </aside>
@@ -400,29 +337,6 @@
     <footer class="footer">
         <p>&copy; 2026 Netaki Telecomunicações. Todos os direitos reservados. Conectando o que importa.</p>
     </footer>
-
-    <div id="lightbox" class="lightbox" onclick="closeLightbox()">
-        <span class="lightbox-close">&times;</span>
-        <img id="lightbox-img" src="" alt="Imagem Ampliada">
-    </div>
-
-    <script>
-        const images = document.querySelectorAll('.manual-img');
-        const lightbox = document.getElementById('lightbox');
-        const lightboxImg = document.getElementById('lightbox-img');
-
-        images.forEach(img => {
-            img.addEventListener('click', () => {
-                lightboxImg.src = img.src; 
-                lightboxImg.alt = img.alt;
-                lightbox.style.display = 'flex'; 
-            });
-        });
-
-        function closeLightbox() {
-            lightbox.style.display = 'none'; 
-        }
-    </script>
 
 </body>
 </html>
