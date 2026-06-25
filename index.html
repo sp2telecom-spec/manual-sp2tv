@@ -65,7 +65,6 @@
         nav a { text-decoration: none; color: var(--accent-color); font-weight: 600; font-size: 0.95rem; transition: color 0.2s; }
         nav a:hover { color: var(--primary-color); }
 
-        /* Botão do PDF */
         .btn-pdf {
             background-color: var(--primary-color);
             color: white !important;
@@ -260,7 +259,7 @@
 
         .footer { background-color: var(--accent-color); color: white; text-align: center; padding: 3rem; margin-top: 6rem; border-top: 4px solid var(--primary-color); }
 
-        /* Estilos do Sumário Dinâmico Oculto no Site e Visível no PDF */
+        /* Estilos do Sumário */
         #pdf-sumario {
             display: none;
             background: #FFFFFF;
@@ -276,7 +275,9 @@
         .sumario-linhas { flex-grow: 1; border-bottom: 2px dotted #CBD5E1; margin: 0 10px 5px 10px; }
         .sumario-num { color: var(--primary-color); font-weight: bold; }
 
-        /* REGRAS DE IMPRESSÃO DO PDF */
+        /* ==========================================
+           REGRAS EXCLUSIVAS DE CORREÇÃO PARA O PDF
+           ========================================== */
         .pdf-imprimir {
             display: block !important;
             width: 100% !important;
@@ -284,18 +285,41 @@
             margin: 0 !important;
             padding: 0 !important;
         }
+        
+        /* Força o Sumário a aparecer no PDF e quebrar a página logo após ele */
         .pdf-imprimir #pdf-sumario {
-            display: block !important; /* Exibe o sumário apenas na geração do PDF */
-            page-break-after: always !important; /* Força o conteúdo a começar na próxima folha */
+            display: block !important;
+            page-break-after: always !important;
+            break-after: page !important;
         }
+        
+        /* Evita que seções e blocos internos sejam cortados no meio da folha */
         .pdf-imprimir .content-section {
             page-break-inside: avoid !important;
-            margin-bottom: 20px !important;
+            break-inside: avoid !important;
+            margin-bottom: 30px !important;
             box-shadow: none !important;
+            border: 1px solid #CBD5E1 !important;
         }
-        .pdf-imprimir .step-image {
-            max-width: 70% !important;
+
+        /* Controla as imagens e as listas de passos para não quebrarem feio */
+        .pdf-imprimir .step-list li {
             page-break-inside: avoid !important;
+            break-inside: avoid !important;
+        }
+
+        .pdf-imprimir .step-image {
+            max-width: 75% !important;
+            page-break-inside: avoid !important;
+            break-inside: avoid !important;
+        }
+
+        /* Evita corte no meio de caixas de alertas ou blocos de solução */
+        .pdf-imprimir .alert-box, 
+        .pdf-imprimir .solution-box, 
+        .pdf-imprimir .support-card {
+            page-break-inside: avoid !important;
+            break-inside: avoid !important;
         }
     </style>
 </head>
@@ -385,7 +409,7 @@
                 </ol>
 
                 <div class="alert-box">
-                    <h4>⚠️ Nota de Compatibilidade Importante</h4>
+                    <h4>⚠️ Nota de Compartibilidade Importante</h4>
                     <p>Se ao realizar as buscas o aplicativo "SP2 TV" não for localizado na loja, isto indica que este modelo específico de televisão não possui compatibilidade de sistema nativa.</p>
                     <p><strong>Compatibilidade:</strong> Modelos de 2020 a 2024. Modelos 2025 e 2026 em breve.</p>
                 </div>
@@ -412,8 +436,8 @@
                 </ol>
 
                 <div class="alert-box">
-                    <h4>⚠️ Nota de Compatibilidade Importante</h4>
-                    <p>Disponível para models LG a partir de 2016. Em aparelhos muito antigos, o uso do APP pode apresentar lentidão devido ao hardware da TV.</p>
+                    <h4>⚠️ Nota de Compartibilidade Importante</h4>
+                    <p>Disponível para modelos LG a partir de 2016. Em aparelhos muito antigos, o uso do APP pode apresentar lentidão devido ao hardware da TV.</p>
                 </div>
             </section>
 
@@ -439,7 +463,7 @@
                     <li>Navegue até o menu superior (ou lateral) e selecione a aba ou aplicativo da <strong>Google Play Store</strong> (ou a aba <strong>"Apps"</strong> em sistemas Google TV).</li>
                     <li>Acesse o campo de busca (ícone de <strong>Lupa</strong> ou barra de pesquisa no topo).</li>
                     <li>Digite <strong>SP2 TV</strong> utilizando o teclado virtual e selecione o aplicativo correspondente nos resultados.</li>
-                    <li>Clique no botão <strong>Instalar</strong> (ou **Download**) e aguarde o término do processo. Após instalado, selecione <strong>Abrir</strong>.</li>
+                    <li>Clique no botão <strong>Instalar</strong> (ou <strong>Download</strong>) e aguarde o término do processo. Após instalado, selecione <strong>Abrir</strong>.</li>
                 </ol>
 
                 <div class="alert-box" style="background-color: #F8FAFC; border-left-color: #10B981; border-color: #E2E8F0;">
@@ -506,17 +530,17 @@
             <section id="suporte" class="content-section">
                 <h2>6. Resolução de Problemas Comuns</h2>
                 
-                <div class="solution-box">
-                    <div class="solution-title">Falha de Comunicação</div>
-                    <p class="solution-text">Verifique o Wi-Fi ou Cabo de rede. Reinicie o roteador por 30 segundos se necessário.</p>
+                <div class="alert-box" style="background-color: #F8FAFC; border-left-color: var(--primary-color); margin-bottom: 1.5rem;">
+                    <strong>Falha de Comunicação:</strong>
+                    <p style="margin-top: 5px; margin-bottom: 0;">Verifique o Wi-Fi ou Cabo de rede. Reinicie o roteador por 30 segundos se necessário.</p>
                 </div>
 
-                <div class="solution-box">
-                    <div class="solution-title">App Deslogado</div>
-                    <p class="solution-text">Ocorre por atualizações de segurança. Basta repetir o passo de Ativação.</p>
+                <div class="alert-box" style="background-color: #F8FAFC; border-left-color: var(--accent-color); margin-bottom: 1.5rem;">
+                    <strong>App Deslogado:</strong>
+                    <p style="margin-top: 5px; margin-bottom: 0;">Ocorre por atualizações de segurança. Basta repetir o passo de Ativação.</p>
                 </div>
 
-                <div class="support-card">
+                <div class="support-card" style="background: #F1F5F9; padding: 2rem; border-radius: var(--border-radius); text-align: center; margin-top: 2rem;">
                     <h3>Ainda precisa de ajuda?</h3>
                     <p>Fale agora com nosso suporte técnico via WhatsApp.</p>
                     <a href="https://api.whatsapp.com/send?l=pt&phone=551938772700&text=Contato%20do%20site%20Netaki%20Telecom." target="_blank" class="btn-whatsapp">
@@ -554,12 +578,14 @@
             if(barraLateral) barraLateral.style.display = 'none';
             elementoAlvo.classList.add('pdf-imprimir');
 
+            // Configuração refinada do html2pdf com modo "avoid-all" inteligente
             const opcoes = {
                 margin:       [15, 15, 15, 15],
                 filename:     'manual_instalacao_sp2tv.pdf',
                 image:        { type: 'jpeg', quality: 0.98 },
                 html2canvas:  { scale: 2, useCORS: true, backgroundColor: '#FFFFFF' },
-                jsPDF:        { unit: 'mm', format: 'a4', orientation: 'portrait' }
+                jsPDF:        { unit: 'mm', format: 'a4', orientation: 'portrait' },
+                pagebreak:    { mode: ['avoid-all', 'css'] } // Impede cortes em elementos do CSS
             };
 
             html2pdf().set(opcoes).from(elementoAlvo).save().then(() => {
