@@ -7,10 +7,10 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/html2pdf.js/0.10.1/html2pdf.bundle.min.js"></script>
     <style>
         :root {
-            --primary-color: #CC0000;
-            --primary-dark: #8B0000;
-            --accent-color: #1E293B;
-            --dark-text: #1E293B;
+            --primary-color: #CC0000;  /* Vermelho Principal Premium */
+            --primary-dark: #8B0000;   /* Vermelho Escuro Corporativo */
+            --accent-color: #1E293B;   /* Grafite para contraste */
+            --dark-text: #1E293B;      /* Texto escuro de alta legibilidade */
             --card-bg: #FFFFFF;
             --border-radius: 12px;
         }
@@ -49,22 +49,29 @@
             align-items: center;
             gap: 20px;
         }
-        .logo-netaki { height: 45px; width: auto; display: block; }
-        .logo-sp2tv { height: 40px; width: auto; display: block; border-radius: 8px; }
+        .logo-netaki {
+            height: 45px;
+            width: auto;
+            display: block;
+        }
+        .logo-sp2tv {
+            height: 40px;
+            width: auto;
+            display: block;
+            border-radius: 8px;
+        }
         
         nav ul { display: flex; list-style: none; gap: 25px; align-items: center; }
-        nav a { text-decoration: none; color: var(--accent-color); font-weight: 600; font-size: 0.95rem; }
+        nav a { text-decoration: none; color: var(--accent-color); font-weight: 600; font-size: 0.95rem; transition: color 0.2s; }
         nav a:hover { color: var(--primary-color); }
 
+        /* Botão do PDF */
         .btn-pdf {
             background-color: var(--primary-color);
             color: white !important;
-            padding: 8px 16px;
+            padding: 8px 14px;
             border-radius: 6px;
             font-size: 0.9rem;
-            display: inline-flex;
-            align-items: center;
-            gap: 6px;
             cursor: pointer;
             transition: 0.2s;
             border: none;
@@ -78,8 +85,9 @@
             text-align: center;
             padding: 5rem 2rem;
         }
-        .hero h1 { font-size: 2.8rem; margin-bottom: 1rem; font-weight: 700; }
-        .hero p { font-size: 1.25rem; opacity: 0.95; max-width: 650px; margin: 0 auto; }
+
+        .hero h1 { font-size: 2.8rem; margin-bottom: 1rem; font-weight: 700; letter-spacing: -0.5px; }
+        .hero p { font-size: 1.25rem; opacity: 0.95; max-width: 650px; margin: 0 auto; font-weight: 300; }
 
         .main-container {
             max-width: 1200px;
@@ -90,9 +98,24 @@
             gap: 2.5rem;
         }
 
-        .pdf-only-header { display: none; }
-        .section-title-with-logo { display: flex; align-items: center; gap: 15px; }
-        .title-brand-logo { height: 35px; width: auto; }
+        .section-title-with-logo {
+            display: flex;
+            align-items: center;
+            gap: 15px;
+        }
+        .title-brand-logo {
+            height: 35px;
+            width: auto;
+        }
+
+        @media (max-width: 768px) {
+            .main-container { grid-template-columns: 1fr; gap: 1.5rem; padding: 0 1rem; }
+            nav { display: none; }
+            .hero h1 { font-size: 2.2rem; }
+            .download-row { flex-direction: column !important; align-items: center !important; gap: 15px; }
+            .download-image-sidebar { width: 120px; }
+            .section-title-with-logo { flex-direction: column; align-items: flex-start; }
+        }
 
         .content-section {
             background: var(--card-bg);
@@ -103,78 +126,176 @@
             border: 1px solid #E2E8F0;
         }
 
-        h2 { color: var(--accent-color); border-left: 6px solid var(--primary-color); padding-left: 14px; margin-bottom: 2rem; font-size: 1.9rem; font-weight: 700; }
+        h2 {
+            color: var(--accent-color);
+            border-left: 6px solid var(--primary-color);
+            padding-left: 14px;
+            margin-bottom: 2rem;
+            font-size: 1.9rem;
+            font-weight: 700;
+        }
+
         h3 { color: var(--primary-dark); margin: 2.5rem 0 1rem 0; font-size: 1.4rem; border-bottom: 2px solid #F1F5F9; padding-bottom: 6px; }
         p { margin-bottom: 1.2rem; color: #475569; text-align: justify; font-size: 1.05rem; }
 
-        .download-row { display: flex; flex-direction: row; align-items: center; gap: 30px; margin-bottom: 2.5rem; }
-        .download-image-sidebar { width: 140px; height: auto; object-fit: contain; flex-shrink: 0; }
-        .download-box-right { flex: 1; background: #F8FAFC; padding: 1.8rem 2rem; border-radius: var(--border-radius); border: 1px solid #E2E8F0; display: flex; flex-direction: column; gap: 12px; }
+        .download-row {
+            display: flex;
+            flex-direction: row;
+            align-items: center;
+            gap: 30px; 
+            margin-bottom: 2.5rem;
+        }
 
-        .btn-link { background-color: var(--primary-color); color: white; padding: 11px 26px; border-radius: 6px; text-decoration: none; font-weight: bold; display: inline-block; text-align: center; }
-        .btn-link:hover { background-color: var(--primary-dark); }
+        .download-image-sidebar {
+            width: 140px;
+            height: auto;
+            object-fit: contain;
+            flex-shrink: 0;
+        }
+
+        .download-box-right {
+            flex: 1;
+            background: #F8FAFC;
+            padding: 1.8rem 2rem;
+            border-radius: var(--border-radius);
+            border: 1px solid #E2E8F0;
+            display: flex;
+            flex-direction: column;
+            gap: 12px;
+        }
+
+        .btn-link {
+            background-color: var(--primary-color);
+            color: white;
+            padding: 11px 26px;
+            border-radius: 6px;
+            text-decoration: none;
+            font-weight: bold;
+            display: inline-block;
+            box-shadow: 0 4px 6px rgba(204, 0, 0, 0.15);
+            transition: 0.2s;
+            text-align: center;
+        }
+        .btn-link:hover { background-color: var(--primary-dark); transform: translateY(-2px); }
 
         .step-list { list-style: none; counter-reset: step-counter; margin: 1.5rem 0; }
         .step-list li { position: relative; padding-left: 4.2rem; margin-bottom: 2.5rem; font-size: 1.05rem; color: #475569; }
         .step-list li::before {
             content: counter(step-counter);
             counter-increment: step-counter;
-            position: absolute; left: 0; top: -2px;
-            background-color: var(--primary-color); color: white;
-            width: 2.8rem; height: 2.8rem; border-radius: 50%;
-            display: flex; align-items: center; justify-content: center; font-weight: bold; font-size: 1.2rem;
+            position: absolute;
+            left: 0; top: -2px;
+            background-color: var(--primary-color);
+            color: white;
+            width: 2.8rem; height: 2.8rem;
+            border-radius: 50%;
+            display: flex; align-items: center; justify-content: center;
+            font-weight: bold; font-size: 1.2rem;
+            box-shadow: 0 4px 6px rgba(204, 0, 0, 0.15);
         }
 
-        .step-image { display: block; max-width: 85%; height: auto; margin: 1.2rem 0 1.8rem 0; border-radius: 8px; box-shadow: 0 4px 12px rgba(0,0,0,0.08); border: 1px solid #E2E8F0; }
-        .alert-box { background-color: #FFF5F5; border-left: 6px solid var(--primary-color); padding: 1.8rem; border-radius: var(--border-radius); margin: 2rem 0; border: 1px solid #FFE2E2; }
+        .step-image {
+            display: block;
+            max-width: 85%;
+            height: auto;
+            margin: 1.2rem 0 1.8rem 0;
+            border-radius: 8px;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.08);
+            border: 1px solid #E2E8F0;
+        }
 
-        .brand-badge-container { display: flex; flex-wrap: wrap; gap: 10px; margin: 1rem 0 1.5rem 0; }
-        .brand-badge { background: #F1F5F9; color: #334155; padding: 5px 12px; border-radius: 20px; font-size: 0.9rem; font-weight: 600; border: 1px solid #E2E8F0; }
+        .alert-box { 
+            background-color: #FFF5F5; 
+            border-left: 6px solid var(--primary-color); 
+            padding: 1.8rem; 
+            border-radius: var(--border-radius); 
+            margin: 2rem 0; 
+            border: 1px solid #FFE2E2;
+        }
+
+        .brand-badge-container {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 10px;
+            margin: 1rem 0 1.5rem 0;
+        }
+
+        .brand-badge {
+            background: #F1F5F9;
+            color: #334155;
+            padding: 5px 12px;
+            border-radius: 20px;
+            font-size: 0.9rem;
+            font-weight: 600;
+            border: 1px solid #E2E8F0;
+        }
 
         .sidebar { position: sticky; top: 120px; height: fit-content; }
-        .quick-links { background: var(--card-bg); padding: 2rem; border-radius: var(--border-radius); box-shadow: 0 4px 6px -1px rgba(0,0,0,0.02); border: 1px solid #E2E8F0; }
-        .quick-links a { text-decoration: none; color: #64748B; font-weight: 500; font-size: 1rem; }
+        .quick-links { 
+            background: var(--card-bg); 
+            padding: 2rem; 
+            border-radius: var(--border-radius); 
+            box-shadow: 0 4px 6px -1px rgba(0,0,0,0.02);
+            border: 1px solid #E2E8F0;
+        }
+        .quick-links a { text-decoration: none; color: #64748B; font-weight: 500; transition: 0.2s; font-size: 1rem; }
         .quick-links a:hover { color: var(--primary-color); }
 
-        .solution-box { border-bottom: 1px solid #E2E8F0; padding: 1rem 0; }
-        .solution-title { font-weight: 700; color: var(--accent-color); margin-bottom: 0.5rem; }
-
-        .support-card { background: #F8FAFC; border: 1px solid #E2E8F0; border-radius: var(--border-radius); padding: 2rem; margin-top: 2rem; text-align: center; }
-        .btn-whatsapp { background-color: #25D366; color: white; padding: 14px 28px; border-radius: 8px; text-decoration: none; font-weight: bold; display: inline-flex; align-items: center; justify-content: center; gap: 10px; margin-top: 15px; }
+        .btn-whatsapp {
+            background-color: #25D366;
+            color: white;
+            padding: 14px 28px;
+            border-radius: 8px;
+            text-decoration: none;
+            font-weight: bold;
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            gap: 10px;
+            box-shadow: 0 4px 12px rgba(37, 211, 102, 0.2);
+            transition: 0.2s;
+            font-size: 1.1rem;
+        }
+        .btn-whatsapp:hover { background-color: #128C7E; transform: translateY(-2px); }
 
         .footer { background-color: var(--accent-color); color: white; text-align: center; padding: 3rem; margin-top: 6rem; border-top: 4px solid var(--primary-color); }
 
-        @media (max-width: 768px) {
-            .main-container { grid-template-columns: 1fr; gap: 1.5rem; padding: 0 1rem; }
-            nav { display: none; }
+        /* Estilos do Sumário Dinâmico Oculto no Site e Visível no PDF */
+        #pdf-sumario {
+            display: none;
+            background: #FFFFFF;
+            padding: 2.5rem;
+            border-radius: var(--border-radius);
+            border: 1px solid #E2E8F0;
+            margin-bottom: 2.5rem;
         }
+        #pdf-sumario h2 { border-left-color: var(--primary-color); }
+        .sumario-lista { list-style: none; margin-top: 1.5rem; }
+        .sumario-item { display: flex; justify-content: space-between; align-items: bottom; margin-bottom: 1rem; font-size: 1.1rem; }
+        .sumario-item a { text-decoration: none; color: var(--accent-color); font-weight: 600; }
+        .sumario-linhas { flex-grow: 1; border-bottom: 2px dotted #CBD5E1; margin: 0 10px 5px 10px; }
+        .sumario-num { color: var(--primary-color); font-weight: bold; }
 
-        /* 👑 REGRAS CRÍTICAS DE CORREÇÃO PARA O MODO PDF */
-        .pdf-mode {
-            background: #FFFFFF !important;
+        /* REGRAS DE IMPRESSÃO DO PDF */
+        .pdf-imprimir {
             display: block !important;
             width: 100% !important;
-            padding: 0 !important;
+            max-width: 100% !important;
             margin: 0 !important;
+            padding: 0 !important;
         }
-        
-        .pdf-mode .content-section {
-            background: #FFFFFF !important;
-            border: none !important;
-            box-shadow: none !important;
-            padding: 10mm 5mm !important;
-            margin: 0 0 15mm 0 !important;
-            page-break-inside: avoid !important; /* Proíbe o html2pdf de quebrar este bloco ao meio */
-            page-break-after: always !important;  /* Força cada seção principal a começar em uma página limpa */
+        .pdf-imprimir #pdf-sumario {
+            display: block !important; /* Exibe o sumário apenas na geração do PDF */
+            page-break-after: always !important; /* Força o conteúdo a começar na próxima folha */
         }
-
-        .pdf-mode .step-image {
-            max-width: 65% !important;
+        .pdf-imprimir .content-section {
             page-break-inside: avoid !important;
+            margin-bottom: 20px !important;
+            box-shadow: none !important;
         }
-
-        .pdf-mode .support-card, .pdf-mode .btn-link {
-            display: none !important;
+        .pdf-imprimir .step-image {
+            max-width: 70% !important;
+            page-break-inside: avoid !important;
         }
     </style>
 </head>
@@ -193,26 +314,33 @@
                     <li><a href="#lg">TV LG</a></li>
                     <li><a href="#androidtv">Android TV</a></li>
                     <li><a href="#ativacao">Ativação</a></li>
-                    <li><button class="btn-pdf" id="btnDownloadManual" onclick="baixarManualPDF()">📥 Baixar Manual PDF</button></li>
+                    <li><a href="#suporte">Suporte</a></li>
+                    <li><button class="btn-pdf" onclick="baixarManualPDF()">📥 Baixar PDF</button></li>
                 </ul>
             </nav>
         </div>
     </header>
 
-    <section class="hero" id="web-hero">
+    <section class="hero">
         <h1>Guia de Instalação e Configuração</h1>
         <p>Acompanhe o procedimento oficial para instalação, ativação e suporte do aplicativo SP2 TV.</p>
     </section>
 
-    <div class="main-container" id="manual-content">
-        
-        <div class="pdf-only-header" id="pdf-header" style="border-bottom: 4px solid #CC0000; padding-bottom: 15px; margin-bottom: 30px;">
-            <div style="font-size: 10pt; text-transform: uppercase; letter-spacing: 2px; color: #8B0000; font-weight: bold; margin-bottom: 5px;">Netaki Telecomunicações</div>
-            <h1 style="font-size: 22pt; color: #1E293B; margin: 0 0 5px 0;">Manual Oficial de Instalação e Configuração</h1>
-            <div style="font-size: 12pt; color: #475569;">Aplicativo SP2 TV — Guia do Usuário</div>
-        </div>
+    <div class="main-container" id="conteudo-principal">
+        <main id="coluna-texto">
+            
+            <div id="pdf-sumario">
+                <h2>Sumário Executivo</h2>
+                <ul class="sumario-lista">
+                    <li class="sumario-item"><a href="#download">1. Como Baixar o App SP2 TV</a><div class="sumario-linhas"></div><span class="sumario-num">Pág. 1</span></li>
+                    <li class="sumario-item"><a href="#samsung">2. Instalação em Smart TVs Samsung</a><div class="sumario-linhas"></div><span class="sumario-num">Pág. 2</span></li>
+                    <li class="sumario-item"><a href="#lg">3. Instalação em Smart TVs LG</a><div class="sumario-linhas"></div><span class="sumario-num">Pág. 3</span></li>
+                    <li class="sumario-item"><a href="#androidtv">4. Instalação em Smart TVs Android TV / Google TV</a><div class="sumario-linhas"></div><span class="sumario-num">Pág. 4</span></li>
+                    <li class="sumario-item"><a href="#ativacao">5. Processo de Ativação Passo a Passo</a><div class="sumario-linhas"></div><span class="sumario-num">Pág. 5</span></li>
+                    <li class="sumario-item"><a href="#suporte">6. Resolução de Problemas Comuns</a><div class="sumario-linhas"></div><span class="sumario-num">Pág. 7</span></li>
+                </ul>
+            </div>
 
-        <main id="pdf-main-content">
             <section id="download" class="content-section">
                 <h2>1. Como Baixar o App SP2 TV</h2>
                 <p>O aplicativo oficial SP2 TV está disponível para instalação imediata nas principais lojas de aplicativos do mercado. Basta aceder à loja do seu dispositivo e pesquisar por <strong>"SP2 TV"</strong>.</p>
@@ -259,6 +387,7 @@
                 <div class="alert-box">
                     <h4>⚠️ Nota de Compatibilidade Importante</h4>
                     <p>Se ao realizar as buscas o aplicativo "SP2 TV" não for localizado na loja, isto indica que este modelo específico de televisão não possui compatibilidade de sistema nativa.</p>
+                    <p><strong>Compatibilidade:</strong> Modelos de 2020 a 2024. Modelos 2025 e 2026 em breve.</p>
                 </div>
             </section>
 
@@ -281,131 +410,165 @@
                     <li>Na barra de cartões coloridos inferior, procure e selecione a opção <strong>LG Content Store</strong>.</li>
                     <li>Aceda ao menu superior, selecione a <strong>Lupa</strong>, introduza o nome do aplicativo e efetue a instalação.</li>
                 </ol>
+
+                <div class="alert-box">
+                    <h4>⚠️ Nota de Compatibilidade Importante</h4>
+                    <p>Disponível para models LG a partir de 2016. Em aparelhos muito antigos, o uso do APP pode apresentar lentidão devido ao hardware da TV.</p>
+                </div>
             </section>
 
             <section id="androidtv" class="content-section">
-                <h2>4. Instalação em Smart TVs Android TV / Google TV</h2>
+                <h2 class="section-title-with-logo">
+                    4. Instalação em Smart TVs com Sistema Android TV / Google TV
+                    <img src="imagens/android.png" alt="Android" class="title-brand-logo">
+                </h2>
+                <p>Muitas marcas modernas do mercado utilizam o ecossistema oficial da Google. Este procedimento é válido para diversos fabricantes de televisores e dispositivos de streaming:</p>
+                
                 <div class="brand-badge-container">
-                    <span class="brand-badge">TCL</span> <span class="brand-badge">Philips</span> <span class="brand-badge">Sony</span> <span class="brand-badge">Xiaomi</span>
+                    <span class="brand-badge">TCL</span>
+                    <span class="brand-badge">Philips</span>
+                    <span class="brand-badge">Sony</span>
+                    <span class="brand-badge">Semp</span>
+                    <span class="brand-badge">Xiaomi (Mi TV / TV Stick / Box)</span>
+                    <span class="brand-badge">Realme Stick</span>
                 </div>
+
+                <h3>Passo a Passo de Instalação</h3>
                 <ol class="step-list">
-                    <li>Pressione o botão <strong>Home</strong> do controle remoto.</li>
-                    <li>Abra a <strong>Google Play Store</strong> (ou aba <strong>"Apps"</strong>).</li>
-                    <li>Acesse o campo de busca, digite <strong>SP2 TV</strong> e clique em <strong>Instalar</strong>.</li>
+                    <li>Pressione o botão <strong>Home</strong> do controle remoto para acessar a tela inicial do sistema.</li>
+                    <li>Navegue até o menu superior (ou lateral) e selecione a aba ou aplicativo da <strong>Google Play Store</strong> (ou a aba <strong>"Apps"</strong> em sistemas Google TV).</li>
+                    <li>Acesse o campo de busca (ícone de <strong>Lupa</strong> ou barra de pesquisa no topo).</li>
+                    <li>Digite <strong>SP2 TV</strong> utilizando o teclado virtual e selecione o aplicativo correspondente nos resultados.</li>
+                    <li>Clique no botão <strong>Instalar</strong> (ou **Download**) e aguarde o término do processo. Após instalado, selecione <strong>Abrir</strong>.</li>
                 </ol>
+
+                <div class="alert-box" style="background-color: #F8FAFC; border-left-color: #10B981; border-color: #E2E8F0;">
+                    <h4>💡 Dica Prática</h4>
+                    <p>Caso sua TV possua controle remoto com comando de voz, você pode pressionar o botão do <strong>Google Assistente</strong> e simplesmente dizer: <em>"Pesquisar aplicativo SP2 TV na Play Store"</em> para ir direto à página de download.</p>
+                </div>
+
+                <div class="alert-box" style="background-color: #F8FAFC; border-left-color: var(--accent-color);">
+                    <h4>⚠️ ALTERNATIVAS PARA TVs NÃO COMPATÍVEIS</h4>
+                    <p>Para modelos não compatíveis, utilize um <strong>TV Box ou Dongle HDMI</strong> (ex: Fire Stick, Chromecast, Roku):</p>
+                    <p>1. Conecte o dispositivo na entrada HDMI da TV.<br>
+                       2. Acesse a loja de apps do dispositivo (Play Store ou Amazon).<br>
+                       3. Busque por <strong>SP2 TV</strong> e instale.</p>
+                </div>
             </section>
 
             <section id="ativacao" class="content-section">
                 <h2>5. Processo de Ativação Passo a Passo</h2>
+                <p>Após a conclusão da instalação, realize o procedimento de vinculação de conta:</p>
+                
                 <ol class="step-list">
-                    <li><strong>Abertura do App:</strong> Abra o app SP2 TV na sua TV.
-                        <img src="imagens/image 4.jpeg" class="step-image">
-                        <img src="imagens/image 5.jpeg" class="step-image">
+                    <li>
+                        <strong>Abertura do App:</strong> Na tela inicial da TV, navegue utilizando ↓ ← ↑ → e clique em <strong>OK</strong> para avançar.
+                        <img src="imagens/image 4.jpeg" alt="Manual TV 1" class="step-image">
+                        <img src="imagens/image 5.jpeg" alt="Manual TV 2" class="step-image">
                     </li>
-                    <li><strong>Tela de Login:</strong> A TV exibirá um QR Code e um código.</li>
-                    <li><strong>Acesso ao Portal:</strong> Acesse pelo celular o site <a href="https://tv.sp2.tv.br/activate" target="_blank">tv.sp2.tv.br/activate</a>.
-                        <img src="imagens/image 6.jpeg" class="step-image">
+                    <li><strong>Tela de Login:</strong> A TV exibirá um <strong>QR Code</strong> e um <strong>Código de Ativação</strong> temporário.</li>
+                    <li>
+                        <strong>Acesso ao Portal:</strong> Leia o QR Code com o celular ou acesse <a href="https://tv.sp2.tv.br/activate" target="_blank">tv.sp2.tv.br/activate</a>.
+                        <img src="imagens/image 6.jpeg" alt="Portal Ativação" class="step-image">
                     </li>
-                    <li><strong>Autenticação:</strong> Faça login com os dados enviados pela Netaki.
-                        <img src="imagens/image 7.png" class="step-image">
+                    <li>
+                        <strong>Autenticação:</strong> Faça login com os dados (Usuário/Senha) fornecidos pela Netaki.
+                        <img src="imagens/image 7.png" alt="Login Netaki" class="step-image">
                     </li>
-                    <li><strong>Vinculação:</strong> Digite o código gerado pela TV e confirme.
-                        <img src="imagens/image 8.png" class="step-image">
-                        <img src="imagens/image 9.png" class="step-image">
+                    <li>
+                        <strong>Vinculação:</strong> No campo "Em Destaque" do site, digite o código da TV e clique em <strong>Entrar</strong>.
+                        <img src="imagens/image 8.png" alt="Código Web" class="step-image">
+                        <img src="imagens/image 9.png" alt="Sucesso" class="step-image">
                     </li>
                 </ol>
 
-                <h3>Grade de Canais e Uso</h3>
-                <img src="imagens/image 10.jpeg" class="step-image">
-                <img src="imagens/image 11.jpeg" class="step-image">
-                <img src="imagens/image 12.jpeg" class="step-image">
-                <img src="imagens/image 13.jpeg" class="step-image">
+                <div class="alert-box" style="border-left-color: #10B981; background-color: #F0FDF4; border-color: #D1FAE5;">
+                    <h4 style="color: #059669;">✓ Ativação Concluída com Sucesso</h4>
+                    <p style="color: #065F46;">O dispositivo será liberado imediatamente após a confirmação no portal.</p>
+                </div>
+
+                <h3>Utilização Básica e Grade de Canais</h3>
+                <p>Use as setas <strong>↓ ← ↑ →</strong> e o <strong>OK</strong> para navegar entre as categorias e escolher seus canais.</p>
+                <img src="imagens/image 10.jpeg" alt="Canais" class="step-image">
+
+                <h3>Barra de Ferramentas e Programação</h3>
+                <p>Com um canal aberto, aperte <strong>OK</strong> para ver a grade e a programação (EPG).</p>
+                <img src="imagens/image 11.jpeg" alt="Barra Ferramentas" class="step-image">
+                <img src="imagens/image 12.jpeg" alt="Grade Canais" class="step-image">
+                <img src="imagens/image 13.jpeg" alt="EPG" class="step-image">
+
+                <div class="alert-box" style="background-color: #F8FAFC; border-left-color: var(--primary-dark);">
+                    <h4>💡 Recurso Catch-up</h4>
+                    <p>Alguns canais permitem assistir conteúdos de até 24h atrás. Basta selecionar no menu de programação e dar OK.</p>
+                </div>
             </section>
 
             <section id="suporte" class="content-section">
                 <h2>6. Resolução de Problemas Comuns</h2>
+                
                 <div class="solution-box">
                     <div class="solution-title">Falha de Comunicação</div>
-                    <p>Desconecte o roteador da tomada por 30 segundos e ligue-o novamente.</p>
+                    <p class="solution-text">Verifique o Wi-Fi ou Cabo de rede. Reinicie o roteador por 30 segundos se necessário.</p>
                 </div>
+
                 <div class="solution-box">
                     <div class="solution-title">App Deslogado</div>
-                    <p>Basta repetir o passo 5 de ativação para vincular novamente o dispositivo.</p>
+                    <p class="solution-text">Ocorre por atualizações de segurança. Basta repetir o passo de Ativação.</p>
                 </div>
 
                 <div class="support-card">
                     <h3>Ainda precisa de ajuda?</h3>
-                    <p>Fale agora diretamente com o nosso suporte técnico oficial.</p>
+                    <p>Fale agora com nosso suporte técnico via WhatsApp.</p>
                     <a href="https://api.whatsapp.com/send?l=pt&phone=551938772700&text=Contato%20do%20site%20Netaki%20Telecom." target="_blank" class="btn-whatsapp">
-                        💬 Falar no WhatsApp (19) 3877-2700
+                        💬 Falar com o Suporte Técnico
                     </a>
                 </div>
             </section>
         </main>
 
-        <aside class="sidebar" id="web-sidebar">
+        <aside class="sidebar" id="barra-lateral">
             <div class="quick-links">
-                <h4>Opções do Guia</h4>
-                <ul style="list-style: none; margin-top: 15px;">
+                <h4>Navegação Rápida</h4>
+                <ul style="list-style: none;">
                     <li style="margin-bottom: 12px;"><a href="#download">» Downloads</a></li>
                     <li style="margin-bottom: 12px;"><a href="#samsung">» Instalação Samsung</a></li>
                     <li style="margin-bottom: 12px;"><a href="#lg">» Instalação LG</a></li>
-                    <li style="margin-bottom: 12px;"><a href="#androidtv">» Instalação Android</a></li>
+                    <li style="margin-bottom: 12px;"><a href="#androidtv">» Instalação Android TV</a></li>
                     <li style="margin-bottom: 12px;"><a href="#ativacao">» Ativação</a></li>
-                    <li style="margin-bottom: 12px;"><button onclick="baixarManualPDF()" style="background:none; border:none; color: #CC0000; font-weight: bold; cursor: pointer; text-align:left;">» 📥 Baixar Manual PDF</button></li>
+                    <li style="margin-bottom: 12px;"><a href="#suporte">» Suporte</a></li>
+                    <li><a href="https://netaki.com.br/fale-conosco/" target="_blank" style="color: var(--primary-color); font-weight: bold;">» Entre em Contato</a></li>
                 </ul>
             </div>
         </aside>
     </div>
 
-    <footer class="footer" id="web-footer">
-        <p>&copy; 2026 Netaki Telecomunicações. Todos os direitos reservados.</p>
+    <footer class="footer">
+        <p>&copy; 2026 Netaki Telecomunicações. Conectando o que importa.</p>
     </footer>
 
     <script>
         function baixarManualPDF() {
-            const btn = document.getElementById('btnDownloadManual');
-            const elementoConteudo = document.getElementById('manual-content');
-            const cabecalhoPDF = document.getElementById('pdf-header');
-            const barraLateral = document.getElementById('web-sidebar');
+            const elementoAlvo = document.getElementById('coluna-texto');
+            const barraLateral = document.getElementById('barra-lateral');
             
-            if(btn) btn.innerText = "⏳ Formatando Documento...";
-
-            // 1. Prepara elementos para captura sem colunas flexíveis (evita bugs estruturais)
-            cabecalhoPDF.style.display = 'block';
             if(barraLateral) barraLateral.style.display = 'none';
-            elementoConteudo.classList.add('pdf-mode');
-            
+            elementoAlvo.classList.add('pdf-imprimir');
+
             const opcoes = {
                 margin:       [15, 15, 15, 15],
-                filename:     'manual_instalacao_sp2tv_netaki.pdf',
+                filename:     'manual_instalacao_sp2tv.pdf',
                 image:        { type: 'jpeg', quality: 0.98 },
-                html2canvas:  { 
-                    scale: 2, 
-                    useCORS: true, 
-                    backgroundColor: '#FFFFFF',
-                    scrollX: 0,
-                    scrollY: 0
-                },
+                html2canvas:  { scale: 2, useCORS: true, backgroundColor: '#FFFFFF' },
                 jsPDF:        { unit: 'mm', format: 'a4', orientation: 'portrait' }
             };
 
-            // 2. Timeout curto garante a aplicação correta dos estilos CSS antes do disparo gráfico
-            setTimeout(() => {
-                html2pdf().set(opcoes).from(elementoConteudo).save().then(() => {
-                    // Restaura estado inicial do site após geração
-                    cabecalhoPDF.style.display = 'none';
-                    if(barraLateral) barraLateral.style.display = 'block';
-                    elementoConteudo.classList.remove('pdf-mode');
-                    if(btn) btn.innerText = "📥 Baixar Manual PDF";
-                }).catch(err => {
-                    console.error("Erro na conversão:", err);
-                    cabecalhoPDF.style.display = 'none';
-                    if(barraLateral) barraLateral.style.display = 'block';
-                    elementoConteudo.classList.remove('pdf-mode');
-                    if(btn) btn.innerText = "📥 Baixar Manual PDF";
-                });
-            }, 500);
+            html2pdf().set(opcoes).from(elementoAlvo).save().then(() => {
+                if(barraLateral) barraLateral.style.display = 'block';
+                elementoAlvo.classList.remove('pdf-imprimir');
+            }).catch(err => {
+                if(barraLateral) barraLateral.style.display = 'block';
+                elementoAlvo.classList.remove('pdf-imprimir');
+            });
         }
     </script>
 </body>
