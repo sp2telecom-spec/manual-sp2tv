@@ -168,6 +168,7 @@
             font-weight: bold; font-size: 1.2rem;
         }
 
+        /* AJUSTE AQUI: cursor pointer para indicar clique nas imagens */
         .step-image {
             display: block;
             max-width: 85%;
@@ -175,6 +176,12 @@
             margin: 1.2rem 0 1.8rem 0;
             border-radius: 8px;
             border: 1px solid #E2E8F0;
+            cursor: pointer;
+            transition: transform 0.2s ease, box-shadow 0.2s ease;
+        }
+        .step-image:hover {
+            transform: scale(1.01);
+            box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1);
         }
 
         .alert-box { 
@@ -266,6 +273,41 @@
         }
 
         /* =======================================================
+           ESTRUTURA DO MODAL DE ZOOM (ESCONDIDO POR PADRÃO)
+        ======================================================= */
+        .image-modal {
+            display: none;
+            position: fixed;
+            z-index: 9999;
+            top: 0; left: 0;
+            width: 100%; height: 100%;
+            background-color: rgba(15, 23, 42, 0.9);
+            backdrop-filter: blur(8px);
+            align-items: center;
+            justify-content: center;
+            cursor: zoom-out;
+        }
+
+        .image-modal img {
+            max-width: 90%;
+            max-height: 85vh;
+            border-radius: 8px;
+            box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.5);
+            cursor: default;
+            transition: transform 0.3s ease;
+        }
+
+        .image-modal-close {
+            position: absolute;
+            top: 20px; right: 25px;
+            color: #FFFFFF;
+            font-size: 35px;
+            font-weight: bold;
+            cursor: pointer;
+            user-select: none;
+        }
+
+        /* =======================================================
            REGRAS EXCLUSIVAS DE IMPRESSÃO (CORREÇÃO DE BORDAS)
         ======================================================= */
         .pdf-imprimir {
@@ -273,7 +315,7 @@
             width: 100% !important;
             max-width: 100% !important;
             margin: 0 auto !important;
-            padding: 10px 25px 10px 25px !important; /* Margem interna de segurança para evitar cortes */
+            padding: 10px 25px 10px 25px !important;
             box-sizing: border-box !important;
             background-color: #FFFFFF !important;
         }
@@ -334,6 +376,11 @@
         .pdf-imprimir .download-row {
             page-break-inside: avoid !important;
             break-inside: avoid !important;
+        }
+
+        /* Garante que o modal nunca apareça no PDF impresso */
+        .pdf-imprimir .image-modal {
+            display: none !important;
         }
     </style>
 </head>
@@ -524,7 +571,7 @@
                     </li>
                     <li><strong>Tela de Login:</strong> A TV exibirá um <strong>QR Code</strong> e um <strong>Código de Ativação</strong> temporário.</li>
                     <br>
-                   
+                    
                     <li>
                         <strong>Acesso ao Portal:</strong> Leia o QR Code com o celular ou acesse <a href="https://tv.sp2.tv.br/activate" target="_blank">tv.sp2.tv.br/activate</a>.
                         <img src="imagens/image 6.jpeg" alt="Portal Ativação" class="step-image">
@@ -549,7 +596,7 @@
                 <p>Use as setas <strong>↓ ← ↑ →</strong> e o <strong>OK</strong> para navegar entre as categorias e escolher seus canais.</p>
                 <img src="imagens/image 10.jpeg" alt="Canais" class="step-image">
 
-                <h3>Barra de Ferramentas e Programação</h3>
+                <h3>Barra de Ferans e Programação</h3>
                 <p>Com um canal aberto, aperte <strong>OK</strong> para ver a grade e a programação (EPG).</p>
                 <img src="imagens/image 11.jpeg" alt="Barra Ferramentas" class="step-image">
                 <img src="imagens/image 12.jpeg" alt="Grade Canais" class="step-image">
@@ -600,11 +647,42 @@
         </aside>
     </div>
 
+    <div id="zoomModal" class="image-modal" onclick="fecharZoom()">
+        <span class="image-modal-close" onclick="fecharZoom()">&times;</span>
+        <img id="imgModalTarget" src="" alt="Imagem ampliada" onclick="event.stopPropagation()">
+    </div>
+
     <footer class="footer">
         <p>&copy; 2026 Netaki Telecomunicações. Conectando o que importa.</p>
     </footer>
 
     <script>
+        /* =======================================================
+           LOGICA DE ZOOM NAS IMAGENS (.step-image)
+        ======================================================= */
+        const modal = document.getElementById('zoomModal');
+        const modalImg = document.getElementById('imgModalTarget');
+        
+        // Seleciona todas as imagens de passos e adiciona o evento de clique
+        document.querySelectorAll('.step-image').forEach(imagem => {
+            imagem.addEventListener('click', function() {
+                modal.style.display = "flex";
+                modalImg.src = this.src;
+            });
+        });
+
+        function fecharZoom() {
+            modal.style.display = "none";
+        }
+
+        // Fecha também usando a tecla Esc para melhor usabilidade
+        document.addEventListener('keydown', function(e) {
+            if (e.key === "Escape") fecharZoom();
+        });
+
+        /* =======================================================
+           LOGICA DO PDF
+        ======================================================= */
         function baixarManualPDF() {
             const elementoAlvo = document.getElementById('coluna-texto');
             const barraLateral = document.getElementById('barra-lateral');
@@ -621,7 +699,7 @@
             });
 
             const opcoes = {
-                margin:       [10, 0, 10, 0], /* Remove as margens nativas que estavam fatiando o conteúdo */
+                margin:       [10, 0, 10, 0],
                 filename:     'manual_instalacao_sp2tv.pdf',
                 image:        { type: 'jpeg', quality: 0.98 },
                 html2canvas:  { 
