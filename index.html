@@ -104,6 +104,7 @@
             box-shadow: 0 4px 6px -1px rgba(0,0,0,0.02);
             margin-bottom: 2.5rem;
             border: 1px solid #E2E8F0;
+            page-break-inside: avoid; /* Evita quebra feia no meio de uma seção no PDF */
         }
 
         h2 { color: var(--accent-color); border-left: 6px solid var(--primary-color); padding-left: 14px; margin-bottom: 2rem; font-size: 1.9rem; font-weight: 700; }
@@ -161,21 +162,26 @@
 
         /* Configurações visuais exclusivas do Modo Manual PDF */
         .pdf-mode {
-            background: white !important;
-            padding: 20mm 15mm !important;
+            background: #FFFFFF !important;
+            color: #1E293B !important;
+            padding: 10mm 10mm !important;
+            display: block !important;
         }
         .pdf-mode .content-section {
             border: none !important;
             box-shadow: none !important;
             padding: 0 !important;
-            margin-bottom: 2rem !important;
+            margin-bottom: 2.5rem !important;
+            background: #FFFFFF !important;
+            display: block !important;
         }
         .pdf-mode .support-card, .pdf-mode .btn-link, .pdf-mode .download-image-sidebar {
-            display: none !important;
+            display: none !important; /* Esconde botões interativos da web no impresso */
         }
         .pdf-mode .step-image {
-            max-width: 50% !important;
+            max-width: 75% !important;
             margin: 15px 0 !important;
+            display: block !important;
         }
     </style>
 </head>
@@ -195,7 +201,7 @@
                     <li><a href="#androidtv">Android TV</a></li>
                     <li><a href="#ativacao">Ativação</a></li>
                     <li><a href="#suporte">Suporte</a></li>
-                    <li><button class="btn-pdf" onclick="baixarManualPDF()">📥 Baixar Manual PDF</button></li>
+                    <li><button class="btn-pdf" id="btnDownloadManual" onclick="baixarManualPDF()">📥 Baixar Manual PDF</button></li>
                 </ul>
             </nav>
         </div>
@@ -267,7 +273,7 @@
                     <li>Pressione o botão <strong>Home</strong> ou <strong>Smart Hub</strong> no comando remoto.</li>
                     <li>Na barra colorida que surge na parte inferior do ecrã, navegue até encontrar o ícone <strong>APPS</strong>.</li>
                     <li>Aceda à <strong>Lupa</strong> situada no canto superior direito.</li>
-                    <li>Escreva o nome do aplicativo, selecione concluído e clique em <strong>Transferir</strong> (or Instalar).</li>
+                    <li>Escreva o nome do aplicativo, selecione concluído e clique em <strong>Transferir</strong> (ou Instalar).</li>
                 </ol>
 
                 <div class="alert-box">
@@ -381,7 +387,7 @@
                 <img src="imagens/image 12.jpeg" alt="Grade Canais" class="step-image">
                 <img src="imagens/image 13.jpeg" alt="EPG" class="step-image">
 
-                <div class="alert-box" style="background-color: #F8FAFC; border-left-color: var(--primary-dark);">
+                <div class="alert-box" style="background-color: #F8FAFC; border-left-color: #8B0000;">
                     <h4>💡 Recurso Catch-up</h4>
                     <p>Alguns canais permitem assistir conteúdos de até 24h atrás. Basta selecionar no menu de programação e dar OK.</p>
                 </div>
@@ -432,27 +438,49 @@
 
     <script>
         function baixarManualPDF() {
+            const btn = document.getElementById('btnDownloadManual');
             const elementoConteudo = document.getElementById('manual-content');
             const cabecalhoPDF = document.getElementById('pdf-header');
             const barraLateral = document.getElementById('web-sidebar');
             
+            // Avisa o usuário que está processando
+            if(btn) btn.innerText = "⏳ Gerando PDF...";
+
+            // Torna visíveis os elementos internos e aplica modo de captura estável
             cabecalhoPDF.style.display = 'block';
             if(barraLateral) barraLateral.style.display = 'none';
             elementoConteudo.classList.add('pdf-mode');
             
+            // Opções blindadas: Ativa CORS, força backgrounds e melhora renderização
             const opcoes = {
-                margin:       [15, 15, 15, 15],
+                margin:       [12, 12, 12, 12],
                 filename:     'manual_instalacao_sp2tv_netaki.pdf',
-                image:        { type: 'jpeg', quality: 0.98 },
-                html2canvas:  { scale: 2, useCORS: true, letterRendering: true },
+                image:        { type: 'jpeg', quality: 0.95 },
+                html2canvas:  { 
+                    scale: 2, 
+                    useCORS: true, 
+                    logging: false,
+                    allowTaint: true,
+                    backgroundColor: '#FFFFFF' // Garante fundo branco nas páginas
+                },
                 jsPDF:        { unit: 'mm', format: 'a4', orientation: 'portrait' }
             };
 
-            html2pdf().set(opcoes).from(elementoConteudo).save().then(() => {
-                cabecalhoPDF.style.display = 'none';
-                if(barraLateral) barraLateral.style.display = 'block';
-                elementoConteudo.classList.remove('pdf-mode');
-            });
+            // Executa a extração apenas garantindo que os elementos gráficos estão no DOM
+            setTimeout(() => {
+                html2pdf().set(opcoes).from(elementoConteudo).save().then(() => {
+                    // Restaura a interface web perfeitamente
+                    cabecalhoPDF.style.display = 'none';
+                    if(barraLateral) barraLateral.style.display = 'block';
+                    elementoConteudo.classList.remove('pdf-mode');
+                    if(btn) btn.innerText = "📥 Baixar Manual PDF";
+                }).catch(err => {
+                    console.error(err);
+                    // Em caso de falha severa, tenta o fallback nativo do sistema
+                    window.print();
+                    if(btn) btn.innerText = "📥 Baixar Manual PDF";
+                });
+            }, 600); // Pequeno delay de segurança para o motor gráfico ler as imagens
         }
     </script>
 </body>
