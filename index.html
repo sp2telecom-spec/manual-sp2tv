@@ -7,10 +7,10 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/html2pdf.js/0.10.1/html2pdf.bundle.min.js"></script>
     <style>
         :root {
-            --primary-color: #CC0000;
-            --primary-dark: #8B0000;
-            --accent-color: #1E293B;
-            --dark-text: #1E293B;
+            --primary-color: #CC0000;  /* Vermelho Principal Premium */
+            --primary-dark: #8B0000;   /* Vermelho Escuro Corporativo */
+            --accent-color: #1E293B;   /* Grafite para contraste */
+            --dark-text: #1E293B;      /* Texto escuro de alta legibilidade */
             --card-bg: #FFFFFF;
             --border-radius: 12px;
         }
@@ -53,7 +53,7 @@
         .logo-sp2tv { height: 40px; width: auto; display: block; border-radius: 8px; }
         
         nav ul { display: flex; list-style: none; gap: 25px; align-items: center; }
-        nav a { text-decoration: none; color: var(--accent-color); font-weight: 600; font-size: 0.95rem; }
+        nav a { text-decoration: none; color: var(--accent-color); font-weight: 600; font-size: 0.95rem; transition: color 0.2s; }
         nav a:hover { color: var(--primary-color); }
 
         .btn-pdf {
@@ -78,7 +78,7 @@
             text-align: center;
             padding: 5rem 2rem;
         }
-        .hero h1 { font-size: 2.8rem; margin-bottom: 1rem; font-weight: 700; }
+        .hero h1 { font-size: 2.8rem; margin-bottom: 1rem; font-weight: 700; letter-spacing: -0.5px; }
         .hero p { font-size: 1.25rem; opacity: 0.95; max-width: 650px; margin: 0 auto; font-weight: 300; }
 
         .main-container {
@@ -93,6 +93,9 @@
         .pdf-only-header {
             display: none;
         }
+
+        .section-title-with-logo { display: flex; align-items: center; gap: 15px; }
+        .title-brand-logo { height: 35px; width: auto; }
 
         .content-section {
             background: var(--card-bg);
@@ -111,8 +114,8 @@
         .download-image-sidebar { width: 140px; height: auto; object-fit: contain; flex-shrink: 0; }
         .download-box-right { flex: 1; background: #F8FAFC; padding: 1.8rem 2rem; border-radius: var(--border-radius); border: 1px solid #E2E8F0; display: flex; flex-direction: column; gap: 12px; }
 
-        .btn-link { background-color: var(--primary-color); color: white; padding: 11px 26px; border-radius: 6px; text-decoration: none; font-weight: bold; display: inline-block; text-align: center; }
-        .btn-link:hover { background-color: var(--primary-dark); }
+        .btn-link { background-color: var(--primary-color); color: white; padding: 11px 26px; border-radius: 6px; text-decoration: none; font-weight: bold; display: inline-block; box-shadow: 0 4px 6px rgba(204, 0, 0, 0.15); transition: 0.2s; text-align: center; }
+        .btn-link:hover { background-color: var(--primary-dark); transform: translateY(-2px); }
 
         .step-list { list-style: none; counter-reset: step-counter; margin: 1.5rem 0; }
         .step-list li { position: relative; padding-left: 4.2rem; margin-bottom: 2.5rem; font-size: 1.05rem; color: #475569; }
@@ -123,6 +126,7 @@
             background-color: var(--primary-color); color: white;
             width: 2.8rem; height: 2.8rem; border-radius: 50%;
             display: flex; align-items: center; justify-content: center; font-weight: bold; font-size: 1.2rem;
+            box-shadow: 0 4px 6px rgba(204, 0, 0, 0.15);
         }
 
         .step-image { display: block; max-width: 85%; height: auto; margin: 1.2rem 0 1.8rem 0; border-radius: 8px; box-shadow: 0 4px 12px rgba(0,0,0,0.08); border: 1px solid #E2E8F0; }
@@ -133,18 +137,29 @@
 
         .sidebar { position: sticky; top: 120px; height: fit-content; }
         .quick-links { background: var(--card-bg); padding: 2rem; border-radius: var(--border-radius); box-shadow: 0 4px 6px -1px rgba(0,0,0,0.02); border: 1px solid #E2E8F0; }
-        .quick-links a { text-decoration: none; color: #64748B; font-weight: 500; font-size: 1rem; }
+        .quick-links a { text-decoration: none; color: #64748B; font-weight: 500; transition: 0.2s; font-size: 1rem; }
         .quick-links a:hover { color: var(--primary-color); }
 
-        .btn-whatsapp { background-color: #25D366; color: white; padding: 14px 28px; border-radius: 8px; text-decoration: none; font-weight: bold; display: inline-flex; align-items: center; justify-content: center; gap: 10px; }
+        .solution-box { border-bottom: 1px solid #E2E8F0; padding: 1rem 0; }
+        .solution-title { font-weight: 700; color: var(--accent-color); margin-bottom: 0.5rem; }
+        .solution-text { color: #475569; }
+
+        .support-card { background: #F8FAFC; border: 1px solid #E2E8F0; border-radius: var(--border-radius); padding: 2rem; margin-top: 2rem; text-align: center; }
+        .btn-whatsapp { background-color: #25D366; color: white; padding: 14px 28px; border-radius: 8px; text-decoration: none; font-weight: bold; display: inline-flex; align-items: center; justify-content: center; gap: 10px; box-shadow: 0 4px 12px rgba(37, 211, 102, 0.2); transition: 0.2s; font-size: 1.1rem; margin-top: 15px; }
+        .btn-whatsapp:hover { background-color: #128C7E; transform: translateY(-2px); }
 
         .footer { background-color: var(--accent-color); color: white; text-align: center; padding: 3rem; margin-top: 6rem; border-top: 4px solid var(--primary-color); }
 
         @media (max-width: 768px) {
             .main-container { grid-template-columns: 1fr; gap: 1.5rem; padding: 0 1rem; }
             nav { display: none; }
+            .hero h1 { font-size: 2.2rem; }
+            .download-row { flex-direction: column !important; align-items: center !important; gap: 15px; }
+            .download-image-sidebar { width: 120px; }
+            .section-title-with-logo { flex-direction: column; align-items: flex-start; }
         }
 
+        /* Configurações visuais exclusivas do Modo Manual PDF */
         .pdf-mode {
             background: white !important;
             padding: 20mm 15mm !important;
@@ -154,6 +169,13 @@
             box-shadow: none !important;
             padding: 0 !important;
             margin-bottom: 2rem !important;
+        }
+        .pdf-mode .support-card, .pdf-mode .btn-link, .pdf-mode .download-image-sidebar {
+            display: none !important;
+        }
+        .pdf-mode .step-image {
+            max-width: 50% !important;
+            margin: 15px 0 !important;
         }
     </style>
 </head>
@@ -172,6 +194,7 @@
                     <li><a href="#lg">TV LG</a></li>
                     <li><a href="#androidtv">Android TV</a></li>
                     <li><a href="#ativacao">Ativação</a></li>
+                    <li><a href="#suporte">Suporte</a></li>
                     <li><button class="btn-pdf" onclick="baixarManualPDF()">📥 Baixar Manual PDF</button></li>
                 </ul>
             </nav>
@@ -212,7 +235,7 @@
                     <img src="imagens/store.png" alt="Google Play Store" class="download-image-sidebar">
                     <div class="download-box-right">
                         <strong>Dispositivos Android e TV Box (Google Play Store):</strong>
-                        <p style="margin:0; font-size:0.95rem;">Disponível diretamente na Google Play Store nacional.</p>
+                        <a href="https://play.google.com/store/apps/details?id=com.eitv.sp2tv&hl=pt_BR" target="_blank" class="btn-link">Baixar Play Store</a>
                     </div>
                 </div>
 
@@ -220,13 +243,16 @@
                     <img src="imagens/storeapp.png" alt="Apple App Store" class="download-image-sidebar">
                     <div class="download-box-right">
                         <strong>Dispositivos iOS - iPhone / iPad (Apple App Store):</strong>
-                        <p style="margin:0; font-size:0.95rem;">Disponível diretamente na Apple App Store.</p>
+                        <a href="https://apps.apple.com/br/app/sp2-tv/id6502468697" target="_blank" class="btn-link">Baixar App Store</a>
                     </div>
                 </div>
             </section>
 
             <section id="samsung" class="content-section">
-                <h2>2. Instalação em Smart TVs Samsung</h2>
+                <h2 class="section-title-with-logo">
+                    2. Instalação em Smart TVs Samsung 
+                    <img src="imagens/samsung.png" alt="Samsung" class="title-brand-logo">
+                </h2>
                 
                 <h3>Modelos Recentes (Sistema Tizen Atual - Menu Lateral)</h3>
                 <ol class="step-list">
@@ -241,7 +267,7 @@
                     <li>Pressione o botão <strong>Home</strong> ou <strong>Smart Hub</strong> no comando remoto.</li>
                     <li>Na barra colorida que surge na parte inferior do ecrã, navegue até encontrar o ícone <strong>APPS</strong>.</li>
                     <li>Aceda à <strong>Lupa</strong> situada no canto superior direito.</li>
-                    <li>Escreva o nome do aplicativo, selecione concluído e clique em <strong>Transferir</strong> (ou Instalar).</li>
+                    <li>Escreva o nome do aplicativo, selecione concluído e clique em <strong>Transferir</strong> (or Instalar).</li>
                 </ol>
 
                 <div class="alert-box">
@@ -252,13 +278,23 @@
             </section>
 
             <section id="lg" class="content-section">
-                <h2>3. Instalação em Smart TVs LG</h2>
+                <h2 class="section-title-with-logo">
+                    3. Instalação em Smart TVs LG 
+                    <img src="imagens/lg.png" alt="LG" class="title-brand-logo">
+                </h2>
                 
                 <h3>Modelos Recentes (webOS 6.0 ou superior)</h3>
                 <ol class="step-list">
                     <li>Pressione o botão <strong>Home</strong> no comando Smart Magic.</li>
                     <li>No ecrã inicial da sua TV, localize e abra a aplicação <strong>Apps</strong> (ou <strong>LG Content Store</strong>).</li>
                     <li>Clique no ícone da <strong>Lupa (Pesquisar)</strong> no topo direito, digite <strong>SP2 TV</strong> e confirme a instalação.</li>
+                </ol>
+
+                <h3>Modelos Antigos (webOS 5.0 ou inferior)</h3>
+                <ol class="step-list">
+                    <li>Pressione o botão <strong>Home</strong> no comando remoto.</li>
+                    <li>Na barra de cartões coloridos inferior, procure e selecione a opção <strong>LG Content Store</strong>.</li>
+                    <li>Aceda ao menu superior, selecione a <strong>Lupa</strong>, introduza o nome do aplicativo e efetue a instalação.</li>
                 </ol>
 
                 <div class="alert-box">
@@ -269,6 +305,7 @@
 
             <section id="androidtv" class="content-section">
                 <h2>4. Instalação em Smart TVs com Sistema Android TV / Google TV</h2>
+                <img src="imagens/android.png" alt="Android" class="title-brand-logo">
                 <p>Muitas marcas modernas do mercado utilizam o ecossistema oficial da Google. Este procedimento é válido para diversos fabricantes de televisores e dispositivos de streaming:</p>
                 
                 <div class="brand-badge-container">
@@ -276,16 +313,31 @@
                     <span class="brand-badge">Philips</span>
                     <span class="brand-badge">Sony</span>
                     <span class="brand-badge">Semp</span>
-                    <span class="brand-badge">Outros modelos com Android TV</span>
+                    <span class="brand-badge">Xiaomi (Mi TV / TV Stick / Box)</span>
+                    <span class="brand-badge">Realme Stick</span>
                 </div>
 
                 <h3>Passo a Passo de Instalação</h3>
                 <ol class="step-list">
                     <li>Pressione o botão <strong>Home</strong> do controle remoto para acessar a tela inicial do sistema.</li>
-                    <li>Navegue até o menu de aplicativos e abra a <strong>Google Play Store</strong>.</li>
-                    <li>Acesse a <strong>Lupa</strong> e digite <strong>SP2 TV</strong>.</li>
-                    <li>Clique em <strong>Instalar</strong> e, ao finalizar, selecione <strong>Abrir</strong>.</li>
+                    <li>Navegue até o menu de aplicativos e abra a <strong>Google Play Store</strong> (ou a aba <strong>"Apps"</strong> em sistemas Google TV).</li>
+                    <li>Acesse o campo de busca (ícone de <strong>Lupa</strong> ou barra de pesquisa no topo).</li>
+                    <li>Digite <strong>SP2 TV</strong> utilizando o teclado virtual e selecione o aplicativo correspondente nos resultados.</li>
+                    <li>Clique no botão <strong>Instalar</strong> e aguarde o término do processo. Após instalado, selecione <strong>Abrir</strong>.</li>
                 </ol>
+
+                <div class="alert-box" style="background-color: #F8FAFC; border-left-color: #10B981; border-color: #E2E8F0;">
+                    <h4>💡 Dica Prática</h4>
+                    <p>Caso sua TV possua controle remoto com comando de voz, você pode pressionar o botão do <strong>Google Assistente</strong> e simplesmente dizer: <em>"Pesquisar aplicativo SP2 TV na Play Store"</em> para ir direto à página de download.</p>
+                </div>
+
+                <div class="alert-box" style="background-color: #F8FAFC; border-left-color: var(--accent-color);">
+                    <h4>⚠️ ALTERNATIVAS PARA TVs NÃO COMPATÍVEIS</h4>
+                    <p>Para modelos não compatíveis, utilize um <strong>TV Box ou Dongle HDMI</strong> (ex: Fire Stick, Chromecast, Roku):</p>
+                    <p>1. Conecte o dispositivo na entrada HDMI da TV.<br>
+                       2. Acesse a loja de apps do dispositivo (Play Store ou Amazon).<br>
+                       3. Busque por <strong>SP2 TV</strong> e instale.</p>
+                </div>
             </section>
 
             <section id="ativacao" class="content-section">
@@ -293,23 +345,68 @@
                 <p>Após a conclusão da instalação, realize o procedimento de vinculação de conta:</p>
                 
                 <ol class="step-list">
-                    <li><strong>Abertura do App:</strong> Na tela inicial da TV, abra o app SP2 TV e use as setas do controle para navegar.</li>
-                    <li><strong>Tela de Login:</strong> A TV exibirá um <strong>QR Code</strong> e um <strong>Código de Ativação</strong> numérico.</li>
-                    <li><strong>Acesso ao Portal:</strong> Aponte a câmera do celular para o QR Code ou acesse <span style="font-family:monospace; background:#f1f5f9; padding:2px 6px;">tv.sp2.tv.br/activate</span>.</li>
-                    <li><strong>Autenticação:</strong> Faça login com os dados (Usuário e Senha) enviados exclusivamente pela Netaki.</li>
-                    <li><strong>Vinculação:</strong> Insira o código exibido na TV dentro do campo correspondente no site e clique em <strong>Entrar</strong>.</li>
+                    <li>
+                        <strong>Abertura do App:</strong> Na tela inicial da TV, abra o app SP2 TV e use as setas do controle para navegar.
+                        <img src="imagens/image 4.jpeg" alt="Manual TV 1" class="step-image">
+                        <img src="imagens/image 5.jpeg" alt="Manual TV 2" class="step-image">
+                    </li>
+                    <li><strong>Tela de Login:</strong> A TV exibirá um <strong>QR Code</strong> e um <strong>Código de Ativação</strong> temporário.</li>
+                    <li>
+                        <strong>Acesso ao Portal:</strong> Leia o QR Code com o celular ou acesse <a href="https://tv.sp2.tv.br/activate" target="_blank">tv.sp2.tv.br/activate</a>.
+                        <img src="imagens/image 6.jpeg" alt="Portal Ativação" class="step-image">
+                    </li>
+                    <li>
+                        <strong>Autenticação:</strong> Faça login com os dados (Usuário/Senha) fornecidos pela Netaki.
+                        <img src="imagens/image 7.png" alt="Login Netaki" class="step-image">
+                    </li>
+                    <li>
+                        <strong>Vinculação:</strong> No campo "Em Destaque" do site, digite o código da TV e clique em <strong>Entrar</strong>.
+                        <img src="imagens/image 8.png" alt="Código Web" class="step-image">
+                        <img src="imagens/image 9.png" alt="Sucesso" class="step-image">
+                    </li>
                 </ol>
 
                 <div class="alert-box" style="border-left-color: #10B981; background-color: #F0FDF4; border-color: #D1FAE5;">
                     <h4 style="color: #059669;">✓ Ativação Concluída com Sucesso</h4>
                     <p style="color: #065F46;">Os canais serão liberados de forma imediata na TV assim que confirmados no portal.</p>
                 </div>
+
+                <h3>Utilização Básica e Grade de Canais</h3>
+                <p>Use as setas <strong>↓ ← ↑ →</strong> e o <strong>OK</strong> para navegar entre as categorias e escolher seus canais.</p>
+                <img src="imagens/image 10.jpeg" alt="Canais" class="step-image">
+
+                <h3>Barra de Ferramentas e Programação</h3>
+                <p>Com um canal aberto, aperte <strong>OK</strong> para ver a grade e a programação (EPG).</p>
+                <img src="imagens/image 11.jpeg" alt="Barra Ferramentas" class="step-image">
+                <img src="imagens/image 12.jpeg" alt="Grade Canais" class="step-image">
+                <img src="imagens/image 13.jpeg" alt="EPG" class="step-image">
+
+                <div class="alert-box" style="background-color: #F8FAFC; border-left-color: var(--primary-dark);">
+                    <h4>💡 Recurso Catch-up</h4>
+                    <p>Alguns canais permitem assistir conteúdos de até 24h atrás. Basta selecionar no menu de programação e dar OK.</p>
+                </div>
             </section>
 
             <section id="suporte" class="content-section">
                 <h2>6. Resolução de Problemas Comuns</h2>
-                <p><strong>Falha de Carregamento:</strong> Verifique o Wi-Fi ou Cabo de rede. Desconecte o roteador da tomada por 30 segundos e ligue-o novamente.</p>
-                <p><strong>App Deslogado:</strong> Ocorre raramente após atualizações automáticas do sistema da TV. Basta repetir o passo 5 (Ativação).</p>
+                
+                <div class="solution-box">
+                    <div class="solution-title">Falha de Comunicação</div>
+                    <p class="solution-text">Verifique o Wi-Fi ou Cabo de rede. Desconecte o roteador da tomada por 30 segundos e ligue-o novamente.</p>
+                </div>
+
+                <div class="solution-box">
+                    <div class="solution-title">App Deslogado</div>
+                    <p class="solution-text">Ocorre raramente após atualizações automáticas do sistema da TV. Basta repetir o passo 5 (Ativação).</p>
+                </div>
+
+                <div class="support-card">
+                    <h3 style="margin-top:0;">Ainda precisa de ajuda?</h3>
+                    <p>Fale agora diretamente com o nosso suporte técnico oficial.</p>
+                    <a href="https://api.whatsapp.com/send?l=pt&phone=551938772700&text=Contato%20do%20site%20Netaki%20Telecom." target="_blank" class="btn-whatsapp">
+                        💬 Falar no WhatsApp (19) 3877-2700
+                    </a>
+                </div>
             </section>
         </main>
 
@@ -322,6 +419,7 @@
                     <li style="margin-bottom: 12px;"><a href="#lg">» Instalação LG</a></li>
                     <li style="margin-bottom: 12px;"><a href="#androidtv">» Instalação Android</a></li>
                     <li style="margin-bottom: 12px;"><a href="#ativacao">» Ativação</a></li>
+                    <li style="margin-bottom: 12px;"><a href="#suporte">» Suporte Técnico</a></li>
                     <li style="margin-bottom: 12px;"><button onclick="baixarManualPDF()" style="background:none; border:none; color: #CC0000; font-weight: bold; cursor: pointer; text-align:left; font-size:1rem;">» 📥 Baixar Manual PDF</button></li>
                 </ul>
             </div>
