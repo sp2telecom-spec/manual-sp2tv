@@ -118,7 +118,7 @@
         }
 
         h3 { color: var(--primary-dark); margin: 2.5rem 0 1rem 0; font-size: 1.4rem; border-bottom: 2px solid #F1F5F9; padding-bottom: 6px; }
-        p { margin-bottom: 1.2rem; color: #475569; text-align: justify; font-size: 1.05rem; }
+        p { margin-bottom: 1.2rem; color: #475569; text-align: justify; font-size: 1.05rem; word-break: break-word; }
 
         .download-row {
             display: flex;
@@ -154,7 +154,7 @@
         .btn-link:hover { background-color: var(--primary-dark); }
 
         .step-list { list-style: none; counter-reset: step-counter; margin: 1.5rem 0; }
-        .step-list li { position: relative; padding-left: 4.2rem; margin-bottom: 2.5rem; font-size: 1.05rem; color: #475569; }
+        .step-list li { position: relative; padding-left: 4.2rem; margin-bottom: 2.5rem; font-size: 1.05rem; color: #475569; word-break: break-word; }
         .step-list li::before {
             content: counter(step-counter);
             counter-increment: step-counter;
@@ -234,14 +234,15 @@
         .sumario-num { color: var(--primary-color); font-weight: bold; }
 
         /* =======================================================
-           REGRAS DE IMPRESSÃO REFORMULADAS - SEM PÁGINAS EM BRANCO
+           CORREÇÃO CRÍTICA DAS REGRAS DE IMPRESSÃO (SEM CORTES)
            ======================================================= */
         .pdf-imprimir {
             display: block !important;
-            width: 100% !important;
-            max-width: 100% !important;
-            margin: 0 !important;
-            padding: 0 !important;
+            width: 800px !important; /* Força largura fixa perfeita para o A4 evitar cortes na direita */
+            max-width: 800px !important;
+            margin: 0 auto !important;
+            padding: 10px !important;
+            float: none !important;
         }
         
         .pdf-imprimir #pdf-sumario {
@@ -250,37 +251,39 @@
             margin-bottom: 30px !important;
         }
         
-        /* Removemos o page-break-inside avoid daqui para evitar saltos gigantes */
         .pdf-imprimir .content-section {
             box-shadow: none !important;
             border: 1px solid #E2E8F0 !important;
             width: 100% !important;
-            padding: 1.5rem !important; /* Enxuga o padding no PDF para caber melhor lateralmente */
+            padding: 2rem !important; 
             margin-bottom: 20px !important;
+            page-break-inside: auto !important; /* Permite que seções longas quebrem de página nativamente */
         }
 
-        /* Bloqueia quebras apenas dentro dos itens da lista de passos */
+        /* Evita que um passo específico ou imagem seja cortado ao meio horizontalmente */
         .pdf-imprimir .step-list li {
             page-break-inside: avoid !important;
             break-inside: avoid !important;
         }
 
         .pdf-imprimir .step-image {
-            max-width: 90% !important;
+            max-width: 100% !important; /* Ajusta as fotos para respeitarem a nova largura */
+            height: auto !important;
             page-break-inside: avoid !important;
             break-inside: avoid !important;
             box-shadow: none !important;
         }
 
         .pdf-imprimir .alert-box, 
-        .pdf-imprimir .support-card {
+        .pdf-imprimir .support-card,
+        .pdf-imprimir .download-row {
             page-break-inside: avoid !important;
             break-inside: avoid !important;
             box-shadow: none !important;
         }
 
         .pdf-imprimir .sumario-linhas {
-            max-width: 60% !important;
+            max-width: 55% !important;
         }
     </style>
 </head>
@@ -385,7 +388,7 @@
                 <h3>Modelos Recentes (webOS 6.0 ou superior)</h3>
                 <ol class="step-list">
                     <li>Pressione o botão <strong>Home</strong> no comando Smart Magic.</li>
-                    <li>No ecrã inicial da sua TV, localize e abra a aplicação <strong>Apps</strong> (ou <strong>LG Content Store</strong>).</li>
+                    <li>No ecrã inicial da sua TV, localize e abra a aplicação <strong>Apps</strong> (or <strong>LG Content Store</strong>).</li>
                     <li>Clique no ícone da <strong>Lupa (Pesquisar)</strong> no topo direito, digite <strong>SP2 TV</strong> e confirme a instalação.</li>
                 </ol>
 
@@ -540,12 +543,17 @@
             elementoAlvo.classList.add('pdf-imprimir');
 
             const opcoes = {
-                margin:       [15, 15, 15, 15],
+                margin:       [15, 12, 15, 12], /* Margens laterais equilibradas */
                 filename:     'manual_instalacao_sp2tv.pdf',
-                image:        { type: 'jpeg', quality: 0.95 },
-                html2canvas:  { scale: 2, useCORS: true, backgroundColor: '#FFFFFF' },
+                image:        { type: 'jpeg', quality: 0.98 },
+                html2canvas:  { 
+                    scale: 2, 
+                    useCORS: true, 
+                    backgroundColor: '#FFFFFF',
+                    width: 800 /* Alinha perfeitamente com o width do CSS de impressão */
+                },
                 jsPDF:        { unit: 'mm', format: 'a4', orientation: 'portrait' },
-                pagebreak:    { mode: ['css'] } /* Modo CSS puro sem 'avoid-all' agressivo que causava páginas em branco */
+                pagebreak:    { mode: ['css'] } 
             };
 
             html2pdf().set(opcoes).from(elementoAlvo).save().then(() => {
