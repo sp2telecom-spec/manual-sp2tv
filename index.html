@@ -275,51 +275,56 @@
         .sumario-linhas { flex-grow: 1; border-bottom: 2px dotted #CBD5E1; margin: 0 10px 5px 10px; }
         .sumario-num { color: var(--primary-color); font-weight: bold; }
 
-        /* ==========================================
-           REGRAS EXCLUSIVAS DE CORREÇÃO PARA O PDF
-           ========================================== */
+        /* =======================================================
+           REGRAS REFINADAS DE IMPRESSÃO - CORREÇÃO DE ALINHAMENTO
+           ======================================================= */
         .pdf-imprimir {
             display: block !important;
-            width: 100% !important;
-            max-width: 100% !important;
-            margin: 0 !important;
-            padding: 0 !important;
+            width: 98% !important;        /* Margem de segurança à direita */
+            max-width: 98% !important;    /* Evita que estoure a borda */
+            margin: 0 auto !important;
+            padding: 0 5px 0 0 !important; /* Pequeno recuo corretivo */
         }
         
-        /* Força o Sumário a aparecer no PDF e quebrar a página logo após ele */
         .pdf-imprimir #pdf-sumario {
             display: block !important;
             page-break-after: always !important;
             break-after: page !important;
+            box-shadow: none !important;
         }
         
-        /* Evita que seções e blocos internos sejam cortados no meio da folha */
         .pdf-imprimir .content-section {
             page-break-inside: avoid !important;
             break-inside: avoid !important;
-            margin-bottom: 30px !important;
+            margin-bottom: 25px !important;
             box-shadow: none !important;
             border: 1px solid #CBD5E1 !important;
+            width: 100% !important;
         }
 
-        /* Controla as imagens e as listas de passos para não quebrarem feio */
         .pdf-imprimir .step-list li {
             page-break-inside: avoid !important;
             break-inside: avoid !important;
         }
 
         .pdf-imprimir .step-image {
-            max-width: 75% !important;
+            max-width: 70% !important;
             page-break-inside: avoid !important;
             break-inside: avoid !important;
+            box-shadow: none !important; /* Remove sombras complexas na geração */
         }
 
-        /* Evita corte no meio de caixas de alertas ou blocos de solução */
         .pdf-imprimir .alert-box, 
         .pdf-imprimir .solution-box, 
         .pdf-imprimir .support-card {
             page-break-inside: avoid !important;
             break-inside: avoid !important;
+            box-shadow: none !important;
+        }
+
+        /* Garante que o pontilhado do sumário se ajuste sem empurrar o número */
+        .pdf-imprimir .sumario-linhas {
+            max-width: 65% !important;
         }
     </style>
 </head>
@@ -409,7 +414,7 @@
                 </ol>
 
                 <div class="alert-box">
-                    <h4>⚠️ Nota de Compartibilidade Importante</h4>
+                    <h4>⚠️ Nota de Compatibilidade Importante</h4>
                     <p>Se ao realizar as buscas o aplicativo "SP2 TV" não for localizado na loja, isto indica que este modelo específico de televisão não possui compatibilidade de sistema nativa.</p>
                     <p><strong>Compatibilidade:</strong> Modelos de 2020 a 2024. Modelos 2025 e 2026 em breve.</p>
                 </div>
@@ -432,11 +437,11 @@
                 <ol class="step-list">
                     <li>Pressione o botão <strong>Home</strong> no comando remoto.</li>
                     <li>Na barra de cartões coloridos inferior, procure e selecione a opção <strong>LG Content Store</strong>.</li>
-                    <li>Aceda ao menu superior, selecione a <strong>Lupa</strong>, introduza o nome do aplicativo e efetue a instalação.</li>
+                    <li>Aceda ao menu superior, selecione a <strong>Lupa</strong>, introduza o nome do aplicativo e efeteu a instalação.</li>
                 </ol>
 
                 <div class="alert-box">
-                    <h4>⚠️ Nota de Compartibilidade Importante</h4>
+                    <h4>⚠️ Nota de Compatibilidade Importante</h4>
                     <p>Disponível para modelos LG a partir de 2016. Em aparelhos muito antigos, o uso do APP pode apresentar lentidão devido ao hardware da TV.</p>
                 </div>
             </section>
@@ -578,14 +583,13 @@
             if(barraLateral) barraLateral.style.display = 'none';
             elementoAlvo.classList.add('pdf-imprimir');
 
-            // Configuração refinada do html2pdf com modo "avoid-all" inteligente
             const opcoes = {
-                margin:       [15, 15, 15, 15],
+                margin:       [15, 12, 15, 12], /* Margens laterais ideais para evitar cortes */
                 filename:     'manual_instalacao_sp2tv.pdf',
                 image:        { type: 'jpeg', quality: 0.98 },
                 html2canvas:  { scale: 2, useCORS: true, backgroundColor: '#FFFFFF' },
                 jsPDF:        { unit: 'mm', format: 'a4', orientation: 'portrait' },
-                pagebreak:    { mode: ['avoid-all', 'css'] } // Impede cortes em elementos do CSS
+                pagebreak:    { mode: ['avoid-all', 'css'] }
             };
 
             html2pdf().set(opcoes).from(elementoAlvo).save().then(() => {
