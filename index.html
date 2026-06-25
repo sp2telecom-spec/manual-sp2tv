@@ -217,30 +217,66 @@
 
         .footer { background-color: var(--accent-color); color: white; text-align: center; padding: 3rem; margin-top: 6rem; border-top: 4px solid var(--primary-color); }
 
-        /* Estilos do Sumário */
+        /* Estilos do Sumário Estruturado para Evitar Erros no PDF */
         #pdf-sumario {
             display: none;
             background: #FFFFFF;
-            padding: 2.5rem;
+            padding: 2rem;
             border-radius: var(--border-radius);
-            border: 1px solid #E2E8F0;
+            border: 1px solid #CBD5E1;
             margin-bottom: 2.5rem;
+            width: 100%;
         }
-        #pdf-sumario h2 { border-left-color: var(--primary-color); }
-        .sumario-lista { list-style: none; margin-top: 1.5rem; }
-        .sumario-item { display: flex; justify-content: space-between; align-items: bottom; margin-bottom: 1rem; font-size: 1.1rem; }
-        .sumario-item a { text-decoration: none; color: var(--accent-color); font-weight: 600; }
-        .sumario-linhas { flex-grow: 1; border-bottom: 2px dotted #CBD5E1; margin: 0 10px 5px 10px; }
-        .sumario-num { color: var(--primary-color); font-weight: bold; }
+        
+        /* Estrutura estável usando propriedades de tabela clássica */
+        .sumario-tabela {
+            display: table;
+            width: 100%;
+            border-collapse: collapse;
+            margin-top: 1.5rem;
+        }
+        .sumario-linha {
+            display: table-row;
+        }
+        .sumario-celula-texto {
+            display: table-cell;
+            white-space: nowrap;
+            padding-bottom: 12px;
+            vertical-align: bottom;
+        }
+        .sumario-celula-texto a {
+            text-decoration: none;
+            color: var(--accent-color);
+            font-weight: 600;
+            font-size: 1.05rem;
+        }
+        .sumario-celula-pontos {
+            display: table-cell;
+            width: 100%;
+            border-bottom: 2px dotted #94A3B8;
+            position: relative;
+            top: -4px;
+        }
+        .sumario-celula-num {
+            display: table-cell;
+            white-space: nowrap;
+            text-align: right;
+            padding-left: 15px;
+            padding-bottom: 12px;
+            color: var(--primary-color);
+            font-weight: bold;
+            font-size: 1.05rem;
+            vertical-align: bottom;
+        }
 
         /* =======================================================
-           REGRAS DE IMPRESSÃO - CORREÇÃO DE QUEBRAS E LARGURA
+           REGRAS EXCLUSIVAS DE IMPRESSÃO (ESTABILIZAÇÃO TOTAL)
            ======================================================= */
         .pdf-imprimir {
             display: block !important;
-            width: 750px !important; 
-            max-width: 750px !important;
-            margin: 0 auto !important;
+            width: 100% !important;
+            max-width: 100% !important;
+            margin: 0 !important;
             padding: 0 !important;
         }
         
@@ -248,7 +284,7 @@
             display: block !important;
             box-shadow: none !important;
             margin-bottom: 30px !important;
-            page-break-after: always !important; /* Força o sumário a ter sua própria página inicial */
+            page-break-after: always !important;
             break-after: always !important;
         }
         
@@ -256,7 +292,6 @@
             box-shadow: none !important;
             border: none !important;
             width: 100% !important;
-            max-width: 100% !important;
             padding: 10px 0 !important;
             margin-bottom: 0 !important;
             page-break-inside: auto !important;
@@ -267,7 +302,9 @@
         .pdf-imprimir li, 
         .pdf-imprimir h2, 
         .pdf-imprimir h3, 
-        .pdf-imprimir strong {
+        .pdf-imprimir strong,
+        .pdf-imprimir span,
+        .pdf-imprimir a {
             word-break: break-word !important;
             overflow-wrap: break-word !important;
             white-space: normal !important;
@@ -275,7 +312,7 @@
 
         .pdf-imprimir h2, 
         .pdf-imprimir h3 {
-            page-break-after: avoid !important; /* Impede títulos órfãos no fim da página */
+            page-break-after: avoid !important;
             break-after: avoid !important;
         }
 
@@ -299,10 +336,6 @@
         .pdf-imprimir .download-row {
             page-break-inside: avoid !important;
             break-inside: avoid !important;
-        }
-
-        .pdf-imprimir .sumario-linhas {
-            max-width: 50% !important;
         }
     </style>
 </head>
@@ -338,14 +371,38 @@
             
             <div id="pdf-sumario">
                 <h2>Sumário Executivo</h2>
-                <ul class="sumario-lista">
-                    <li class="sumario-item"><a href="#download">1. Como Baixar o App SP2 TV</a><div class="sumario-linhas"></div><span class="sumario-num">Pág. 1</span></li>
-                    <li class="sumario-item"><a href="#samsung">2. Instalação em Smart TVs Samsung</a><div class="sumario-linhas"></div><span class="sumario-num">Pág. 2</span></li>
-                    <li class="sumario-item"><a href="#lg">3. Instalação em Smart TVs LG</a><div class="sumario-linhas"></div><span class="sumario-num">Pág. 3</span></li>
-                    <li class="sumario-item"><a href="#androidtv">4. Instalação em Smart TVs Android TV / Google TV</a><div class="sumario-linhas"></div><span class="sumario-num">Pág. 4</span></li>
-                    <li class="sumario-item"><a href="#ativacao">5. Processo de Ativação Passo a Passo</a><div class="sumario-linhas"></div><span class="sumario-num">Pág. 5</span></li>
-                    <li class="sumario-item"><a href="#suporte">6. Resolução de Problemas Comuns</a><div class="sumario-linhas"></div><span class="sumario-num">Pág. 7</span></li>
-                </ul>
+                <div class="sumario-tabela">
+                    <div class="sumario-linha">
+                        <div class="sumario-celula-texto"><a href="#download">1. Como Baixar o App SP2 TV</a></div>
+                        <div class="sumario-celula-pontos"></div>
+                        <div class="sumario-celula-num">Pág. 1</div>
+                    </div>
+                    <div class="sumario-linha">
+                        <div class="sumario-celula-texto"><a href="#samsung">2. Instalação em Smart TVs Samsung</a></div>
+                        <div class="sumario-celula-pontos"></div>
+                        <div class="sumario-celula-num">Pág. 2</div>
+                    </div>
+                    <div class="sumario-linha">
+                        <div class="sumario-celula-texto"><a href="#lg">3. Instalação em Smart TVs LG</a></div>
+                        <div class="sumario-celula-pontos"></div>
+                        <div class="sumario-celula-num">Pág. 3</div>
+                    </div>
+                    <div class="sumario-linha">
+                        <div class="sumario-celula-texto"><a href="#androidtv">4. Instalação em Smart TVs Android TV / Google TV</a></div>
+                        <div class="sumario-celula-pontos"></div>
+                        <div class="sumario-celula-num">Pág. 4</div>
+                    </div>
+                    <div class="sumario-linha">
+                        <div class="sumario-celula-texto"><a href="#ativacao">5. Processo de Ativação Passo a Passo</a></div>
+                        <div class="sumario-celula-pontos"></div>
+                        <div class="sumario-celula-num">Pág. 5</div>
+                    </div>
+                    <div class="sumario-linha">
+                        <div class="sumario-celula-texto"><a href="#suporte">6. Resolução de Problemas Comuns</a></div>
+                        <div class="sumario-celula-pontos"></div>
+                        <div class="sumario-celula-num">Pág. 7</div>
+                    </div>
+                </div>
             </div>
 
             <section id="download" class="content-section">
@@ -392,7 +449,7 @@
                 </ol>
 
                 <div class="alert-box">
-                    <h4>⚠️ Nota de Compatibilidade Importante</h4>
+                    <h4>⚠️ Nota de Compartibilidade Importante</h4>
                     <p>Se ao realizar as buscas o aplicativo "SP2 TV" não for localizado na loja, isto indica que este modelo específico de televisão não possui compatibilidade de sistema nativa.</p>
                     <p><strong>Compatibilidade:</strong> Modelos de 2020 a 2024. Modelos 2025 e 2026 em breve.</p>
                 </div>
@@ -561,7 +618,6 @@
             if(barraLateral) barraLateral.style.display = 'none';
             elementoAlvo.classList.add('pdf-imprimir');
 
-            // Mapeia todas as seções e injeta quebras nativas via JS antes da renderização
             const secoes = elementoAlvo.querySelectorAll('.content-section');
             secoes.forEach((secao, indice) => {
                 if (indice > 0) {
@@ -570,23 +626,23 @@
                 }
             });
 
+            // Configurações fluidas e otimizadas sem travar a janela de forma agressiva
             const opcoes = {
                 margin:       [15, 15, 15, 15],
                 filename:     'manual_instalacao_sp2tv.pdf',
                 image:        { type: 'jpeg', quality: 0.98 },
                 html2canvas:  { 
-                    scale: 2, 
+                    scale: 2.5, 
                     useCORS: true, 
                     backgroundColor: '#FFFFFF',
-                    width: 750,
-                    windowWidth: 750 // Trava a janela de captura de tela para eliminar o corte lateral direito
+                    scrollX: 0,
+                    scrollY: 0
                 },
                 jsPDF:        { unit: 'mm', format: 'a4', orientation: 'portrait' },
                 pagebreak:    { mode: ['css'] }
             };
 
             html2pdf().set(opcoes).from(elementoAlvo).save().then(() => {
-                // Remove estilos temporários pós-renderização
                 secoes.forEach(secao => {
                     secao.style.removeProperty('page-break-before');
                     secao.style.removeProperty('break-before');
