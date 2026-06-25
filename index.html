@@ -87,8 +87,8 @@
             gap: 2.5rem;
         }
 
-        .section-title-with-logo { display: flex; align-items: center; gap: 15px; }
-        .title-brand-logo { height: 35px; width: auto; }
+        .section-title-with-logo { display: flex; align-items: center; justify-content: space-between; gap: 15px; }
+        .title-brand-logo { height: 35px; width: auto; max-width: 120px; object-fit: contain; }
 
         @media (max-width: 768px) {
             .main-container { grid-template-columns: 1fr; gap: 1.5rem; padding: 0 1rem; }
@@ -96,7 +96,7 @@
             .hero h1 { font-size: 2.2rem; }
             .download-row { flex-direction: column !important; align-items: center !important; gap: 15px; }
             .download-image-sidebar { width: 120px; }
-            .section-title-with-logo { flex-direction: column; align-items: flex-start; }
+            .section-title-with-logo { flex-direction: row; align-items: center; }
         }
 
         .content-section {
@@ -218,62 +218,69 @@
         .footer { background-color: var(--accent-color); color: white; text-align: center; padding: 3rem; margin-top: 6rem; border-top: 4px solid var(--primary-color); }
 
         /* =======================================================
-           SUMÁRIO REFEITO COM REGRAS FLUIDAS PARA EVITAR TRAVAMENTOS
+           SUMÁRIO ESTRUTURADO CONTRA QUEBRAS LATERAIS
         ======================================================= */
         #pdf-sumario {
             display: none;
             background: #FFFFFF;
-            padding: 2rem;
+            padding: 2.5rem;
             border-radius: var(--border-radius);
             border: 1px solid #CBD5E1;
             margin-bottom: 2.5rem;
             width: 100%;
+            box-sizing: border-box;
         }
         
         .sumario-tabela {
             width: 100%;
             margin-top: 1.5rem;
+            display: block;
         }
 
         .sumario-linha {
-            display: flex;
-            align-items: flex-end;
-            margin-bottom: 14px;
-            width: 100%;
+            display: flex !important;
+            flex-direction: row !important;
+            align-items: flex-end !important;
+            justify-content: space-between !important;
+            margin-bottom: 16px;
+            width: 100% !important;
+            clear: both;
         }
 
         .sumario-celula-texto {
-            white-space: nowrap;
-            flex-shrink: 0;
+            white-space: nowrap !important;
+            flex-shrink: 0 !important;
+            display: block !important;
         }
 
         .sumario-celula-texto a {
             text-decoration: none;
             color: var(--accent-color);
             font-weight: 600;
-            font-size: 1.05rem;
+            font-size: 1.1rem;
         }
 
         .sumario-celula-pontos {
-            flex-grow: 1;
-            border-bottom: 2px dotted #94A3B8;
-            margin: 0 10px;
+            flex-grow: 1 !important;
+            border-bottom: 2px dotted #94A3B8 !important;
+            margin: 0 12px !important;
             position: relative;
             top: -4px;
-            min-width: 20px;
+            min-width: 30px;
         }
 
         .sumario-celula-num {
-            white-space: nowrap;
+            white-space: nowrap !important;
             text-align: right;
             color: var(--primary-color);
             font-weight: bold;
-            font-size: 1.05rem;
-            flex-shrink: 0;
+            font-size: 1.1rem;
+            flex-shrink: 0 !important;
+            display: block !important;
         }
 
         /* =======================================================
-           REGRAS EXCLUSIVAS DE IMPRESSÃO (ESTABILIZAÇÃO TOTAL)
+           REGRAS EXCLUSIVAS DE IMPRESSÃO - FIXAÇÃO DA LARGURA
         ======================================================= */
         .pdf-imprimir {
             display: block !important;
@@ -289,17 +296,6 @@
             margin-bottom: 30px !important;
             page-break-after: always !important;
             break-after: always !important;
-        }
-        
-        /* Previne o fatiamento vertical das letras do sumário */
-        .pdf-imprimir .sumario-linha,
-        .pdf-imprimir .sumario-celula-texto,
-        .pdf-imprimir .sumario-celula-texto a,
-        .pdf-imprimir .sumario-celula-num {
-            display: inline-flex !important;
-            word-break: keep-all !important;
-            overflow-wrap: normal !important;
-            white-space: nowrap !important;
         }
 
         .pdf-imprimir .content-section {
@@ -441,7 +437,7 @@
 
             <section id="samsung" class="content-section">
                 <h2 class="section-title-with-logo">
-                    2. Instalação em Smart TVs Samsung 
+                    <span>2. Instalação em Smart TVs Samsung</span>
                     <img src="imagens/samsung.png" alt="Samsung" class="title-brand-logo">
                 </h2>
                 
@@ -470,7 +466,7 @@
 
             <section id="lg" class="content-section">
                 <h2 class="section-title-with-logo">
-                    3. Instalação em Smart TVs LG 
+                    <span>3. Instalação em Smart TVs LG</span>
                     <img src="imagens/lg.png" alt="LG" class="title-brand-logo">
                 </h2>
                 
@@ -490,13 +486,13 @@
 
                 <div class="alert-box">
                     <h4>⚠️ Nota de Compatibilidade Importante</h4>
-                    <p>Disponível para modelos LG a partir de 2016. Em aparelhos muito antigos, o uso do APP pode apresentar lentidão devido ao hardware da TV.</p>
+                    <p>Disponível para models LG a partir de 2016. Em aparelhos muito antigos, o uso do APP pode apresentar lentidão devido ao hardware da TV.</p>
                 </div>
             </section>
 
             <section id="androidtv" class="content-section">
                 <h2 class="section-title-with-logo">
-                    4. Instalação em Smart TVs com Sistema Android TV / Google TV
+                    <span>4. Instalação em Smart TVs com Sistema Android TV / Google TV</span>
                     <img src="imagens/android.png" alt="Android" class="title-brand-logo">
                 </h2>
                 <p>Muitas marcas modernas do mercado utilizam o ecossistema oficial da Google. Este procedimento é válido para diversos fabricantes de televisores e dispositivos de streaming:</p>
@@ -513,7 +509,7 @@
                 <h3>Passo a Passo de Instalação</h3>
                 <ol class="step-list">
                     <li>Pressione o botão <strong>Home</strong> do controle remoto para acessar a tela inicial do sistema.</li>
-                    <li>Navegue até o menu superior (or lateral) e selecione a aba ou aplicativo da <strong>Google Play Store</strong> (ou a aba <strong>"Apps"</strong> em sistemas Google TV).</li>
+                    <li>Navegue até o menu superior (ou lateral) e selecione a aba ou aplicativo da <strong>Google Play Store</strong> (ou a aba <strong>"Apps"</strong> em sistemas Google TV).</li>
                     <li>Acesse o campo de busca (ícone de <strong>Lupa</strong> ou barra de pesquisa no topo).</li>
                     <li>Digite <strong>SP2 TV</strong> utilizando o teclado virtual e selecione o aplicativo correspondente nos resultados.</li>
                     <li>Clique no botão <strong>Instalar</strong> (ou <strong>Download</strong>) e aguarde o término do processo. Após instalado, selecione <strong>Abrir</strong>.</li>
@@ -648,7 +644,8 @@
                     useCORS: true, 
                     backgroundColor: '#FFFFFF',
                     scrollX: 0,
-                    scrollY: 0
+                    scrollY: 0,
+                    windowWidth: 1200 /* Resolve o problema de esmagamento e cortes laterais */
                 },
                 jsPDF:        { unit: 'mm', format: 'a4', orientation: 'portrait' },
                 pagebreak:    { mode: ['css'] }
