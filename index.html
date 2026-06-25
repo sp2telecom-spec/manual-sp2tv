@@ -218,76 +218,64 @@
         .footer { background-color: var(--accent-color); color: white; text-align: center; padding: 3rem; margin-top: 6rem; border-top: 4px solid var(--primary-color); }
 
         /* =======================================================
-           SUMÁRIO ESTRUTURADO CONTRA QUEBRAS LATERAIS
+           SUMÁRIO ESTRUTURADO COM FLOATS CLÁSSICOS (ANTI-BUG)
         ======================================================= */
         #pdf-sumario {
             display: none;
             background: #FFFFFF;
-            padding: 2.5rem;
+            padding: 2rem;
             border-radius: var(--border-radius);
             border: 1px solid #CBD5E1;
             margin-bottom: 2.5rem;
             width: 100%;
-            box-sizing: border-box;
-        }
-        
-        .sumario-tabela {
-            width: 100%;
-            margin-top: 1.5rem;
-            display: block;
         }
 
         .sumario-linha {
-            display: flex !important;
-            flex-direction: row !important;
-            align-items: flex-end !important;
-            justify-content: space-between !important;
-            margin-bottom: 16px;
-            width: 100% !important;
+            width: 100%;
+            margin-bottom: 15px;
+            border-bottom: 2px dotted #94A3B8;
+            height: 24px;
             clear: both;
         }
 
         .sumario-celula-texto {
-            white-space: nowrap !important;
-            flex-shrink: 0 !important;
-            display: block !important;
+            float: left;
+            background: #FFFFFF;
+            padding-right: 8px;
+            height: 24px;
+            line-height: 24px;
         }
 
         .sumario-celula-texto a {
             text-decoration: none;
             color: var(--accent-color);
             font-weight: 600;
-            font-size: 1.1rem;
-        }
-
-        .sumario-celula-pontos {
-            flex-grow: 1 !important;
-            border-bottom: 2px dotted #94A3B8 !important;
-            margin: 0 12px !important;
-            position: relative;
-            top: -4px;
-            min-width: 30px;
+            font-size: 1.05rem;
         }
 
         .sumario-celula-num {
-            white-space: nowrap !important;
-            text-align: right;
+            float: right;
+            background: #FFFFFF;
+            padding-left: 8px;
             color: var(--primary-color);
             font-weight: bold;
-            font-size: 1.1rem;
-            flex-shrink: 0 !important;
-            display: block !important;
+            font-size: 1.05rem;
+            height: 24px;
+            line-height: 24px;
+            text-align: right;
         }
 
         /* =======================================================
-           REGRAS EXCLUSIVAS DE IMPRESSÃO - FIXAÇÃO DA LARGURA
+           REGRAS EXCLUSIVAS DE IMPRESSÃO (CORREÇÃO DE BORDAS)
         ======================================================= */
         .pdf-imprimir {
             display: block !important;
             width: 100% !important;
             max-width: 100% !important;
-            margin: 0 !important;
-            padding: 0 !important;
+            margin: 0 auto !important;
+            padding: 10px 25px 10px 25px !important; /* Margem interna de segurança para evitar cortes */
+            box-sizing: border-box !important;
+            background-color: #FFFFFF !important;
         }
         
         .pdf-imprimir #pdf-sumario {
@@ -302,10 +290,11 @@
             box-shadow: none !important;
             border: none !important;
             width: 100% !important;
-            padding: 10px 0 !important;
+            padding: 15px 0 !important;
             margin-bottom: 0 !important;
             page-break-inside: auto !important;
             break-inside: auto !important;
+            background: transparent !important;
         }
 
         .pdf-imprimir p, 
@@ -383,32 +372,26 @@
                 <div class="sumario-tabela">
                     <div class="sumario-linha">
                         <div class="sumario-celula-texto"><a href="#download">1. Como Baixar o App SP2 TV</a></div>
-                        <div class="sumario-celula-pontos"></div>
                         <div class="sumario-celula-num">Pág. 1</div>
                     </div>
                     <div class="sumario-linha">
                         <div class="sumario-celula-texto"><a href="#samsung">2. Instalação em Smart TVs Samsung</a></div>
-                        <div class="sumario-celula-pontos"></div>
                         <div class="sumario-celula-num">Pág. 2</div>
                     </div>
                     <div class="sumario-linha">
                         <div class="sumario-celula-texto"><a href="#lg">3. Instalação em Smart TVs LG</a></div>
-                        <div class="sumario-celula-pontos"></div>
                         <div class="sumario-celula-num">Pág. 3</div>
                     </div>
                     <div class="sumario-linha">
                         <div class="sumario-celula-texto"><a href="#androidtv">4. Instalação em Smart TVs Android TV / Google TV</a></div>
-                        <div class="sumario-celula-pontos"></div>
                         <div class="sumario-celula-num">Pág. 4</div>
                     </div>
                     <div class="sumario-linha">
                         <div class="sumario-celula-texto"><a href="#ativacao">5. Processo de Ativação Passo a Passo</a></div>
-                        <div class="sumario-celula-pontos"></div>
                         <div class="sumario-celula-num">Pág. 5</div>
                     </div>
                     <div class="sumario-linha">
                         <div class="sumario-celula-texto"><a href="#suporte">6. Resolução de Problemas Comuns</a></div>
-                        <div class="sumario-celula-pontos"></div>
                         <div class="sumario-celula-num">Pág. 7</div>
                     </div>
                 </div>
@@ -486,7 +469,7 @@
 
                 <div class="alert-box">
                     <h4>⚠️ Nota de Compatibilidade Importante</h4>
-                    <p>Disponível para models LG a partir de 2016. Em aparelhos muito antigos, o uso do APP pode apresentar lentidão devido ao hardware da TV.</p>
+                    <p>Disponível para modelos LG a partir de 2016. Em aparelhos muito antigos, o uso do APP pode apresentar lentidão devido ao hardware da TV.</p>
                 </div>
             </section>
 
@@ -636,7 +619,7 @@
             });
 
             const opcoes = {
-                margin:       [15, 15, 15, 15],
+                margin:       [10, 0, 10, 0], /* Remove as margens nativas que estavam fatiando o conteúdo */
                 filename:     'manual_instalacao_sp2tv.pdf',
                 image:        { type: 'jpeg', quality: 0.98 },
                 html2canvas:  { 
@@ -644,8 +627,7 @@
                     useCORS: true, 
                     backgroundColor: '#FFFFFF',
                     scrollX: 0,
-                    scrollY: 0,
-                    windowWidth: 1200 /* Resolve o problema de esmagamento e cortes laterais */
+                    scrollY: 0
                 },
                 jsPDF:        { unit: 'mm', format: 'a4', orientation: 'portrait' },
                 pagebreak:    { mode: ['css'] }
