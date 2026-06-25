@@ -64,18 +64,18 @@
         nav a { text-decoration: none; color: var(--accent-color); font-weight: 600; font-size: 0.95rem; transition: color 0.2s; }
         nav a:hover { color: var(--primary-color); }
 
-        /* Estilo do Botão Exportar PDF no Menu */
+        /* Botão de Exportar Manual */
         .btn-pdf {
             background-color: var(--primary-color);
             color: white !important;
-            padding: 6px 14px;
+            padding: 8px 16px;
             border-radius: 6px;
-            font-size: 0.9rem !important;
+            font-size: 0.9rem;
             display: inline-flex;
             align-items: center;
             gap: 6px;
             cursor: pointer;
-            transition: background-color 0.2s, transform 0.1s;
+            transition: 0.2s;
             border: none;
             font-weight: 600;
         }
@@ -103,14 +103,18 @@
             gap: 2.5rem;
         }
 
-        /* Estilo para Títulos com Logo */
+        /* Sumário do Manual - Escondido no site, aparece apenas no PDF */
+        .manual-toc {
+            display: none;
+        }
+
         .section-title-with-logo {
             display: flex;
             align-items: center;
             gap: 15px;
         }
         .title-brand-logo {
-            height: 35px; /* Tamanho ajustado para títulos H2 */
+            height: 35px;
             width: auto;
         }
 
@@ -266,37 +270,101 @@
 
         .footer { background-color: var(--accent-color); color: white; text-align: center; padding: 3rem; margin-top: 6rem; border-top: 4px solid var(--primary-color); }
 
-        /* Otimizações para ocultar elementos desnecessários na geração do PDF */
+        /* ==========================================================================
+           REGRAS DE IMPRESSÃO EXCLUSIVAS PARA TRANSFORMAR A PÁGINA EM UM MANUAL PDF
+           ========================================================================== */
         @media print {
-            header, .hero, .sidebar, .footer, .alert-box, .btn-link, .btn-whatsapp, .btn-pdf {
+            /* 1. Esconde tudo o que for elemento de site */
+            header, .hero, .sidebar, .footer, .btn-link, .btn-whatsapp, .download-image-sidebar {
                 display: none !important;
             }
+
+            /* 2. Reseta o fundo para papel branco */
             body {
                 background: white !important;
-                color: black !important;
+                color: #1E293B !important;
+                padding: 0 !important;
+                margin: 0 !important;
             }
+
+            /* 3. Expande o container principal para usar a página inteira */
             .main-container {
                 display: block !important;
                 margin: 0 !important;
                 padding: 0 !important;
                 max-width: 100% !important;
             }
+
             .content-section {
                 border: none !important;
                 box-shadow: none !important;
                 padding: 0 !important;
-                margin-bottom: 3rem !important;
-                page-break-inside: auto !important;
+                margin-bottom: 2rem !important;
             }
+
+            /* 4. Torna o Sumário Visível apenas no PDF */
+            .manual-toc {
+                display: block !important;
+                background-color: #F8FAFC !important;
+                border: 1px solid #E2E8F0 !important;
+                border-radius: 8px;
+                padding: 20px;
+                margin-bottom: 30px;
+                page-break-inside: avoid;
+            }
+            .toc-title {
+                font-size: 1.2rem;
+                font-weight: bold;
+                color: #1E293B;
+                margin-bottom: 15px;
+                border-bottom: 2px solid #CC0000;
+                padding-bottom: 5px;
+                text-transform: uppercase;
+            }
+            .toc-grid {
+                display: grid;
+                grid-template-columns: 1fr;
+                gap: 8px;
+                list-style: none;
+            }
+            .toc-grid li {
+                font-weight: 600;
+                color: #475569;
+                border-bottom: 1px dotted #CBD5E1;
+                padding-bottom: 4px;
+            }
+
+            /* 5. Cabeçalho estilo "Capa de Manual" no topo da primeira página */
+            .main-container::before {
+                content: "NETAKI TELECOMUNICAÇÕES \A MANUAL OFICIAL DE INSTALAÇÃO E CONFIGURAÇÃO — SP2 TV";
+                white-space: pre-wrap;
+                display: block;
+                font-size: 1.4rem;
+                font-weight: bold;
+                color: #1E293B;
+                border-bottom: 4px solid #CC0000;
+                padding-bottom: 15px;
+                margin-bottom: 30px;
+                text-align: left;
+            }
+
+            /* 6. Ajustes de quebras de página automáticas */
             h2, h3 {
                 page-break-after: avoid !important;
+                color: #1E293B !important;
             }
-            .step-list li, .step-image {
+            .content-section, .step-list li, .alert-box {
                 page-break-inside: avoid !important;
             }
             .step-image {
-                max-width: 60% !important;
-                margin: 10px auto !important;
+                max-width: 55% !important;
+                margin: 15px auto !important;
+                page-break-inside: avoid !important;
+            }
+            .download-box-right {
+                background: none !important;
+                border: none !important;
+                padding: 0 !important;
             }
         }
     </style>
@@ -317,7 +385,7 @@
                     <li><a href="#androidtv">Android TV</a></li>
                     <li><a href="#ativacao">Ativação</a></li>
                     <li><a href="#suporte">Suporte</a></li>
-                    <li><button class="btn-pdf" onclick="window.print()">📥 Salvar PDF</button></li>
+                    <li><button class="btn-pdf" onclick="window.print()">📥 Baixar Manual PDF</button></li>
                 </ul>
             </nav>
         </div>
@@ -329,6 +397,19 @@
     </section>
 
     <div class="main-container">
+        
+        <div class="manual-toc">
+            <div class="toc-title">Sumário do Manual</div>
+            <ul class="toc-grid">
+                <li>1. Como Baixar o App SP2 TV</li>
+                <li>2. Instalação em Smart TVs Samsung</li>
+                <li>3. Instalação em Smart TVs LG</li>
+                <li>4. Instalação em Smart TVs Android TV / Google TV</li>
+                <li>5. Processo de Ativação Passo a Passo</li>
+                <li>6. Resolução de Problemas Comuns</li>
+            </ul>
+        </div>
+
         <main>
             <section id="download" class="content-section">
                 <h2>1. Como Baixar o App SP2 TV</h2>
@@ -408,7 +489,7 @@
 
             <section id="androidtv" class="content-section">
                 <h2>4. Instalação em Smart TVs com Sistema Android TV / Google TV</h2>
-                <img src="imagens/android.png" alt="LG" class="title-brand-logo">
+                <img src="imagens/android.png" alt="Android" class="title-brand-logo">
                 <p>Muitas marcas modernas do mercado utilizam o ecossistema oficial da Google. Este procedimento é válido para diversos fabricantes de televisores e dispositivos de streaming:</p>
                 
                 <div class="brand-badge-container">
@@ -426,7 +507,7 @@
                     <li>Navegue até o menu superior (or lateral) e selecione a aba ou aplicativo da <strong>Google Play Store</strong> (ou a aba <strong>"Apps"</strong> em sistemas Google TV).</li>
                     <li>Acesse o campo de busca (ícone de <strong>Lupa</strong> ou barra de pesquisa no topo).</li>
                     <li>Digite <strong>SP2 TV</strong> utilizando o teclado virtual e selecione o aplicativo correspondente nos resultados.</li>
-                    <li>Clique no botão <strong>Instalar</strong> (ou <strong>Download</strong>) e aguarde o término do processo. Após instalado, selecione <strong>Abrir</strong>.</li>
+                    <li>Clique no botão <strong>Instalar</strong> (ou **Download**) e aguarde o término do processo. Após instalado, selecione <strong>Abrir</strong>.</li>
                 </ol>
 
                 <div class="alert-box" style="background-color: #F8FAFC; border-left-color: #10B981; border-color: #E2E8F0;">
@@ -505,7 +586,7 @@
 
                 <div class="support-card">
                     <h3>Ainda precisa de ajuda?</h3>
-                    <p>Fale agora com nosso suporte técnico tel:(19) 3877-2700.</p>
+                    <p>Fale agora com nosso suporte técnico via WhatsApp.</p>
                     <a href="https://api.whatsapp.com/send?l=pt&phone=551938772700&text=Contato%20do%20site%20Netaki%20Telecom." target="_blank" class="btn-whatsapp">
                         💬 Falar com o Suporte Técnico
                     </a>
@@ -523,7 +604,7 @@
                     <li style="margin-bottom: 12px;"><a href="#androidtv">» Instalação Android TV</a></li>
                     <li style="margin-bottom: 12px;"><a href="#ativacao">» Ativação</a></li>
                     <li style="margin-bottom: 12px;"><a href="#suporte">» Suporte</a></li>
-                    <li style="margin-bottom: 12px;"><a onclick="window.print()" style="color: #CC0000; font-weight: bold; cursor: pointer;">» 📥 Exportar Manual (PDF)</a></li>
+                    <li style="margin-bottom: 12px;"><a onclick="window.print()" style="color: #CC0000; font-weight: bold; cursor: pointer;">» 📥 Baixar Manual (PDF)</a></li>
                     <li><a href="https://netaki.com.br/fale-conosco/" target="_blank" style="color: var(--primary-color); font-weight: bold;">» Entre em Contato</a></li>
                 </ul>
             </div>
