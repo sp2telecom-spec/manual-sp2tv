@@ -7,10 +7,10 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/html2pdf.js/0.10.1/html2pdf.bundle.min.js"></script>
     <style>
         :root {
-            --primary-color: #CC0000;  /* Vermelho Principal Premium */
-            --primary-dark: #8B0000;   /* Vermelho Escuro Corporativo */
-            --accent-color: #1E293B;   /* Grafite para contraste */
-            --dark-text: #1E293B;      /* Texto escuro de alta legibilidade */
+            --primary-color: #CC0000;
+            --primary-dark: #8B0000;
+            --accent-color: #1E293B;
+            --dark-text: #1E293B;
             --card-bg: #FFFFFF;
             --border-radius: 12px;
         }
@@ -49,20 +49,11 @@
             align-items: center;
             gap: 20px;
         }
-        .logo-netaki {
-            height: 45px;
-            width: auto;
-            display: block;
-        }
-        .logo-sp2tv {
-            height: 40px;
-            width: auto;
-            display: block;
-            border-radius: 8px;
-        }
+        .logo-netaki { height: 45px; width: auto; display: block; }
+        .logo-sp2tv { height: 40px; width: auto; display: block; border-radius: 8px; }
         
         nav ul { display: flex; list-style: none; gap: 25px; align-items: center; }
-        nav a { text-decoration: none; color: var(--accent-color); font-weight: 600; font-size: 0.95rem; transition: color 0.2s; }
+        nav a { text-decoration: none; color: var(--accent-color); font-weight: 600; font-size: 0.95rem; }
         nav a:hover { color: var(--primary-color); }
 
         .btn-pdf {
@@ -72,7 +63,6 @@
             border-radius: 6px;
             font-size: 0.9rem;
             cursor: pointer;
-            transition: 0.2s;
             border: none;
             font-weight: 600;
         }
@@ -97,15 +87,8 @@
             gap: 2.5rem;
         }
 
-        .section-title-with-logo {
-            display: flex;
-            align-items: center;
-            gap: 15px;
-        }
-        .title-brand-logo {
-            height: 35px;
-            width: auto;
-        }
+        .section-title-with-logo { display: flex; align-items: center; gap: 15px; }
+        .title-brand-logo { height: 35px; width: auto; }
 
         @media (max-width: 768px) {
             .main-container { grid-template-columns: 1fr; gap: 1.5rem; padding: 0 1rem; }
@@ -145,12 +128,7 @@
             margin-bottom: 2.5rem;
         }
 
-        .download-image-sidebar {
-            width: 140px;
-            height: auto;
-            object-fit: contain;
-            flex-shrink: 0;
-        }
+        .download-image-sidebar { width: 140px; height: auto; object-fit: contain; flex-shrink: 0; }
 
         .download-box-right {
             flex: 1;
@@ -171,11 +149,9 @@
             text-decoration: none;
             font-weight: bold;
             display: inline-block;
-            box-shadow: 0 4px 6px rgba(204, 0, 0, 0.15);
-            transition: 0.2s;
             text-align: center;
         }
-        .btn-link:hover { background-color: var(--primary-dark); transform: translateY(-2px); }
+        .btn-link:hover { background-color: var(--primary-dark); }
 
         .step-list { list-style: none; counter-reset: step-counter; margin: 1.5rem 0; }
         .step-list li { position: relative; padding-left: 4.2rem; margin-bottom: 2.5rem; font-size: 1.05rem; color: #475569; }
@@ -190,7 +166,6 @@
             border-radius: 50%;
             display: flex; align-items: center; justify-content: center;
             font-weight: bold; font-size: 1.2rem;
-            box-shadow: 0 4px 6px rgba(204, 0, 0, 0.15);
         }
 
         .step-image {
@@ -199,7 +174,6 @@
             height: auto;
             margin: 1.2rem 0 1.8rem 0;
             border-radius: 8px;
-            box-shadow: 0 4px 12px rgba(0,0,0,0.08);
             border: 1px solid #E2E8F0;
         }
 
@@ -212,22 +186,8 @@
             border: 1px solid #FFE2E2;
         }
 
-        .brand-badge-container {
-            display: flex;
-            flex-wrap: wrap;
-            gap: 10px;
-            margin: 1rem 0 1.5rem 0;
-        }
-
-        .brand-badge {
-            background: #F1F5F9;
-            color: #334155;
-            padding: 5px 12px;
-            border-radius: 20px;
-            font-size: 0.9rem;
-            font-weight: 600;
-            border: 1px solid #E2E8F0;
-        }
+        .brand-badge-container { display: flex; flex-wrap: wrap; gap: 10px; margin: 1rem 0 1.5rem 0; }
+        .brand-badge { background: #F1F5F9; color: #334155; padding: 5px 12px; border-radius: 20px; font-size: 0.9rem; font-weight: 600; border: 1px solid #E2E8F0; }
 
         .sidebar { position: sticky; top: 120px; height: fit-content; }
         .quick-links { 
@@ -237,7 +197,7 @@
             box-shadow: 0 4px 6px -1px rgba(0,0,0,0.02);
             border: 1px solid #E2E8F0;
         }
-        .quick-links a { text-decoration: none; color: #64748B; font-weight: 500; transition: 0.2s; font-size: 1rem; }
+        .quick-links a { text-decoration: none; color: #64748B; font-weight: 500; font-size: 1rem; }
         .quick-links a:hover { color: var(--primary-color); }
 
         .btn-whatsapp {
@@ -251,11 +211,9 @@
             align-items: center;
             justify-content: center;
             gap: 10px;
-            box-shadow: 0 4px 12px rgba(37, 211, 102, 0.2);
-            transition: 0.2s;
             font-size: 1.1rem;
         }
-        .btn-whatsapp:hover { background-color: #128C7E; transform: translateY(-2px); }
+        .btn-whatsapp:hover { background-color: #128C7E; }
 
         .footer { background-color: var(--accent-color); color: white; text-align: center; padding: 3rem; margin-top: 6rem; border-top: 4px solid var(--primary-color); }
 
@@ -276,55 +234,53 @@
         .sumario-num { color: var(--primary-color); font-weight: bold; }
 
         /* =======================================================
-           REGRAS REFINADAS DE IMPRESSÃO - CORREÇÃO DE ALINHAMENTO
+           REGRAS DE IMPRESSÃO REFORMULADAS - SEM PÁGINAS EM BRANCO
            ======================================================= */
         .pdf-imprimir {
             display: block !important;
-            width: 98% !important;        /* Margem de segurança à direita */
-            max-width: 98% !important;    /* Evita que estoure a borda */
-            margin: 0 auto !important;
-            padding: 0 5px 0 0 !important; /* Pequeno recuo corretivo */
+            width: 100% !important;
+            max-width: 100% !important;
+            margin: 0 !important;
+            padding: 0 !important;
         }
         
         .pdf-imprimir #pdf-sumario {
             display: block !important;
-            page-break-after: always !important;
-            break-after: page !important;
             box-shadow: none !important;
+            margin-bottom: 30px !important;
         }
         
+        /* Removemos o page-break-inside avoid daqui para evitar saltos gigantes */
         .pdf-imprimir .content-section {
-            page-break-inside: avoid !important;
-            break-inside: avoid !important;
-            margin-bottom: 25px !important;
             box-shadow: none !important;
-            border: 1px solid #CBD5E1 !important;
+            border: 1px solid #E2E8F0 !important;
             width: 100% !important;
+            padding: 1.5rem !important; /* Enxuga o padding no PDF para caber melhor lateralmente */
+            margin-bottom: 20px !important;
         }
 
+        /* Bloqueia quebras apenas dentro dos itens da lista de passos */
         .pdf-imprimir .step-list li {
             page-break-inside: avoid !important;
             break-inside: avoid !important;
         }
 
         .pdf-imprimir .step-image {
-            max-width: 70% !important;
+            max-width: 90% !important;
             page-break-inside: avoid !important;
             break-inside: avoid !important;
-            box-shadow: none !important; /* Remove sombras complexas na geração */
+            box-shadow: none !important;
         }
 
         .pdf-imprimir .alert-box, 
-        .pdf-imprimir .solution-box, 
         .pdf-imprimir .support-card {
             page-break-inside: avoid !important;
             break-inside: avoid !important;
             box-shadow: none !important;
         }
 
-        /* Garante que o pontilhado do sumário se ajuste sem empurrar o número */
         .pdf-imprimir .sumario-linhas {
-            max-width: 65% !important;
+            max-width: 60% !important;
         }
     </style>
 </head>
@@ -584,12 +540,12 @@
             elementoAlvo.classList.add('pdf-imprimir');
 
             const opcoes = {
-                margin:       [15, 12, 15, 12], /* Margens laterais ideais para evitar cortes */
+                margin:       [15, 15, 15, 15],
                 filename:     'manual_instalacao_sp2tv.pdf',
-                image:        { type: 'jpeg', quality: 0.98 },
+                image:        { type: 'jpeg', quality: 0.95 },
                 html2canvas:  { scale: 2, useCORS: true, backgroundColor: '#FFFFFF' },
                 jsPDF:        { unit: 'mm', format: 'a4', orientation: 'portrait' },
-                pagebreak:    { mode: ['avoid-all', 'css'] }
+                pagebreak:    { mode: ['css'] } /* Modo CSS puro sem 'avoid-all' agressivo que causava páginas em branco */
             };
 
             html2pdf().set(opcoes).from(elementoAlvo).save().then(() => {
