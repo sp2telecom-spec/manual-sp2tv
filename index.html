@@ -217,7 +217,9 @@
 
         .footer { background-color: var(--accent-color); color: white; text-align: center; padding: 3rem; margin-top: 6rem; border-top: 4px solid var(--primary-color); }
 
-        /* Estilos do Sumário Estruturado para Evitar Erros no PDF */
+        /* =======================================================
+           SUMÁRIO REFEITO COM REGRAS FLUIDAS PARA EVITAR TRAVAMENTOS
+        ======================================================= */
         #pdf-sumario {
             display: none;
             background: #FFFFFF;
@@ -228,50 +230,51 @@
             width: 100%;
         }
         
-        /* Estrutura estável usando propriedades de tabela clássica */
         .sumario-tabela {
-            display: table;
             width: 100%;
-            border-collapse: collapse;
             margin-top: 1.5rem;
         }
+
         .sumario-linha {
-            display: table-row;
+            display: flex;
+            align-items: flex-end;
+            margin-bottom: 14px;
+            width: 100%;
         }
+
         .sumario-celula-texto {
-            display: table-cell;
             white-space: nowrap;
-            padding-bottom: 12px;
-            vertical-align: bottom;
+            flex-shrink: 0;
         }
+
         .sumario-celula-texto a {
             text-decoration: none;
             color: var(--accent-color);
             font-weight: 600;
             font-size: 1.05rem;
         }
+
         .sumario-celula-pontos {
-            display: table-cell;
-            width: 100%;
+            flex-grow: 1;
             border-bottom: 2px dotted #94A3B8;
+            margin: 0 10px;
             position: relative;
             top: -4px;
+            min-width: 20px;
         }
+
         .sumario-celula-num {
-            display: table-cell;
             white-space: nowrap;
             text-align: right;
-            padding-left: 15px;
-            padding-bottom: 12px;
             color: var(--primary-color);
             font-weight: bold;
             font-size: 1.05rem;
-            vertical-align: bottom;
+            flex-shrink: 0;
         }
 
         /* =======================================================
            REGRAS EXCLUSIVAS DE IMPRESSÃO (ESTABILIZAÇÃO TOTAL)
-           ======================================================= */
+        ======================================================= */
         .pdf-imprimir {
             display: block !important;
             width: 100% !important;
@@ -288,6 +291,17 @@
             break-after: always !important;
         }
         
+        /* Previne o fatiamento vertical das letras do sumário */
+        .pdf-imprimir .sumario-linha,
+        .pdf-imprimir .sumario-celula-texto,
+        .pdf-imprimir .sumario-celula-texto a,
+        .pdf-imprimir .sumario-celula-num {
+            display: inline-flex !important;
+            word-break: keep-all !important;
+            overflow-wrap: normal !important;
+            white-space: nowrap !important;
+        }
+
         .pdf-imprimir .content-section {
             box-shadow: none !important;
             border: none !important;
@@ -303,8 +317,7 @@
         .pdf-imprimir h2, 
         .pdf-imprimir h3, 
         .pdf-imprimir strong,
-        .pdf-imprimir span,
-        .pdf-imprimir a {
+        .pdf-imprimir span {
             word-break: break-word !important;
             overflow-wrap: break-word !important;
             white-space: normal !important;
@@ -626,7 +639,6 @@
                 }
             });
 
-            // Configurações fluidas e otimizadas sem travar a janela de forma agressiva
             const opcoes = {
                 margin:       [15, 15, 15, 15],
                 filename:     'manual_instalacao_sp2tv.pdf',
