@@ -118,7 +118,7 @@
         }
 
         h3 { color: var(--primary-dark); margin: 2.5rem 0 1rem 0; font-size: 1.4rem; border-bottom: 2px solid #F1F5F9; padding-bottom: 6px; }
-        p { margin-bottom: 1.2rem; color: #475569; text-align: justify; font-size: 1.05rem; word-break: break-word; }
+        p { margin-bottom: 1.2rem; color: #475569; text-align: justify; font-size: 1.05rem; }
 
         .download-row {
             display: flex;
@@ -154,7 +154,7 @@
         .btn-link:hover { background-color: var(--primary-dark); }
 
         .step-list { list-style: none; counter-reset: step-counter; margin: 1.5rem 0; }
-        .step-list li { position: relative; padding-left: 4.2rem; margin-bottom: 2.5rem; font-size: 1.05rem; color: #475569; word-break: break-word; }
+        .step-list li { position: relative; padding-left: 4.2rem; margin-bottom: 2.5rem; font-size: 1.05rem; color: #475569; }
         .step-list li::before {
             content: counter(step-counter);
             counter-increment: step-counter;
@@ -234,44 +234,64 @@
         .sumario-num { color: var(--primary-color); font-weight: bold; }
 
         /* =======================================================
-           CORREÇÃO CRÍTICA DAS REGRAS DE IMPRESSÃO (SEM CORTES)
+           REGRAS DE IMPRESSÃO - CORREÇÃO DE QUEBRAS E LARGURA
            ======================================================= */
         .pdf-imprimir {
             display: block !important;
-            width: 800px !important; /* Força largura fixa perfeita para o A4 evitar cortes na direita */
-            max-width: 800px !important;
+            width: 750px !important; 
+            max-width: 750px !important;
             margin: 0 auto !important;
-            padding: 10px !important;
-            float: none !important;
+            padding: 0 !important;
         }
         
         .pdf-imprimir #pdf-sumario {
             display: block !important;
             box-shadow: none !important;
             margin-bottom: 30px !important;
+            page-break-after: always !important; /* Força o sumário a ter sua própria página inicial */
+            break-after: always !important;
         }
         
         .pdf-imprimir .content-section {
             box-shadow: none !important;
-            border: 1px solid #E2E8F0 !important;
+            border: none !important;
             width: 100% !important;
-            padding: 2rem !important; 
-            margin-bottom: 20px !important;
-            page-break-inside: auto !important; /* Permite que seções longas quebrem de página nativamente */
+            max-width: 100% !important;
+            padding: 10px 0 !important;
+            margin-bottom: 0 !important;
+            page-break-inside: auto !important;
+            break-inside: auto !important;
         }
 
-        /* Evita que um passo específico ou imagem seja cortado ao meio horizontalmente */
+        .pdf-imprimir p, 
+        .pdf-imprimir li, 
+        .pdf-imprimir h2, 
+        .pdf-imprimir h3, 
+        .pdf-imprimir strong {
+            word-break: break-word !important;
+            overflow-wrap: break-word !important;
+            white-space: normal !important;
+        }
+
+        .pdf-imprimir h2, 
+        .pdf-imprimir h3 {
+            page-break-after: avoid !important; /* Impede títulos órfãos no fim da página */
+            break-after: avoid !important;
+        }
+
         .pdf-imprimir .step-list li {
             page-break-inside: avoid !important;
             break-inside: avoid !important;
+            margin-bottom: 1.5rem !important;
         }
 
         .pdf-imprimir .step-image {
-            max-width: 100% !important; /* Ajusta as fotos para respeitarem a nova largura */
+            max-width: 80% !important;
             height: auto !important;
             page-break-inside: avoid !important;
             break-inside: avoid !important;
-            box-shadow: none !important;
+            display: block !important;
+            margin: 1rem 0 !important;
         }
 
         .pdf-imprimir .alert-box, 
@@ -279,11 +299,10 @@
         .pdf-imprimir .download-row {
             page-break-inside: avoid !important;
             break-inside: avoid !important;
-            box-shadow: none !important;
         }
 
         .pdf-imprimir .sumario-linhas {
-            max-width: 55% !important;
+            max-width: 50% !important;
         }
     </style>
 </head>
@@ -388,7 +407,7 @@
                 <h3>Modelos Recentes (webOS 6.0 ou superior)</h3>
                 <ol class="step-list">
                     <li>Pressione o botão <strong>Home</strong> no comando Smart Magic.</li>
-                    <li>No ecrã inicial da sua TV, localize e abra a aplicação <strong>Apps</strong> (or <strong>LG Content Store</strong>).</li>
+                    <li>No ecrã inicial da sua TV, localize e abra a aplicação <strong>Apps</strong> (ou <strong>LG Content Store</strong>).</li>
                     <li>Clique no ícone da <strong>Lupa (Pesquisar)</strong> no topo direito, digite <strong>SP2 TV</strong> e confirme a instalação.</li>
                 </ol>
 
@@ -424,7 +443,7 @@
                 <h3>Passo a Passo de Instalação</h3>
                 <ol class="step-list">
                     <li>Pressione o botão <strong>Home</strong> do controle remoto para acessar a tela inicial do sistema.</li>
-                    <li>Navegue até o menu superior (ou lateral) e selecione a aba ou aplicativo da <strong>Google Play Store</strong> (ou a aba <strong>"Apps"</strong> em sistemas Google TV).</li>
+                    <li>Navegue até o menu superior (or lateral) e selecione a aba ou aplicativo da <strong>Google Play Store</strong> (ou a aba <strong>"Apps"</strong> em sistemas Google TV).</li>
                     <li>Acesse o campo de busca (ícone de <strong>Lupa</strong> ou barra de pesquisa no topo).</li>
                     <li>Digite <strong>SP2 TV</strong> utilizando o teclado virtual e selecione o aplicativo correspondente nos resultados.</li>
                     <li>Clique no botão <strong>Instalar</strong> (ou <strong>Download</strong>) e aguarde o término do processo. Após instalado, selecione <strong>Abrir</strong>.</li>
@@ -542,24 +561,43 @@
             if(barraLateral) barraLateral.style.display = 'none';
             elementoAlvo.classList.add('pdf-imprimir');
 
+            // Mapeia todas as seções e injeta quebras nativas via JS antes da renderização
+            const secoes = elementoAlvo.querySelectorAll('.content-section');
+            secoes.forEach((secao, indice) => {
+                if (indice > 0) {
+                    secao.style.setProperty('page-break-before', 'always', 'important');
+                    secao.style.setProperty('break-before', 'always', 'important');
+                }
+            });
+
             const opcoes = {
-                margin:       [15, 12, 15, 12], /* Margens laterais equilibradas */
+                margin:       [15, 15, 15, 15],
                 filename:     'manual_instalacao_sp2tv.pdf',
                 image:        { type: 'jpeg', quality: 0.98 },
                 html2canvas:  { 
                     scale: 2, 
                     useCORS: true, 
                     backgroundColor: '#FFFFFF',
-                    width: 800 /* Alinha perfeitamente com o width do CSS de impressão */
+                    width: 750,
+                    windowWidth: 750 // Trava a janela de captura de tela para eliminar o corte lateral direito
                 },
                 jsPDF:        { unit: 'mm', format: 'a4', orientation: 'portrait' },
-                pagebreak:    { mode: ['css'] } 
+                pagebreak:    { mode: ['css'] }
             };
 
             html2pdf().set(opcoes).from(elementoAlvo).save().then(() => {
+                // Remove estilos temporários pós-renderização
+                secoes.forEach(secao => {
+                    secao.style.removeProperty('page-break-before');
+                    secao.style.removeProperty('break-before');
+                });
                 if(barraLateral) barraLateral.style.display = 'block';
                 elementoAlvo.classList.remove('pdf-imprimir');
             }).catch(err => {
+                secoes.forEach(secao => {
+                    secao.style.removeProperty('page-break-before');
+                    secao.style.removeProperty('break-before');
+                });
                 if(barraLateral) barraLateral.style.display = 'block';
                 elementoAlvo.classList.remove('pdf-imprimir');
             });
